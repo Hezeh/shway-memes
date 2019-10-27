@@ -1,6 +1,8 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Memes",
+  "name": "Shway Memes",
+  "description": "A cool application that helps you share memes easily.",
+  "dir": "auto",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,8 +10,30 @@
       "type": "image/x-icon"
     }
   ],
+  "share_target": {
+    "action": "/share_target",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "share-title",
+      "text": "share-text",
+      "url": "share-url",
+    }
+  }, 
+  "share_target": {
+    "action": "/share_target",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "files": [{
+        "name": "file",
+        "accept": ["*/*"]
+      }]
+    }
+  },
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "categories": ["social", "entertainment", "photo", "lifestyle"]
 }
