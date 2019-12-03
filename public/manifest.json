@@ -12,16 +12,6 @@
   ],
   "share_target": {
     "action": "/share_target",
-    "method": "GET",
-    "enctype": "application/x-www-form-urlencoded",
-    "params": {
-      "title": "share-title",
-      "text": "share-text",
-      "url": "share-url",
-    }
-  }, 
-  "share_target": {
-    "action": "/share_target",
     "method": "POST",
     "enctype": "multipart/form-data",
     "params": {

@@ -1,0 +1,13 @@
+.heading {
+    color: cyan;
+    text-align: center;
+    font: bold;
+    font-size: 15px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.emoji {
+    size: 100px;
+}

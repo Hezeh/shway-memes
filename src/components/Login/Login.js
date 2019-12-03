@@ -11,6 +11,10 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Fab from '@material-ui/core/Fab';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import InstagramIcon from '@material-ui/icons/Instagram';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -19,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   paper: {
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(1),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -33,7 +37,13 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(),
+  },
+  margin: {
+    margin: theme.spacing(1),
+  },
+  extendedIcon: {
+    marginRight: theme.spacing(1),
   },
 }));
 
@@ -50,6 +60,18 @@ function Login() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
+        <Fab variant="extended" color="secondary" aria-label="add" className={classes.margin}>
+          <TwitterIcon className={classes.extendedIcon} />
+          Sign in with Twitter
+        </Fab>
+        <Fab variant="extended" fullWidth color="secondary" aria-label="add" className={classes.margin}>
+          <FacebookIcon className={classes.extendedIcon} />
+          Sign in with Facebook
+        </Fab>
+        <Fab variant="extended" color="secondary" aria-label="add" className={classes.margin}>
+          <InstagramIcon className={classes.extendedIcon} />
+          Sign in with Instagram
+        </Fab>
         <form className={classes.form} noValidate>
           <TextField
             variant="outlined"
@@ -57,7 +79,7 @@ function Login() {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="Email Address or Phone Number"
             name="email"
             autoComplete="email"
             autoFocus

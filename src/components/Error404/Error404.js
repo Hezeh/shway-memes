@@ -2,8 +2,10 @@ import React from 'react';
 
 const PageNotFound = () => {
     return (
-        <div>
-            <h1>Http Error 404>>> Page Not Found. Return to Homepage</h1>
+        <div className="heading">
+            <span role="img" className="emoji">🤣</span>
+            <h1>Error 404: Meme Not Found.</h1>
+            
         </div>
     )
 }
