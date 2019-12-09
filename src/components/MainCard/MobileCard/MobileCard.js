@@ -1,27 +1,22 @@
 import React, { useState } from 'react';
-//import Follow from '../Follow/Follow';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
-import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import {Link} from 'react-router-dom'
-//import LoopIcon from '@material-ui/icons/Loop';
-//import MoodBadIcon from '@material-ui/icons/MoodBad';
-//import MoodIcon from '@material-ui/icons/Mood';
+import LoopIcon from '@material-ui/icons/Loop';
 import SwipeableViews from 'react-swipeable-views';
-import { autoPlay } from 'react-swipeable-views-utils';
+//import { autoPlay } from 'react-swipeable-views-utils';
 import './MobileCard.css';
+import { favoriteMeme, repostReaction} from '../Reactions/CardReactions'
+
 // TODO: Remember to Implement the backend to resize images to a size of 400px by 500px
 
 const useStyles = makeStyles(theme => ({
@@ -55,7 +50,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+//const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const tutorialSteps = [
   {
@@ -64,7 +59,7 @@ const tutorialSteps = [
     username: 'Hezekiah',
     shortname: 'HM',
     imgPath:
-    'https://preview.redd.it/tlnxohgeqrw31.jpg?width=640&height=351&crop=smart&auto=webp&s=8dc4fe0fb703f680931d506be02b740f32a523c8',
+    'https://storage.googleapis.com/spikey-shway-001/memes/Screenshot_20190422-193426.png'
   },
   {
     id: 2,
@@ -72,7 +67,7 @@ const tutorialSteps = [
     username: 'Maish',
     shortname: 'MH',
     imgPath:
-      'https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60',
+    'https://storage.googleapis.com/spikey-shway-001/memes/Screenshot_20190423-152551.png'
   },
   {
     id: 3,
@@ -80,7 +75,7 @@ const tutorialSteps = [
     username: 'Waithira',
     shortname: 'PW',
     imgPath:
-      'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250&q=80',
+      'https://storage.googleapis.com/spikey-shway-001/memes/Screenshot_20190430-190922.png',
   },
   {
     id: 4,
@@ -88,7 +83,7 @@ const tutorialSteps = [
     username: 'Namatsi',
     shortname: 'NM',
     imgPath:
-      'https://images.unsplash.com/photo-1518732714860-b62714ce0c59?auto=format&fit=crop&w=400&h=250&q=60',
+      'https://storage.googleapis.com/spikey-shway-001/memes/Screenshot_20190422-193129.png',
   },
   {
     id: 5,
@@ -96,11 +91,36 @@ const tutorialSteps = [
     username: 'Tito',
     shortname: 'TO',
     imgPath:
-      'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60',
+      'https://storage.googleapis.com/spikey-shway-001/memes/Screenshot_20190422-193213.png',
   },
+  {
+    id: 6,
+    label: 'Goč, Serbia',
+    username: 'Tito',
+    shortname: 'TO',
+    imgPath:
+      'https://storage.googleapis.com/spikey-shway-001/memes/Screenshot_20190427-093901.png',
+  },
+  {
+    id: 7,
+    label: 'Goč, Serbia',
+    username: 'Tito',
+    shortname: 'TO',
+    imgPath:
+      'https://storage.googleapis.com/spikey-shway-001/memes/Screenshot_20190430-042750.png',
+  },
+  {
+    id: 8,
+    label: 'Goč, Serbia',
+    username: 'Tito',
+    shortname: 'TO',
+    imgPath:
+      'https://storage.googleapis.com/spikey-shway-001/memes/Screenshot_20190501-084245.png',
+  },
+  
 ];
 
-function MemesVideos() {
+function MobileCard() {
   const classes = useStyles();
   const [follow, setFollow] = useState(false);
   const theme = useTheme();
@@ -147,47 +167,9 @@ function MemesVideos() {
     )
   }
 
-  const handleNext = () => {
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep(prevActiveStep => prevActiveStep - 1);
-  };
-
   const handleStepChange = step => {
     setActiveStep(step);
   };
-
-  const favoriteMeme = () => {
-    return (
-      console.log('Favorited this meme!')
-    )
-  }
-
-  const laughReaction = () => {
-    return (
-      console.log('This meme is quite hilarious')
-    )
-  }
-
-  const ghostReaction = () => {
-    return (
-      console.log('Ghosted')
-    )
-  }
-
-  const disgustReaction = () => {
-    return (
-      console.log('Disgusting meme!')
-    )
-  }
-
-  const repostReaction = () => {
-    return (
-      console.log('Reposted this meme')
-    )
-  }
 
   return (
 
@@ -203,41 +185,35 @@ function MemesVideos() {
                 <Card className={classes.card}>
                   <CardHeader
                     avatar={
-                      <Link to="/profile" className="link">
-                        <Avatar aria-label="user-avatar" className={classes.avatar} title="User">
-                        {tutorialSteps[activeStep].shortname}
-                        </Avatar>
-                      </Link>
+                      <Avatar
+                        alt="User Avatar"
+                        className={classes.avatar}
+                      >{step.shortname}</Avatar>
                     }
-                    action={followUser}
+                    //action={followUser}
                     title={
                       <Link to="/profile" className="menu-link">
                         <Button size="small"  color="secondary">
-                          {tutorialSteps[activeStep].username}
+                          {step.username}
                         </Button>
                       </Link>
                     }
                   />
-                  <CardMedia className="img" image={step.imgPath} title="Meme" />
+                  <CardMedia 
+                    className={classes.img} 
+                    image={step.imgPath} 
+                    title="Meme" />
                   <CardActions>
-                    <IconButton aria-label="add to favorites" title="Favorite" onClick={favoriteMeme} color="secondary">
-                      <span role="img" aria-label="add to favorites">💖</span>
+                    <IconButton aria-label="favorite" title="Favorite" onClick={favoriteMeme}>
+                      <FavoriteIcon />
                     </IconButton>
-                    <IconButton aria-label="laugh" title="Laugh" onClick={laughReaction}>
-                      <span role="img" aria-label="Very funny">🤣</span>
-                    </IconButton>
-                    <IconButton aria-label="ghost-face" title="GhostReaction" onClick={ghostReaction}>
-                      <span role="img" aria-label="ghost-face">💀</span>
-                    </IconButton>
-                    <IconButton aria-label="disgusting" title="Disgust" onClick={disgustReaction}>
-                      <span role="img" aria-label="disgusting">🤦</span>
-                    </IconButton>
-                    <IconButton aria-label="Repost" title="Rememe" onClick={repostReaction}>
-                      <span role="img" aria-label="repost">🌀</span>
+                    <IconButton aria-label="share" title="Repost" onClick={repostReaction}>
+                      <LoopIcon />
                     </IconButton>
                     <IconButton aria-label="share" title="Share" onClick={shareMeme}>
                       <ShareIcon />
                     </IconButton>
+                    
                   </CardActions>
                 </Card>
         ) : null}
@@ -247,8 +223,4 @@ function MemesVideos() {
   );
 }
 
-{/*
-🥺🥶😙😂🤩😊🙂😌🤬😡🤤🤒🤕🤥💩🤡👿😈😇💀🤤😪🤐🥴🤧🤒👹👺👻☠️👽👾🤖🎃😺😸😹😻😼😽
-🤔🤓🤒🤬🤣🤤🤢🤦🙅‍♂️🤭💖🥰️🤭🥺️🤨🙌 💜
-*/}
-export default MemesVideos;
+export default MobileCard;

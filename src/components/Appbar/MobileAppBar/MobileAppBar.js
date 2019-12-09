@@ -10,13 +10,16 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AddIcon from '@material-ui/icons/Add';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
-import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
 import HomeIcon from '@material-ui/icons/Home';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import SideListLinks from '../SideList/SideList';
 import ImageSearchIcon from '@material-ui/icons/ImageSearch';
+import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
+import pink from '@material-ui/core/colors/pink';
+
+const color = pink[400];
 
 export const useStyles = makeStyles(theme => ({
   text: {
@@ -45,7 +48,14 @@ export const useStyles = makeStyles(theme => ({
   },
   input: {
     display: 'none'
-  }
+  }, 
+  div: {
+    //margin: '30px',
+    //padding: '10px'
+  },
+  activeLink: {
+    color: color
+  },
 }));
 
 export  function BottomAppBar() {
@@ -106,17 +116,19 @@ export  function BottomAppBar() {
           </SwipeableDrawer>
 
 
-          <Link to="/" className="link">
+          <NavLink exact to="/" activeClassName={classes.activeLink} className="link">
             <IconButton color="inherit" title="Home">
                 <HomeIcon />
             </IconButton>
-          </Link>
-          
-          <Link to="/search" className="link">
-            <IconButton color="inherit" title="Videos">
-                <ImageSearchIcon />
+          </NavLink>
+
+          <NavLink to="/trending" activeClassName={classes.activeLink} className="link">
+            <IconButton color="inherit" title="Trending">
+                <WhatshotIcon />
             </IconButton>
-          </Link>
+          </NavLink>
+          
+          
           <input
             accept="image/*"
             className={classes.input}
@@ -125,37 +137,40 @@ export  function BottomAppBar() {
             type="file"
           />
           <label htmlFor="contained-button-file">
-            <Fab color="secondary" aria-label="add" className={classes.fabButton} title="Select Images" component="span">
+            <Fab color="secondary" aria-label="add" className={classes.fabButton} title="Select Memes" component="span">
               <AddIcon />
             </Fab>
           </label>
 
           <div className={classes.grow} />
 
-          <Link to="/favorites" className="link">
-            <IconButton color="inherit" title="Favorites">
-              <FavoriteIcon />
+          <div className={classes.div}>
+          <NavLink to="/search" activeClassName={classes.activeLink} className="link">
+            <IconButton color="inherit" title="Videos">
+                <ImageSearchIcon />
             </IconButton>
-          </Link>
+          </NavLink>
+          </div>
 
-          <IconButton color="inherit" title="Whatshot">
-            <Link to="/hotmemes" className="link">
-              <WhatshotIcon />
-            </Link>
-          </IconButton>
+          <NavLink to="/subscriptions" activeClassName={classes.activeLink} className="link">
+            <IconButton color="inherit" title="Subscriptions">
+              <SubscriptionsIcon />
+            </IconButton>
+          </NavLink>
 
-          {auth && (
-            <div>
-              <IconButton
+          <NavLink to="/profile" activeClassName={classes.activeLink} className="link">
+            <IconButton color="inherit" title="Profile">
+              <AccountCircle />
+            </IconButton>
+          </NavLink>
+          
+          {/* <IconButton
                   aria-label="account of current user"
                   aria-controls="menu-appbar"
                   color="inherit"
                 >
-                  <Link to="/profile" className="menu-link"><AccountCircle /></Link>
-                </IconButton>
-              
-              </div>
-          )}
+            <Link to="/profile" className="link"></Link>
+          </IconButton> */}
         </Toolbar>
       </AppBar>
     </Fragment>

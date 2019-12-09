@@ -8,7 +8,7 @@ export const APIEndpoint = `${host}/api`;
 export const fileUploadURL = `${APIEndpoint}/upload/`;
 export const emailURL = `${APIEndpoint}/email/`;
 export const changeEmailURL = `${APIEndpoint}/change-email/`;
-export const changePasswordURL = `${APIEndpoint}/changef-password/`;
+export const changePasswordURL = `${APIEndpoint}/change-password/`;
 
 export const loginURL = `${host}/rest-auth/login/`;
 export const signupURL = `${host}/rest-auth/registration/`;

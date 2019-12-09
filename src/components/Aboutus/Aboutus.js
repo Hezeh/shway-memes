@@ -16,7 +16,7 @@ const Aboutus = () => {
     return (
         <Fragment>
             <About 
-                paragraph="We make your world more fun and elegant. Your next smile is just a click away!"
+                paragraph="A platform for sharing cool memes!"
                 heading="What do we do"      
             />
             <About 

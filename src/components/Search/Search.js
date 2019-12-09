@@ -1,12 +1,31 @@
 import React from 'react';
-import SearchIcon from '@material-ui/icons/Search';
+import DesktopSearch from '../Search/Desktop/DesktopSearch';
+import MobileSearch from '../Search/Mobile/MobileSearch';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
+import { ThemeProvider} from '@material-ui/styles'
 
-const Search = () => {
+export default function Search() {
+  const theme = useTheme();
+  
+  const matches = useMediaQuery(theme.breakpoints.up('md'));
+
+  const deviceType = () => {
+    if (matches === true) {
+      return (
+        <DesktopSearch />
+      )
+    } else {
+      return (
+        <MobileSearch />
+      )
+    }
+  }
     return (
         <div>
-            <h1>Search Functionality</h1>
+          <ThemeProvider theme={theme}>
+            {deviceType()}
+          </ThemeProvider>
         </div>
-    )
+      )
 }
-
-export default Search;

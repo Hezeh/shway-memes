@@ -6,20 +6,14 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import SideListLinks from '../SideList/SideList';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import { Link } from 'react-router-dom';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import PropTypes from 'prop-types';
-import Slide from '@material-ui/core/Slide';
 import Fab from '@material-ui/core/Fab';
 
 const useStyles = makeStyles(theme => ({
@@ -178,56 +172,19 @@ export default function DesktopAppBar(props) {
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <a target="_blank" rel="noopener noreferrer" href="https://www.kapwing.com/meme-maker" className="menu-link">
+              <a target="_blank" rel="noopener noreferrer" href="https://www.kapwing.com/meme-maker" className="link">
                 <Fab variant="extended" fullWidth color="secondary" aria-label="add" className={classes.margin}>
                   Create Memes
                 </Fab>
               </a>
-              <IconButton aria-label="show 17 new notifications" color="inherit">
-                <Badge badgeContent={17} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
-              {auth && (
-              <div>
                 <IconButton
                   aria-label="account of current user"
                   aria-controls="menu-appbar"
                   color="inherit"
                 >
-                  <Link to="/profile" className="menu-link"><AccountCircle /></Link>
+                  <Link to="/profile" className="link"><AccountCircle /></Link>
                 </IconButton>
-                {/*
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={open}
-                  onClose={handleClose}
-                >
-                  <Link to="/profile" className="menu-link" onClick={handleClose}>
-                    <MenuItem >
-                        Profile
-                    </MenuItem>
-                  </Link>
-                  <Link to="/points" className="menu-link" onClick={handleClose}>
-                    <MenuItem >
-                        Shway Points
-                    </MenuItem>
-                  </Link>
                 
-                </Menu>
-                */}
-                </div>
-              )}
             </div>
           </Toolbar>
         </AppBar>
