@@ -18,6 +18,13 @@ import SideListLinks from '../SideList/SideList';
 import ImageSearchIcon from '@material-ui/icons/ImageSearch';
 import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
 import pink from '@material-ui/core/colors/pink';
+import PropTypes from 'prop-types';
+import Typography from '@material-ui/core/Typography';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
+import Slide from '@material-ui/core/Slide';
+
 
 const color = pink[400];
 
@@ -41,7 +48,7 @@ export const useStyles = makeStyles(theme => ({
   fabButton: {
     position: 'absolute',
     zIndex: 1,
-    top: -15,
+    top: -30,
     left: 0,
     right: 0,
     margin: '0 auto',
@@ -58,7 +65,23 @@ export const useStyles = makeStyles(theme => ({
   },
 }));
 
-export  function BottomAppBar() {
+function HideOnScroll(props) {
+  const { children} = props;
+  const trigger = useScrollTrigger();
+
+  return (
+    <Slide appear={false} direction="up" in={!trigger}>
+      {children}
+    </Slide>
+  );
+}
+
+HideOnScroll.propTypes = {
+  children: PropTypes.element.isRequired,
+};
+
+
+export  function BottomAppBar(props) {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -100,6 +123,7 @@ export  function BottomAppBar() {
   return (
     <Fragment>
       <CssBaseline />
+      <HideOnScroll {...props}>
       <AppBar position="fixed" color="default" className={classes.appBar}>
         <Toolbar>
 
@@ -143,14 +167,11 @@ export  function BottomAppBar() {
           </label>
 
           <div className={classes.grow} />
-
-          <div className={classes.div}>
           <NavLink to="/search" activeClassName={classes.activeLink} className="link">
             <IconButton color="inherit" title="Videos">
                 <ImageSearchIcon />
             </IconButton>
           </NavLink>
-          </div>
 
           <NavLink to="/subscriptions" activeClassName={classes.activeLink} className="link">
             <IconButton color="inherit" title="Subscriptions">
@@ -163,16 +184,9 @@ export  function BottomAppBar() {
               <AccountCircle />
             </IconButton>
           </NavLink>
-          
-          {/* <IconButton
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  color="inherit"
-                >
-            <Link to="/profile" className="link"></Link>
-          </IconButton> */}
         </Toolbar>
       </AppBar>
+      </HideOnScroll>
     </Fragment>
   );
 }

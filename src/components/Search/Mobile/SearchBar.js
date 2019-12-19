@@ -10,19 +10,16 @@ const useStyles = makeStyles(theme => ({
     padding: '2px 4px',
     display: 'flex',
     alignItems: 'center',
-    width: 400,
+    maxWidth: 350,
     margin: 'auto'
   },
   input: {
     marginLeft: theme.spacing(1),
     flex: 1,
+    marginTop: 1,
   },
   iconButton: {
-    padding: 10,
-  },
-  divider: {
-    height: 28,
-    margin: 4,
+    padding: 5,
   },
 }));
 

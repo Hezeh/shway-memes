@@ -3,18 +3,18 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Fab from '@material-ui/core/Fab';
-import TwitterIcon from '@material-ui/icons/Twitter';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import InstagramIcon from '@material-ui/icons/Instagram';
+// import Fab from '@material-ui/core/Fab';
+// import TwitterIcon from '@material-ui/icons/Twitter';
+// import FacebookIcon from '@material-ui/icons/Facebook';
+// import InstagramIcon from '@material-ui/icons/Instagram';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -60,18 +60,6 @@ function Login() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Fab variant="extended" color="secondary" aria-label="add" className={classes.margin}>
-          <TwitterIcon className={classes.extendedIcon} />
-          Sign in with Twitter
-        </Fab>
-        <Fab variant="extended" fullWidth color="secondary" aria-label="add" className={classes.margin}>
-          <FacebookIcon className={classes.extendedIcon} />
-          Sign in with Facebook
-        </Fab>
-        <Fab variant="extended" color="secondary" aria-label="add" className={classes.margin}>
-          <InstagramIcon className={classes.extendedIcon} />
-          Sign in with Instagram
-        </Fab>
         <form className={classes.form} noValidate>
           <TextField
             variant="outlined"
@@ -79,7 +67,7 @@ function Login() {
             required
             fullWidth
             id="email"
-            label="Email Address or Phone Number"
+            label="Email Address"
             name="email"
             autoComplete="email"
             autoFocus

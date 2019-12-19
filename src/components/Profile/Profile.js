@@ -14,7 +14,6 @@ import ArtTrackIcon from '@material-ui/icons/ArtTrack';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import PeopleIcon from '@material-ui/icons/People';
 import Followers from './Followers/Followers'
-import Following from './Following/Following'
 import Posts from './Posts/Posts'
 import Favorites from './Favorites/Favorites'
 
@@ -51,7 +50,7 @@ export default function ProfileNavTabs() {
                 
                 <Tab icon={<ArtTrackIcon />} label="POSTS" to={`${match.url}`} component={Link}/>
                 <Tab icon={<FavoriteIcon />} label="FAVORITES" to={`${match.url}/favorites`} component={Link}/>
-                <Tab icon={<PersonPinIcon />} label="FOLLOWING" to={`${match.url}/following`} component={Link}/>
+                {/* <Tab icon={<PersonPinIcon />} label="FOLLOWING" to={`${match.url}/following`} component={Link}/> */}
                 <Tab icon={<PeopleIcon />} label="FOLLOWERS" to={`${match.url}/followers`} component={Link}/>
               </Tabs>
             </AppBar>
@@ -59,9 +58,9 @@ export default function ProfileNavTabs() {
               <Route path={`${match.url}/favorites`}>
                 <Favorites />
               </Route>
-              <Route path={`${match.url}/following`}>
+              {/* <Route path={`${match.url}/following`}>
                 <Following />
-              </Route>
+              </Route> */}
               <Route path={`${match.url}/followers`}>
                 <Followers />
               </Route>

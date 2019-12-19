@@ -18,10 +18,10 @@ import IconButton from '@material-ui/core/IconButton';
 import { connect } from 'react-redux';
 import { Redirect} from 'react-router-dom';
 import { authSignup as signup} from '../../store/actions/auth';
-import Fab from '@material-ui/core/Fab';
-import TwitterIcon from '@material-ui/icons/Twitter';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import InstagramIcon from '@material-ui/icons/Instagram';
+// import Fab from '@material-ui/core/Fab';
+// import TwitterIcon from '@material-ui/icons/Twitter';
+// import FacebookIcon from '@material-ui/icons/Facebook';
+// import InstagramIcon from '@material-ui/icons/Instagram';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -114,7 +114,7 @@ const Register = ({authenticated, loading, signup, error}) => {
             <Typography component="h1" variant="h5">
               Sign up to view Memes.
             </Typography>
-            <Fab variant="extended" color="secondary" aria-label="add" className={classes.margin}>
+            {/* <Fab variant="extended" color="secondary" aria-label="add" className={classes.margin}>
               <TwitterIcon className={classes.extendedIcon} />
               Sign in with Twitter
             </Fab>
@@ -125,7 +125,7 @@ const Register = ({authenticated, loading, signup, error}) => {
             <Fab variant="extended" color="secondary" aria-label="add" className={classes.margin}>
               <InstagramIcon className={classes.extendedIcon} />
               Sign in with Instagram
-            </Fab>
+            </Fab> */}
             <form className={classes.form} Validate onSubmit={handleSubmit}>
               <Grid container spacing={1}> 
                 <Grid item xs={12} sm={12}>

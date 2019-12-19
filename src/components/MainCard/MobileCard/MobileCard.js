@@ -13,22 +13,29 @@ import Button from '@material-ui/core/Button';
 import {Link} from 'react-router-dom'
 import LoopIcon from '@material-ui/icons/Loop';
 import SwipeableViews from 'react-swipeable-views';
-//import { autoPlay } from 'react-swipeable-views-utils';
 import './MobileCard.css';
 import { favoriteMeme, repostReaction} from '../Reactions/CardReactions'
+import { autoPlay } from 'react-swipeable-views-utils';
+
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+
 
 // TODO: Remember to Implement the backend to resize images to a size of 400px by 500px
 
 const useStyles = makeStyles(theme => ({
   card: {
     maxWidth: '99%',
+    //minHeight: '100%',
     maxHeight: 800,  // 1000
-    transition: "0.1s",
+    transition: "0.01s",
     margin: 'auto',
     justify: "center",
     borderRadius: "30px",
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 20,
+    // position: 'fixed',
+    // height: '100%',
     boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
     "&:hover": {
       boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
@@ -38,19 +45,23 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: red[500],
   },
   img: {
-    height: 400,
+    //minHeight: 500,
+    //lineHeight: 350,
+    height: 350,
     display: 'block',
     overflow: 'hidden',
     maxWidth: '95%',
     alignItems: 'center',
-    padding: '10px',
+    padding: '5px',
     margin: 'auto',
     borderRadius: '10px',
     position: "static",
+    [theme.breakpoints.down('xs')]: {
+      //display: 'block',
+      //height: 350,
+    },  
   },
 }));
-
-//const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const tutorialSteps = [
   {
@@ -173,7 +184,7 @@ function MobileCard() {
 
   return (
 
-    <SwipeableViews
+    <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}
         onChangeIndex={handleStepChange}
@@ -219,7 +230,7 @@ function MobileCard() {
         ) : null}
         </div>
       ))}
-    </SwipeableViews>
+    </AutoPlaySwipeableViews>
   );
 }
 

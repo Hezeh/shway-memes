@@ -5,7 +5,7 @@ import './Followers.css';
 export default function Followers() {
     return (
         <div>
-            Followers Component
+            <h1>Followers Component</h1>
         </div>
     )
 }

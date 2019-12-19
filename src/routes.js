@@ -2,6 +2,8 @@ import React, { Fragment, Suspense} from 'react';
 import './App.css';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import AppBar from './components/Appbar/Appbar';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles } from '@material-ui/core/styles';
 const Favorites = React.lazy(() => import ('./components/Favorites/Favorites'));
 const Trending = React.lazy(() => import ('./components/Trending/Trending'));
 const Login = React.lazy(() => import ('./components/Login/Login'));
@@ -14,6 +16,17 @@ const Search = React.lazy(() => import ('./components/Search/Search'))
 const MainCard = React.lazy(() => import ('./components/MainCard/MainCard'))
 //const Interests = React.lazy(() => import ('./components/Interests/Interests'))
 const Subscriptions = React.lazy(() => import ('./components/Subscriptions/Subscriptions'))
+
+const useStyles = makeStyles(theme => ({
+    root: {
+      display: 'flex',
+      '& > * + *': {
+        marginLeft: theme.spacing(2),
+      },
+      margin: 'auto',
+      padding: '200px'
+    },
+  }));
 
 const PrivateRoute = ({ component: Component, ...rest}) => {
     const authenticated = localStorage.getItem("token") !== null;
@@ -36,11 +49,17 @@ const PrivateRoute = ({ component: Component, ...rest}) => {
     );
 };
 
-const BaseRouter = () => (
-    <Fragment>
+export default function BaseRouter() {
+    const classes = useStyles();
+    return (
+        <Fragment>
         <AppBar />
         
-          <Suspense fallback={<div>A Moment Please...</div>}>
+          <Suspense fallback={
+          <div className={classes.root}>
+            {/* <CircularProgress /> */}
+            <CircularProgress color="secondary" />
+          </div>}>
               <Switch>
                   <Route exact path="/" component={MainCard} />
                   <Route path="/favorites" component={Favorites} />
@@ -56,6 +75,6 @@ const BaseRouter = () => (
           </Suspense>
         
     </Fragment>
-)
 
-export default BaseRouter;
+    )
+}
