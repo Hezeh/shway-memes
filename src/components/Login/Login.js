@@ -11,11 +11,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-// import Fab from '@material-ui/core/Fab';
-// import TwitterIcon from '@material-ui/icons/Twitter';
-// import FacebookIcon from '@material-ui/icons/Facebook';
-// import InstagramIcon from '@material-ui/icons/Instagram';
-
 const useStyles = makeStyles(theme => ({
   '@global': {
     body: {

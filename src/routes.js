@@ -4,7 +4,7 @@ import {Switch, Route, Redirect} from 'react-router-dom';
 import AppBar from './components/Appbar/Appbar';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
-const Favorites = React.lazy(() => import ('./components/Favorites/Favorites'));
+// const Favorites = React.lazy(() => import ('./components/Favorites/Favorites'));
 const Trending = React.lazy(() => import ('./components/Trending/Trending'));
 const Login = React.lazy(() => import ('./components/Login/Login'));
 const Register = React.lazy(() => import ('./components/Register/Register'));
@@ -62,7 +62,7 @@ export default function BaseRouter() {
           </div>}>
               <Switch>
                   <Route exact path="/" component={MainCard} />
-                  <Route path="/favorites" component={Favorites} />
+                  {/* <Route path="/favorites" component={Favorites} /> */}
                   <Route path="/trending" component={Trending} />
                   <Route path="/register" component={Register}/>
                   <Route path="/login" component={Login}/>
