@@ -103,7 +103,7 @@ export default function GroupsSubs() {
           {messages.map(({ id, primary, secondary, person }) => (
             <React.Fragment key={id}>
               {id === 1 && <ListSubheader className={classes.subheader}>Around Me</ListSubheader>}
-              {id === 3 && <ListSubheader className={classes.subheader}>Global</ListSubheader>}
+              {id === 3 && <ListSubheader className={classes.subheader}>Suggestions</ListSubheader>}
               <ListItem button>
                 {/* <ListItemAvatar>
                   <Avatar alt="Profile Picture" src={person} />

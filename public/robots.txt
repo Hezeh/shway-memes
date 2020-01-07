@@ -1,0 +1,4 @@
+# Notice: Crawling Shwaymemes is prohibited unless you have express written permission.
+
+User-agent: *
+Disallow: /

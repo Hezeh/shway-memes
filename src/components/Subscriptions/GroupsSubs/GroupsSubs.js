@@ -5,10 +5,10 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+// import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import Avatar from '@material-ui/core/Avatar';
+// import Avatar from '@material-ui/core/Avatar';
 
 const messages = [
   {
@@ -102,12 +102,12 @@ export default function GroupsSubs() {
         <List className={classes.list}>
           {messages.map(({ id, primary, secondary, person }) => (
             <React.Fragment key={id}>
-              {id === 1 && <ListSubheader className={classes.subheader}>Today</ListSubheader>}
-              {id === 3 && <ListSubheader className={classes.subheader}>Yesterday</ListSubheader>}
+              {id === 1 && <ListSubheader className={classes.subheader}>Following</ListSubheader>}
+              {id === 3 && <ListSubheader className={classes.subheader}>Suggestions</ListSubheader>}
               <ListItem button>
-                <ListItemAvatar>
+                {/* <ListItemAvatar>
                   <Avatar alt="Profile Picture" src={person} />
-                </ListItemAvatar>
+                </ListItemAvatar> */}
                 <ListItemText primary={primary} secondary={secondary} />
               </ListItem>
             </React.Fragment>

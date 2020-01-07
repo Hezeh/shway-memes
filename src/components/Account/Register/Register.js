@@ -17,7 +17,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import { connect } from 'react-redux';
 import { Redirect} from 'react-router-dom';
-import { authSignup as signup} from '../../store/actions/auth';
+import { authSignup as signup} from '../../../store/actions/auth';
 // import Fab from '@material-ui/core/Fab';
 // import TwitterIcon from '@material-ui/icons/Twitter';
 // import FacebookIcon from '@material-ui/icons/Facebook';
@@ -112,7 +112,7 @@ const Register = ({authenticated, loading, signup, error}) => {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign up to view Memes.
+              Sign up to view shway memes.
             </Typography>
             {/* <Fab variant="extended" color="secondary" aria-label="add" className={classes.margin}>
               <TwitterIcon className={classes.extendedIcon} />
@@ -189,18 +189,7 @@ const Register = ({authenticated, loading, signup, error}) => {
                     id="password"
                     autoComplete="current-password"
                     onChange={handleChange}
-                    InputProps= {{
-                      endAdornment : 
-                        <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                        >
-                          {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                        </IconButton>
-                      </InputAdornment> 
-                    }}
+                   
                   />
                 </Grid>
                 <Grid item xs={12}>

@@ -102,8 +102,8 @@ export default function PeopleSubs() {
         <List className={classes.list}>
           {messages.map(({ id, primary, secondary, person }) => (
             <React.Fragment key={id}>
-              {id === 1 && <ListSubheader className={classes.subheader}>Today</ListSubheader>}
-              {id === 3 && <ListSubheader className={classes.subheader}>Yesterday</ListSubheader>}
+              {id === 1 && <ListSubheader className={classes.subheader}>Following</ListSubheader>}
+              {id === 3 && <ListSubheader className={classes.subheader}>Suggestions</ListSubheader>}
               <ListItem button>
                 <ListItemAvatar>
                   <Avatar alt="Profile Picture" src={person} />
