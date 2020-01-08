@@ -1,9 +1,10 @@
 import React, { Fragment, Suspense} from 'react';
 import './App.css';
 import {Switch, Route, Redirect} from 'react-router-dom';
-import AppBar from './components/Appbar/Appbar';
+// import AppBar from './components/Appbar/Appbar';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
+const AppBar = React.lazy(() => import ('./components/Appbar/Appbar'))
 // const Favorites = React.lazy(() => import ('./components/Favorites/Favorites'));
 const Trending = React.lazy(() => import ('./components/Trending/Trending'));
 const Login = React.lazy(() => import ('./components/Account/Login/Login'));
