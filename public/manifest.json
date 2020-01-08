@@ -1,7 +1,7 @@
 {
   "short_name": "Memes",
   "name": "Shway Memes",
-  "description": "A cool application that helps you share memes easily.",
+  "description": "A web application that helps you create and share memes easily.",
   "dir": "auto",
   "icons": [
     {
@@ -21,7 +21,7 @@
       }]
     }
   },
-  "start_url": ".",
+  "start_url": "./",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff",
