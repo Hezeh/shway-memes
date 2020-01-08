@@ -21,9 +21,9 @@
       }]
     }
   },
-  "start_url": "./index.html",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#221d1d",
   "background_color": "#ffffff",
   "categories": ["social", "entertainment", "photo", "lifestyle"]
 }
