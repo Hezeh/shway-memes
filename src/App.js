@@ -31,7 +31,7 @@ const App = (props) => {
 }
 
 const mapStateToProps = state => {
-  console.log(state)
+  // console.log(state)
   return {
     isAuthenticated: state.auth.token !== null,
   }
@@ -39,7 +39,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onTryAutoSignup: () => dispatch(actions.authCheckState)
+    onTryAutoSignup: () => dispatch(actions.authCheckState())
   }
 }
 

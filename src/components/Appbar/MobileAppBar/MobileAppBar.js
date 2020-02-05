@@ -11,20 +11,20 @@ import AddIcon from '@material-ui/icons/Add';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
 import HomeIcon from '@material-ui/icons/Home';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+// import FavoriteIcon from '@material-ui/icons/Favorite';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import SideListLinks from '../SideList/SideList';
-import ImageSearchIcon from '@material-ui/icons/ImageSearch';
+// import ImageSearchIcon from '@material-ui/icons/ImageSearch';
 import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
 import pink from '@material-ui/core/colors/pink';
 import PropTypes from 'prop-types';
-import Typography from '@material-ui/core/Typography';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
 import Slide from '@material-ui/core/Slide';
-
+import './MobileAppBar.css'
+import axios from 'axios'
+import UploadFab from '../../Upload/Mobile/UploadFab'
+import GroupIcon from '@material-ui/icons/Group';
 
 const color = pink[400];
 
@@ -89,6 +89,27 @@ export  function BottomAppBar(props) {
   const [state, setState ] = useState({
     left: false
   })
+  const [image, setImage] = useState('');
+  const [imagename, setImagename] = useState('Choose File')
+  const [uploadedImage, setUploadedImage] = useState({});
+  const [message, setMessage] = useState('');
+  const [uploadPercentage, setUploadPercentage] = useState(0);
+
+  const onChange = e => {
+    setImage(e.target.files[0]);
+    setImagename(e.target.files[0].name);
+}
+
+  const uploadHandler = () => {
+    const formData = new FormData()
+    formData.append(
+      'myFile',
+      image,
+      imagename
+    )
+    axios.post('my-domain.com/file-upload', formData)
+  }
+  
 
   const toggleDrawer = (side, open) => event => {
   if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -140,46 +161,47 @@ export  function BottomAppBar(props) {
           </SwipeableDrawer>
 
 
-          <NavLink exact to="/" activeClassName={classes.activeLink} className="link">
+          <NavLink exact to="/" activeClassName="mobile-menu-link" className="link">
             <IconButton color="inherit" title="Home">
                 <HomeIcon />
             </IconButton>
           </NavLink>
 
-          <NavLink to="/trending" activeClassName={classes.activeLink} className="link">
+          <NavLink to="/trending" activeClassName="mobile-menu-link" className="link">
             <IconButton color="inherit" title="Trending">
                 <WhatshotIcon />
             </IconButton>
           </NavLink>
           
-          
-          <input
+          <UploadFab />
+          {/* <input
             accept="image/*"
             className={classes.input}
             id="contained-button-file"
             multiple
             type="file"
+            // onChange={onChange}
           />
           <label htmlFor="contained-button-file">
             <Fab color="secondary" aria-label="add" className={classes.fabButton} title="Select Memes" component="span">
               <AddIcon />
             </Fab>
-          </label>
+          </label> */}
 
           <div className={classes.grow} />
-          <NavLink to="/search" activeClassName={classes.activeLink} className="link">
-            <IconButton color="inherit" title="Videos">
+          {/* <NavLink to="/search" activeClassName="mobile-menu-link" className="link">
+            <IconButton color="inherit" title="Search images">
                 <ImageSearchIcon />
             </IconButton>
-          </NavLink>
+          </NavLink> */}
 
-          <NavLink to="/subscriptions" activeClassName={classes.activeLink} className="link">
+          <NavLink to="/groups" activeClassName="mobile-menu-link" className="link">
             <IconButton color="inherit" title="Subscriptions">
-              <SubscriptionsIcon />
+              <GroupIcon />
             </IconButton>
           </NavLink>
 
-          <NavLink to="/profile" activeClassName={classes.activeLink} className="link">
+          <NavLink to="/profile" activeClassName="mobile-menu-link" className="link">
             <IconButton color="inherit" title="Profile">
               <AccountCircle />
             </IconButton>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -16,6 +16,12 @@ import SwipeableViews from 'react-swipeable-views';
 import './MobileCard.css';
 import { favoriteMeme, repostReaction} from '../Reactions/CardReactions'
 import { autoPlay } from 'react-swipeable-views-utils';
+import Switch from '@material-ui/core/Switch';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import tutorialSteps from '../Data'
+import RepeatIcon from '@material-ui/icons/Repeat';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -63,80 +69,22 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const tutorialSteps = [
-  {
-    id: 1,
-    label: 'San Francisco – Oakland Bay Bridge, United States',
-    username: 'Hezekiah',
-    shortname: 'HM',
-    imgPath:
-    'https://storage.googleapis.com/spikey-shway-001/memes/Screenshot_20190422-193426.png'
-  },
-  {
-    id: 2,
-    label: 'Bird',
-    username: 'Maish',
-    shortname: 'MH',
-    imgPath:
-    'https://storage.googleapis.com/spikey-shway-001/memes/Screenshot_20190423-152551.png'
-  },
-  {
-    id: 3,
-    label: 'Bali, Indonesia',
-    username: 'Waithira',
-    shortname: 'PW',
-    imgPath:
-      'https://storage.googleapis.com/spikey-shway-001/memes/Screenshot_20190430-190922.png',
-  },
-  {
-    id: 4,
-    label: 'NeONBRAND Digital Marketing, Las Vegas, United States',
-    username: 'Namatsi',
-    shortname: 'NM',
-    imgPath:
-      'https://storage.googleapis.com/spikey-shway-001/memes/Screenshot_20190422-193129.png',
-  },
-  {
-    id: 5,
-    label: 'Goč, Serbia',
-    username: 'Tito',
-    shortname: 'TO',
-    imgPath:
-      'https://storage.googleapis.com/spikey-shway-001/memes/Screenshot_20190422-193213.png',
-  },
-  {
-    id: 6,
-    label: 'Goč, Serbia',
-    username: 'Tito',
-    shortname: 'TO',
-    imgPath:
-      'https://storage.googleapis.com/spikey-shway-001/memes/Screenshot_20190427-093901.png',
-  },
-  {
-    id: 7,
-    label: 'Goč, Serbia',
-    username: 'Tito',
-    shortname: 'TO',
-    imgPath:
-      'https://storage.googleapis.com/spikey-shway-001/memes/Screenshot_20190430-042750.png',
-  },
-  {
-    id: 8,
-    label: 'Goč, Serbia',
-    username: 'Tito',
-    shortname: 'TO',
-    imgPath:
-      'https://storage.googleapis.com/spikey-shway-001/memes/Screenshot_20190501-084245.png',
-  },
-  
-];
 
 function MobileCard() {
   const classes = useStyles();
-  const [follow, setFollow] = useState(false);
+  const [follow, setFollow] = useState(true);
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = tutorialSteps.length;
+  const [autoplay, setAutoplay] = useState(true)
+  // const maxSteps = tutorialSteps.length;
+  const [checked, setChecked] = React.useState(true);
+  const [iconColor, setIconColor] = React.useState('default')
+  const [favorited, setFavorited] = React.useState(false)
+
+  const toggleChecked = () => {
+    setChecked(prev => !prev);
+    setAutoplay(prev => !prev);
+  };
 
   const shareMeme = () => {
     if (navigator.share) {
@@ -150,6 +98,11 @@ function MobileCard() {
     }
   }
 
+  const favoriteMeme = () => {
+    // setIconColor('default' => !'secondary');
+    // setFavorited(prev => !prev)
+  }
+
   const followUser = () => {
      if ( follow === true ) { 
        return (
@@ -159,7 +112,7 @@ function MobileCard() {
        )
       } else {
         return (
-         <Button variant="contained" color="secondary" className={classes.button} onClick={handleUnFollow}>
+         <Button variant="outlined" color="secondary" className={classes.button} onClick={handleFollow}>
            Unfollow
          </Button>
        )
@@ -168,13 +121,7 @@ function MobileCard() {
 
   const handleFollow = () => {
     return (
-      setFollow(false)
-    )
-  }
-
-  const handleUnFollow = () => {
-    return (
-      setFollow(true)
+      setFollow(prev => !prev)
     )
   }
 
@@ -182,9 +129,10 @@ function MobileCard() {
     setActiveStep(step);
   };
 
-  return (
-
-    <AutoPlaySwipeableViews
+  const handleAutoplay = () => {
+    if ( autoplay === true ) {
+      return (
+        <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}
         onChangeIndex={handleStepChange}
@@ -201,7 +149,7 @@ function MobileCard() {
                         className={classes.avatar}
                       >{step.shortname}</Avatar>
                     }
-                    //action={followUser}
+                    action={followUser()}
                     title={
                       <Link to="/profile" className="menu-link">
                         <Button size="small"  color="secondary">
@@ -215,11 +163,11 @@ function MobileCard() {
                     image={step.imgPath} 
                     title="Meme" />
                   <CardActions>
-                    <IconButton aria-label="favorite" title="Favorite" onClick={favoriteMeme}>
+                    <IconButton aria-label="favorite" title="Favorite" onClick={favoriteMeme} color={iconColor}>
                       <FavoriteIcon />
                     </IconButton>
                     <IconButton aria-label="share" title="Repost" onClick={repostReaction}>
-                      <LoopIcon />
+                      <RepeatIcon />
                     </IconButton>
                     <IconButton aria-label="share" title="Share" onClick={shareMeme}>
                       <ShareIcon />
@@ -231,6 +179,77 @@ function MobileCard() {
         </div>
       ))}
     </AutoPlaySwipeableViews>
+
+      )
+      
+    } else {
+      return (
+        <SwipeableViews
+        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+        index={activeStep}
+        onChangeIndex={handleStepChange}
+        enableMouseEvents
+      >
+        {tutorialSteps.map((step, index) => (
+            <div key={step.id}>
+              {Math.abs(activeStep - index) <= 2 ? (
+                <Card className={classes.card}>
+                  <CardHeader
+                    avatar={
+                      <Avatar
+                        alt="User Avatar"
+                        className={classes.avatar}
+                      >{step.shortname}</Avatar>
+                    }
+                    action={followUser()}
+                    title={
+                      <Link to="/profile" className="menu-link">
+                        <Button size="small"  color="secondary">
+                          {step.username}
+                        </Button>
+                      </Link>
+                    }
+                  />
+                  <CardMedia 
+                    className={classes.img} 
+                    image={step.imgPath} 
+                    title="Meme" />
+                  <CardActions>
+                    <IconButton aria-label="favorite" title="Favorite" onClick={favoriteMeme} >
+                      <FavoriteIcon />
+                    </IconButton>
+                    <IconButton aria-label="share" title="Repost" onClick={repostReaction}>
+                      <RepeatIcon />
+                    </IconButton>
+                    <IconButton aria-label="share" title="Share" onClick={shareMeme}>
+                      <ShareIcon />
+                    </IconButton>
+                    
+                  </CardActions>
+                </Card>
+        ) : null}
+        </div>
+      ))}
+    </SwipeableViews>
+      )
+      
+    }
+  }
+
+  return (
+    <div>
+      <FormControl>
+      <FormGroup>
+        <FormControlLabel
+          value="autoplay"
+          control={<Switch color="secondary" checked={checked} onChange={toggleChecked} />}
+          label="Autoplay"
+          labelPlacement="start"
+        />
+      </FormGroup>
+    </FormControl>
+      {handleAutoplay()}
+    </div>
   );
 }
 

@@ -9,7 +9,7 @@ import {
     Link,
     useRouteMatch,
 } from 'react-router-dom';
-import PersonPinIcon from '@material-ui/icons/PersonPin';
+// import PersonPinIcon from '@material-ui/icons/PersonPin';
 import ArtTrackIcon from '@material-ui/icons/ArtTrack';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import PeopleIcon from '@material-ui/icons/People';
@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ProfileNavTabs() {
+export default function ProfileNavTabs(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -38,6 +38,7 @@ export default function ProfileNavTabs() {
     <div className={classes.root}>
       <Route 
           path="/profile"
+          // path={`/@${props.profile.username}`}
           render={({ location }) => (
             <React.Fragment>
             <AppBar position="static" color="inherit">

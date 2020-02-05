@@ -17,11 +17,9 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import { connect } from 'react-redux';
 import { Redirect} from 'react-router-dom';
-import { authSignup as signup} from '../../../store/actions/auth';
-// import Fab from '@material-ui/core/Fab';
-// import TwitterIcon from '@material-ui/icons/Twitter';
-// import FacebookIcon from '@material-ui/icons/Facebook';
-// import InstagramIcon from '@material-ui/icons/Instagram';
+import { authSignup } from '../../../store/actions/auth';
+import { useForm } from '../../../useForm'
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -54,44 +52,56 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Register = ({authenticated, loading, signup, error}) => {
+const Register = (props) => {
   const classes = useStyles();
 
   const [values, setValues] = useState({
-    showPassword: false
+    showPassword: false,
   })
 
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [formError, setFormError] = useState(null)
+  const [values2, handleChange] = useForm({ 
+    email: "",
+    username: "", 
+    password: "" ,
+    confirmPassword: "",
+    formError: ""
+  });
 
-  const handleSubmit = e => {
+  const [isLoading, setIsLoading] = useState(true)
+
+  let history = useHistory();
+
+  // const [username, setUsername] = useState("");
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+  // const [confirmPassword, setConfirmPassword] = useState('');
+  // const [formError, setFormError] = useState(null)
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      username !== "" &&
-      email !== "" &&
-      password !== "" &&
-      confirmPassword !== "" &&
-      comparePasswordLength() === true
-    )
-    signup(username, email, password, confirmPassword)
+    // if (
+    //   values2.username !== "" &&
+    //   values2.email !== "" &&
+    //   values2.password !== "" &&
+    //   values2.confirmPassword !== "" &&
+    //   comparePasswordLength() === true
+    // )
+    props.onAuth(values2.username, values2.email, values2.password, values2.confirmPassword)
   }
 
   const comparePasswordLength = () => {
-    if (password.length >= 6 && confirmPassword.length >= 6) {
+    if (values2.password.length >= 6 && values2.confirmPassword.length >= 6) {
       return true;
     } else {
-      setFormError("Your password must be a minimum of 6 characters")
+     values2.formError("Your password must be a minimum of 6 characters")
     }
     return false;
   }
 
-  const handleChange = prop => event => {
-    setValues({[prop]: event.target.value });
-    setFormError(null)
-  };
+  // const handleChange = prop => event => {
+  //   setValues({[prop]: event.target.value });
+  //   setFormError(null)
+  // };
 
   const handleClickShowPassword = () => {
     setValues({showPassword: !values.showPassword });
@@ -100,45 +110,36 @@ const Register = ({authenticated, loading, signup, error}) => {
   const handleMouseDownPassword = event => {
     event.preventDefault();
   };
-
-  if (authenticated) {
-    return <Redirect to="/" />
-  } else {
-    return (
-        <Container component="main" maxWidth="xs">
+  
+  if (props.authenticated) {
+    return <Redirect to="/" />;
+  }
+  return (
+    <Container component="main" maxWidth="xs">
           <CssBaseline />            
           <div className={classes.paper}>
             <Avatar className={classes.avatar}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign up to view shway memes.
+            Sign up to share and view cool memes, follow trending meme hashtags, discover new memelords 
+            and engage in meme groups.
             </Typography>
-            {/* <Fab variant="extended" color="secondary" aria-label="add" className={classes.margin}>
-              <TwitterIcon className={classes.extendedIcon} />
-              Sign in with Twitter
-            </Fab>
-            <Fab variant="extended" fullWidth color="secondary" aria-label="add" className={classes.margin}>
-              <FacebookIcon className={classes.extendedIcon} />
-              Sign in with Facebook
-            </Fab>
-            <Fab variant="extended" color="secondary" aria-label="add" className={classes.margin}>
-              <InstagramIcon className={classes.extendedIcon} />
-              Sign in with Instagram
-            </Fab> */}
-            <form className={classes.form} Validate onSubmit={handleSubmit}>
+            
+            <form className={classes.form} onSubmit={handleSubmit}>
               <Grid container spacing={1}> 
                 <Grid item xs={12} sm={12}>
                   <TextField
                     autoComplete="fname"
-                    name="userName"
+                    name="username"
                     variant="outlined"
                     required
                     fullWidth
-                    id="firstName"
+                    id="userName"
                     label="User Name"
                     autoFocus
                     onChange={handleChange}
+                    value={values2.username}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -151,6 +152,7 @@ const Register = ({authenticated, loading, signup, error}) => {
                     name="email"
                     autoComplete="email"
                     onChange={handleChange}
+                    value={values2.email}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -161,9 +163,10 @@ const Register = ({authenticated, loading, signup, error}) => {
                     name="password"
                     label="Password"
                     type={values.showPassword ? 'text' : 'password'}
-                    id="password"
+                    id="confirmPassword"
                     autoComplete="current-password"
                     onChange={handleChange}
+                    value={values2.password}
                     InputProps= {{
                       endAdornment : 
                         <InputAdornment position="end">
@@ -189,6 +192,7 @@ const Register = ({authenticated, loading, signup, error}) => {
                     id="password"
                     autoComplete="current-password"
                     onChange={handleChange}
+                    value={values2.confirmPassword}
                    
                   />
                 </Grid>
@@ -205,7 +209,7 @@ const Register = ({authenticated, loading, signup, error}) => {
                 variant="contained"
                 color="secondary"
                 className={classes.submit}
-                disabled={loading}
+                disabled={props.loading}
               >
                 Sign Up
               </Button>
@@ -219,8 +223,8 @@ const Register = ({authenticated, loading, signup, error}) => {
             </form>
           </div>
       </Container>
-      )
-    }
+  )
+
 }
 
 const mapStateToProps = (state) => {
@@ -233,8 +237,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    signup: (username, email, password1, password2) =>
-      dispatch(signup(username, email, password1, password2))
+    onAuth: (username, email, password1, password2) => dispatch(authSignup(username, email, password1, password2))
   }
 }
 

@@ -3,16 +3,16 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
+// import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import InfoIcon from '@material-ui/icons/Info';
-import HowToRegIcon from '@material-ui/icons/HowToReg';
+// import HowToRegIcon from '@material-ui/icons/HowToReg';
 import { Link } from 'react-router-dom';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 
 export default function SideListLinks() {
   return (
       <List>
-        <Link to="/login" className="menu-link">
+        {/* <Link to="/login" className="menu-link">
           <ListItem button >
             <ListItemIcon>
               <AccountBoxIcon />
@@ -28,7 +28,7 @@ export default function SideListLinks() {
             </ListItemIcon>
             <ListItemText primary="Register" />
           </ListItem>
-        </Link>
+        </Link> */}
 
         <Link to="/aboutus" className="menu-link">
           <ListItem button >

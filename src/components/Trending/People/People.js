@@ -7,10 +7,9 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import Avatar from '@material-ui/core/Avatar';
 
-const messages = [
+const people = [
   {
     id: 1,
     primary: 'Programmer Humor',
@@ -79,7 +78,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2, 2, 0),
   },
   paper: {
-    paddingBottom: 50,
+    paddingBottom: 100,
   },
   list: {
     marginBottom: theme.spacing(2),
@@ -95,20 +94,18 @@ export default function GroupsSubs() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Paper square className={classes.paper}>
+      <Paper className={classes.paper}>
         <Typography className={classes.text} variant="h5" gutterBottom>
           Meme Lords
         </Typography>
         <List className={classes.list}>
-          {messages.map(({ id, primary, secondary, person }) => (
+          {people.map(({ id, primary, person }) => (
             <React.Fragment key={id}>
-              {id === 1 && <ListSubheader className={classes.subheader}>Around Me</ListSubheader>}
-              {id === 3 && <ListSubheader className={classes.subheader}>Suggestions</ListSubheader>}
               <ListItem button>
                 <ListItemAvatar>
                   <Avatar alt="Profile Picture" src={person} />
                 </ListItemAvatar>
-                <ListItemText primary={primary} secondary={secondary} />
+                <ListItemText primary={primary} />
               </ListItem>
             </React.Fragment>
           ))}

@@ -1,0 +1,20 @@
+.results-wrapper {
+
+}
+.results-wrapper .inner {
+    /*position: fixed;*/
+    /*margin: 0 auto;*/
+}
+.result-wrapper {
+
+}
+
+.result-wrapper ul {
+    margin: 0;
+    padding: 0;
+}
+
+.result-wrapper ul li {
+    margin: 0;
+    padding: 0;
+}

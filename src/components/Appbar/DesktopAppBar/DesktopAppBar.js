@@ -5,16 +5,16 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import SideListLinks from '../SideList/SideList';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import { Link } from 'react-router-dom';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import PropTypes from 'prop-types';
-import Fab from '@material-ui/core/Fab';
+// import Fab from '@material-ui/core/Fab';
+// import PublishIcon from '@material-ui/icons/Publish';
+import { useHistory } from "react-router-dom";
+import UploadFab from '../../Upload/Desktop/UploadFab'
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -76,6 +76,9 @@ const useStyles = makeStyles(theme => ({
       display: 'none',
     },
   },
+  input: {
+    display: 'none'
+  }, 
 }));
 
 function ElevationScroll(props) {
@@ -98,11 +101,17 @@ ElevationScroll.propTypes = {
 export default function DesktopAppBar(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [auth, setAuth] = React.useState(true);
-  const open = Boolean(anchorEl);
+  // const [auth, setAuth] = React.useState(true);
+  // const open = Boolean(anchorEl);
   const [state, setState ] = useState({
     left: false
   })
+
+  let history = useHistory();
+
+  function handleChange() {
+    history.push("/home");
+  }
 
   const toggleDrawer = (side, open) => event => {
   if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -120,22 +129,12 @@ export default function DesktopAppBar(props) {
     >
       <SideListLinks />
     </div>
-  )
-
-  function handleMenu(event) {
-    setAnchorEl(event.currentTarget);
-  }
-
-  function handleClose() {
-    setAnchorEl(null);
-  }
-
- 
+  ) 
   
   return (
     <div className={classes.grow}>
       <ElevationScroll {...props}>
-        <AppBar position="sticky" color="dark">
+        <AppBar position="sticky" color="inherit">
           <Toolbar>
             <IconButton
               edge="start"
@@ -157,35 +156,23 @@ export default function DesktopAppBar(props) {
             <Typography className={classes.title} variant="h6" noWrap>
               <Link to="/" className="appbarLinks">ShwayMemes</Link>
             </Typography>
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ 'aria-label': 'search' }}
-              />
-            </div>
+            
             <div className={classes.grow} />
-            <div className={classes.sectionDesktop}>
-              <a target="_blank" rel="noopener noreferrer" href="https://www.kapwing.com/meme-maker" className="link">
-                <Fab variant="extended" fullWidth color="secondary" aria-label="add" className={classes.margin}>
-                  Create Memes
-                </Fab>
-              </a>
-                <IconButton
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  color="inherit"
-                >
-                  <Link to="/profile" className="link"><AccountCircle /></Link>
-                </IconButton>
-                
-            </div>
+            <UploadFab />
+            {/* <input
+              accept="image/*"
+              className={classes.input}
+              id="contained-button-file"
+              multiple
+              type="file"
+              onChange={handleChange}
+            />
+            
+          <label htmlFor="contained-button-file">
+            <Fab color="secondary" aria-label="add" className={classes.fabButton} title="Select Memes" component="span">
+              <PublishIcon />
+            </Fab>
+          </label> */}
           </Toolbar>
         </AppBar>
       </ElevationScroll>

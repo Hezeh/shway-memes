@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import './DesktopCard.css';
+import React, { Fragment , useState, useEffect} from 'react';
+// import './DesktopCard.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -9,11 +9,15 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import LoopIcon from '@material-ui/icons/Loop';
+// import LoopIcon from '@material-ui/icons/Loop';
 import Grid from '@material-ui/core/Grid';
 import Skeleton from '@material-ui/lab/Skeleton'
 import { favoriteMeme, repostReaction} from '../Reactions/CardReactions'
+import tutorialSteps from '../Data'
+import Button from '@material-ui/core/Button';
+import {Link} from 'react-router-dom'
+// import { useFetch } from '../../../useFetch';
+import RepeatIcon from '@material-ui/icons/Repeat';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -42,78 +46,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const tutorialSteps = [
-  {
-    id: 1,
-    label: 'San Francisco – Oakland Bay Bridge, United States',
-    username: 'Hezekiah',
-    shortname: 'HM',
-    imgPath:
-    'https://storage.googleapis.com/spikey-shway-001/memes/Screenshot_20190422-193426.png'
-  },
-  {
-    id: 2,
-    label: 'Bird',
-    username: 'Maish',
-    shortname: 'MH',
-    imgPath:
-    'https://storage.googleapis.com/spikey-shway-001/memes/Screenshot_20190423-152551.png'
-  },
-  {
-    id: 3,
-    label: 'Bali, Indonesia',
-    username: 'Waithira',
-    shortname: 'PW',
-    imgPath:
-      'https://storage.googleapis.com/spikey-shway-001/memes/Screenshot_20190430-190922.png',
-  },
-  {
-    id: 4,
-    label: 'NeONBRAND Digital Marketing, Las Vegas, United States',
-    username: 'Namatsi',
-    shortname: 'NM',
-    imgPath:
-      'https://storage.googleapis.com/spikey-shway-001/memes/Screenshot_20190422-193129.png',
-  },
-  {
-    id: 5,
-    label: 'Goč, Serbia',
-    username: 'Tito',
-    shortname: 'TO',
-    imgPath:
-      'https://storage.googleapis.com/spikey-shway-001/memes/Screenshot_20190422-193213.png',
-  },
-  {
-    id: 6,
-    label: 'Goč, Serbia',
-    username: 'Tito',
-    shortname: 'TO',
-    imgPath:
-      'https://storage.googleapis.com/spikey-shway-001/memes/Screenshot_20190427-093901.png',
-  },
-  {
-    id: 7,
-    label: 'Goč, Serbia',
-    username: 'Tito',
-    shortname: 'TO',
-    imgPath:
-      'https://storage.googleapis.com/spikey-shway-001/memes/Screenshot_20190430-042750.png',
-  },
-  {
-    id: 8,
-    label: 'Goč, Serbia',
-    username: 'Tito',
-    shortname: 'TO',
-    imgPath:
-      'https://storage.googleapis.com/spikey-shway-001/memes/Screenshot_20190501-084245.png',
-  },
-  
-];
 
 function MainCard() {
   const classes = useStyles();
-  const loading = false;
-  
+  // const loading = true;
+  const [values, setValues] = useState({
+    loading: true,
+  })
   
   return (
     <div>
@@ -126,27 +65,30 @@ function MainCard() {
                     <Card className={classes.card}>
                       <CardHeader
                         avatar={
-                          loading ? (
+                          values.loading ? (
                             <Skeleton variant="circle" width={40} height={40} />
                           ) : (
                             <Avatar
                               alt="User Avatar"
                               className={classes.avatar}
-                          >{step.shortname}</Avatar>
-                          )
-                        }
+                            >
+                              {step.shortname}
+                            </Avatar>
+                          )}
                         action={
-                          loading ? null : (
-                            <IconButton aria-label="more">
-                              <MoreVertIcon />
-                            </IconButton>
+                          values.loading ? null : (
+                            <Link to="/profile" className="menu-link">
+                              <Button size="small"  color="secondary">
+                                {step.username}
+                              </Button>
+                            </Link>
                           )
                         }
-                        title={loading ? <Skeleton height={10} width="80%" style={{ marginBottom: 6 }} /> : step.username}
-    
-                
+                        title={values.loading ? 
+                                <Skeleton height={35} width="100%" style={{ marginBottom: 6 }} /> 
+                                : step.username}
                       />
-                        {loading ? (
+                        {values.loading ? (
                           <Skeleton variant="rect" className={classes.media} />
                         ) : (
                           <CardMedia
@@ -157,7 +99,7 @@ function MainCard() {
         
                         )}  
                         <CardActions >
-                          {loading ? (
+                          {values.loading ? (
                           <React.Fragment>
                             <Skeleton height={40} width="80%" />
                           </React.Fragment>
@@ -167,7 +109,7 @@ function MainCard() {
                               <FavoriteIcon />
                             </IconButton>
                             <IconButton aria-label="share" title="Repost" onClick={repostReaction}>
-                              <LoopIcon />
+                              <RepeatIcon />
                             </IconButton>
                           </Fragment>
                         )}
@@ -184,6 +126,5 @@ function MainCard() {
     </div>
   );
 }
-
 
 export default MainCard;

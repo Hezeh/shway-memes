@@ -1,12 +1,8 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-// import Typography from '@material-ui/core/Typography';
-// import Box from '@material-ui/core/Box';
-import PersonPinIcon from '@material-ui/icons/PersonPin';
 import PeopleIcon from '@material-ui/icons/People';
 import { 
     Switch,
@@ -14,8 +10,9 @@ import {
     Link,
     useRouteMatch,
 } from 'react-router-dom';
-import People from './PeopleSubs/PeopleSubs'
+import CreateGroup from './Create/Create'
 import Groups from './GroupsSubs/GroupsSubs'
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SubsNavTabs() {
+export default function SubsNavTabs(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -37,7 +34,8 @@ export default function SubsNavTabs() {
   return (
     <div className={classes.root}>
       <Route 
-          path="/subscriptions"
+          path="/groups"
+          // path={`@${props.profile.username}`}
           render={({ location }) => (
             <React.Fragment>
             <AppBar position="static" color="inherit">
@@ -48,13 +46,13 @@ export default function SubsNavTabs() {
                 aria-label="nav tabs example"
               >
                 <Tab icon={<PeopleIcon />} label="Groups" to={`${match.url}`} component={Link}/>
-                <Tab icon={<PersonPinIcon />} label="People" to={`${match.url}/people`} component={Link}/>
+                <Tab icon={<GroupAddIcon />} label="Add Group" to={`${match.url}/addgroup`} component={Link}/>
               </Tabs>
             </AppBar>
             <Switch>
               
-              <Route path={`${match.url}/people`}>
-                <People />
+              <Route path={`${match.url}/addgroup`}>
+                <CreateGroup />
               </Route>
               <Route path={`${match.url}`}>
                 <Groups />

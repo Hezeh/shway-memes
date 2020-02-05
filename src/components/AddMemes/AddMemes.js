@@ -33,8 +33,6 @@ const MemesUpload = () => {
                                 Math.round(progressEvent.loaded * 100 / progressEvent.total)
                             )
                         )
-
-                      
                     )
                       // Clear percentage
                       setTimeout(() => setUploadPercentage(0), 1000)
