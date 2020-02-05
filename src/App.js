@@ -6,8 +6,16 @@ import * as actions from './store/actions/auth';
 import { BrowserRouter as Router} from 'react-router-dom';
 import { connect } from 'react-redux';
 import BaseRouter from './routes';
+import ReactGA from 'react-ga';
 
 const App = (props) => {
+
+  useEffect(() => {
+    ReactGA.initialize('G-783Q923YG8');
+    // To Report Page View 
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, [])
+
   
   const theme = createMuiTheme({
     palette: {
