@@ -10,11 +10,7 @@ import ReactGA from 'react-ga';
 
 const App = (props) => {
 
-  useEffect(() => {
-    ReactGA.initialize('G-8FY07ZWJJJ');
-    // To Report Page View 
-    ReactGA.pageview(window.location.pathname + window.location.search);
-  }, [])
+  
 
   
   const theme = createMuiTheme({

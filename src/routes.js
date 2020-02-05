@@ -3,6 +3,7 @@ import './App.css';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
+import ReactGA from 'react-ga';
 const AppBar = React.lazy(() => import ('./components/Appbar/Appbar'))
 const Trending = React.lazy(() => import ('./components/Trending/Trending'));
 const Login = React.lazy(() => import ('./components/Account/Login/Login'));
@@ -16,6 +17,7 @@ const Subscriptions = React.lazy(() => import ('./components/Subscriptions/Group
 const ResetPassword = React.lazy(() => import ('./components/Account/ResetPassword/ResetPassword'))
 // const Groups = React.lazy(() => import ('./components/Groups/Groups'))
 const Upload = React.lazy(() => import ('./components/Upload/Upload'))
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -31,6 +33,14 @@ const useStyles = makeStyles(theme => ({
 
 export default function BaseRouter() {
     const classes = useStyles();
+
+    useEffect(() => {
+      ReactGA.initialize('G-8FY07ZWJJJ');
+      // To Report Page View 
+      ReactGA.pageview(window.location.pathname + window.location.search);
+    }, [])
+
+
         return (
           <Fragment>
             <Suspense fallback={
