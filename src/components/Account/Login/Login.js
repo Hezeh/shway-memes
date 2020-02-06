@@ -14,6 +14,7 @@ import { authLogin } from '../../../store/actions/auth';
 import { useForm } from '../../../useForm'
 import { useHistory } from "react-router-dom";
 import { Redirect } from "react-router-dom";
+import ReactGA from 'react-ga';
 
 
 const useStyles = makeStyles(theme => ({
@@ -57,6 +58,10 @@ function Login(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     props.onAuth(values.username, values.password)
+    ReactGA.event({
+      category: 'User',
+      action: 'User Logged In'
+    });
   }
   if (isAuthenticated) {
       return <Redirect to="/" />;

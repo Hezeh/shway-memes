@@ -22,6 +22,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import tutorialSteps from '../Data'
 import RepeatIcon from '@material-ui/icons/Repeat';
+import ReactGA from 'react-ga';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -96,6 +97,10 @@ function MobileCard() {
         .then(() => console.log('Successful share'))
         .catch((error) => console.log('Error sharing', error));
     }
+    ReactGA.event({
+      category: 'User',
+      action: 'Shared link to photo/meme'
+    });
   }
 
   const favoriteMeme = () => {

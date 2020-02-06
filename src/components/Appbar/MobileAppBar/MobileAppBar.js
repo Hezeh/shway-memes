@@ -5,9 +5,9 @@ import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import Fab from '@material-ui/core/Fab';
+// import Fab from '@material-ui/core/Fab';
 import MenuIcon from '@material-ui/icons/Menu';
-import AddIcon from '@material-ui/icons/Add';
+// import AddIcon from '@material-ui/icons/Add';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
 import HomeIcon from '@material-ui/icons/Home';
@@ -16,13 +16,13 @@ import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import { NavLink } from 'react-router-dom';
 import SideListLinks from '../SideList/SideList';
 // import ImageSearchIcon from '@material-ui/icons/ImageSearch';
-import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
+// import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
 import pink from '@material-ui/core/colors/pink';
 import PropTypes from 'prop-types';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
 import './MobileAppBar.css'
-import axios from 'axios'
+// import axios from 'axios'
 import UploadFab from '../../Upload/Mobile/UploadFab'
 import GroupIcon from '@material-ui/icons/Group';
 
@@ -83,32 +83,32 @@ HideOnScroll.propTypes = {
 
 export  function BottomAppBar(props) {
   const classes = useStyles();
-  const [auth, setAuth] = React.useState(true);
+  // const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const [state, setState ] = useState({
     left: false
   })
-  const [image, setImage] = useState('');
-  const [imagename, setImagename] = useState('Choose File')
-  const [uploadedImage, setUploadedImage] = useState({});
-  const [message, setMessage] = useState('');
-  const [uploadPercentage, setUploadPercentage] = useState(0);
+  // const [image, setImage] = useState('');
+  // const [imagename, setImagename] = useState('Choose File')
+  // const [uploadedImage, setUploadedImage] = useState({});
+  // const [message, setMessage] = useState('');
+  // const [uploadPercentage, setUploadPercentage] = useState(0);
 
-  const onChange = e => {
-    setImage(e.target.files[0]);
-    setImagename(e.target.files[0].name);
-}
+  // const onChange = e => {
+  //   setImage(e.target.files[0]);
+  //   setImagename(e.target.files[0].name);
+  // }
 
-  const uploadHandler = () => {
-    const formData = new FormData()
-    formData.append(
-      'myFile',
-      image,
-      imagename
-    )
-    axios.post('my-domain.com/file-upload', formData)
-  }
+  // const uploadHandler = () => {
+  //   const formData = new FormData()
+  //   formData.append(
+  //     'myFile',
+  //     image,
+  //     imagename
+  //   )
+  //   axios.post('my-domain.com/file-upload', formData)
+  // }
   
 
   const toggleDrawer = (side, open) => event => {
@@ -129,17 +129,17 @@ export  function BottomAppBar(props) {
     </div>
   )
 
-  function handleChange(event) {
-    setAuth(event.target.checked);
-  }
+  // function handleChange(event) {
+  //   setAuth(event.target.checked);
+  // }
 
-  function handleMenu(event) {
-    setAnchorEl(event.currentTarget);
-  }
+  // function handleMenu(event) {
+  //   setAnchorEl(event.currentTarget);
+  // }
 
-  function handleClose() {
-    setAnchorEl(null);
-  }
+  // function handleClose() {
+  //   setAnchorEl(null);
+  // }
 
   return (
     <Fragment>

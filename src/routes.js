@@ -13,7 +13,7 @@ const Profile = React.lazy(() => import ('./components/Profile/Profile'))
 const Error_404 = React.lazy(() => import ('./components/Errors/Error_404/Error_404'))
 const Search = React.lazy(() => import ('./components/Search/Search'))
 const MainCard = React.lazy(() => import ('./components/MainCard/MainCard'))
-const Subscriptions = React.lazy(() => import ('./components/Subscriptions/Groups'))
+const Subscriptions = React.lazy(() => import ('./components/Groups/Groups'))
 const ResetPassword = React.lazy(() => import ('./components/Account/ResetPassword/ResetPassword'))
 // const Groups = React.lazy(() => import ('./components/Groups/Groups'))
 const Upload = React.lazy(() => import ('./components/Upload/Upload'))
@@ -33,13 +33,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function BaseRouter() {
     const classes = useStyles();
-
-    useEffect(() => {
-      ReactGA.initialize('G-8FY07ZWJJJ');
-      // To Report Page View 
-      ReactGA.pageview(window.location.pathname + window.location.search);
-    }, [])
-
 
         return (
           <Fragment>

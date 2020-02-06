@@ -11,6 +11,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import ReactGA from 'react-ga';
+
 const useStyles = makeStyles(theme => ({
   '@global': {
     body: {
@@ -49,6 +51,10 @@ function Login() {
       e.preventDefault()
       console.log('Trying to reset password')
       console.log('Check out your email')
+      ReactGA.event({
+        category: 'User',
+        action: 'Password reset requested'
+      });
   }
 
   return (

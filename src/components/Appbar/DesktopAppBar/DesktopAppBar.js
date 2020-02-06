@@ -15,6 +15,8 @@ import PropTypes from 'prop-types';
 // import PublishIcon from '@material-ui/icons/Publish';
 import { useHistory } from "react-router-dom";
 import UploadFab from '../../Upload/Desktop/UploadFab'
+import ReactGA from 'react-ga';
+
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -118,6 +120,10 @@ export default function DesktopAppBar(props) {
       return;
     }
     setState({ ...state, [side]: open });
+    ReactGA.event({
+      category: 'User',
+      action: 'Toggled Drawer'
+    });
   };
   
   const sideList = side => (

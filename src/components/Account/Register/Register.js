@@ -20,6 +20,7 @@ import { Redirect} from 'react-router-dom';
 import { authSignup } from '../../../store/actions/auth';
 import { useForm } from '../../../useForm'
 import { useHistory } from "react-router-dom";
+import ReactGA from 'react-ga';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -87,6 +88,10 @@ const Register = (props) => {
     //   comparePasswordLength() === true
     // )
     props.onAuth(values2.username, values2.email, values2.password, values2.confirmPassword)
+    ReactGA.event({
+      category: 'User',
+      action: 'User Created an account'
+    });
   }
 
   const comparePasswordLength = () => {
