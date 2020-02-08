@@ -10,12 +10,14 @@ import SideListLinks from '../SideList/SideList';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import { Link } from 'react-router-dom';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 // import Fab from '@material-ui/core/Fab';
 // import PublishIcon from '@material-ui/icons/Publish';
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import UploadFab from '../../Upload/Desktop/UploadFab'
 import ReactGA from 'react-ga';
+import Slide from '@material-ui/core/Slide';
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -30,30 +32,6 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
-  },
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(3),
-      width: 'auto',
-    },
-  },
-  searchIcon: {
-    width: theme.spacing(7),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   inputRoot: {
     color: 'inherit',
@@ -81,39 +59,33 @@ const useStyles = makeStyles(theme => ({
   input: {
     display: 'none'
   }, 
+
 }));
 
-function ElevationScroll(props) {
-  const { children } = props;
-  const trigger = useScrollTrigger({ 
-    target: window,
-    disableHysteresis: true,
-    threshold: 0,
-  });
+function HideOnScroll(props) {
+  const { children} = props;
+  const trigger = useScrollTrigger();
 
-  return React.cloneElement(children, {
-    elevation: trigger ? 4 : 0,
-  });
+  return (
+    <Slide appear={false} direction="down" in={!trigger} >
+      {children}
+    </Slide>
+  );
 }
-
-ElevationScroll.propTypes = {
-  children: PropTypes.element.isRequired,
-};
-
 export default function DesktopAppBar(props) {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  // const [anchorEl, setAnchorEl] = React.useState(null);
   // const [auth, setAuth] = React.useState(true);
   // const open = Boolean(anchorEl);
   const [state, setState ] = useState({
     left: false
   })
 
-  let history = useHistory();
+  // let history = useHistory();
 
-  function handleChange() {
-    history.push("/home");
-  }
+  // function handleChange() {
+  //   history.push("/home");
+  // }
 
   const toggleDrawer = (side, open) => event => {
   if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -139,8 +111,8 @@ export default function DesktopAppBar(props) {
   
   return (
     <div className={classes.grow}>
-      <ElevationScroll {...props}>
-        <AppBar position="sticky" color="inherit">
+      <HideOnScroll {...props}>
+        <AppBar  color="inherit">
           <Toolbar>
             <IconButton
               edge="start"
@@ -181,7 +153,7 @@ export default function DesktopAppBar(props) {
           </label> */}
           </Toolbar>
         </AppBar>
-      </ElevationScroll>
+      </HideOnScroll>
     </div>
   );
 }

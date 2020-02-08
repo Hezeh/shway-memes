@@ -22,8 +22,9 @@ import RepeatIcon from '@material-ui/icons/Repeat';
 const useStyles = makeStyles(theme => ({
   card: {
     flexGrow: 1,
-    minWidth: '600px',
-    maxHeight: '800px',  // was 1000px
+    minWidth: '630px',
+    // maxHeight: '800px',  // was 1000px
+    maxHeight: '1000px',
     margin: "10px",
     transition: "0.1s",
     borderRadius: "30px",
@@ -42,8 +43,11 @@ const useStyles = makeStyles(theme => ({
   div: {
     alignContent: 'start',
     display: 'block',
-    
-  }
+  },
+  root: {
+    marginTop: '30px',
+    paddingTop: '30px'
+  },
 }));
 
 
