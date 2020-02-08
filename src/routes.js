@@ -1,9 +1,8 @@
-import React, { Fragment, Suspense, useEffect} from 'react';
+import React, { Fragment, Suspense} from 'react';
 import './App.css';
-import {Switch, Route, Redirect} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
-import ReactGA from 'react-ga';
 const AppBar = React.lazy(() => import ('./components/Appbar/Appbar'))
 const Trending = React.lazy(() => import ('./components/Trending/Trending'));
 const Login = React.lazy(() => import ('./components/Account/Login/Login'));
@@ -14,7 +13,7 @@ const Error_404 = React.lazy(() => import ('./components/Errors/Error_404/Error_
 const Search = React.lazy(() => import ('./components/Search/Search'))
 const MainCard = React.lazy(() => import ('./components/MainCard/MainCard'))
 const Subscriptions = React.lazy(() => import ('./components/Groups/Groups'))
-const ResetPassword = React.lazy(() => import ('./components/Account/ResetPassword/ResetPassword'))
+// const ResetPassword = React.lazy(() => import ('./components/Account/ResetPassword/ResetPassword'))
 // const Groups = React.lazy(() => import ('./components/Groups/Groups'))
 const Upload = React.lazy(() => import ('./components/Upload/Upload'))
 
@@ -55,7 +54,7 @@ export default function BaseRouter() {
                 <Route path="/home" component={Upload}/>
                 <Route exact path="/register" component={Register}/>
                 <Route exact path="/login" component={Login}/>
-                <Route exact path="/resetpassword" component={ResetPassword}/>
+                {/* <Route exact path="/resetpassword" component={ResetPassword}/> */}
                 {/* <Redirect from="/login" to="/" />
                 <Redirect from="/register" to="/" /> */}
                 <Route path="*" component={Error_404}/>

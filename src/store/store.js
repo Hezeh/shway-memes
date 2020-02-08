@@ -8,7 +8,7 @@ const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, 
     composeEnhances(
         applyMiddleware(
-            thunk, 
+            thunk,
             loadingBarMiddleware()  // managers loading bar
         )))
 

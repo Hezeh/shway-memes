@@ -114,11 +114,11 @@ function Login(props) {
             Sign In
           </Button>
           <Grid container>
-            <Grid item xs>
+            {/* <Grid item xs>
               <Link href="/resetpassword" variant="body2" color="secondary">
                 Forgot password?
               </Link>
-            </Grid>
+            </Grid> */}
             <Grid item>
               <Link href="/register" variant="body2" color="secondary">
                 {"Don't have an account? Sign Up"}
