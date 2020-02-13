@@ -9,17 +9,20 @@ import {
     Link,
     useRouteMatch,
 } from 'react-router-dom';
-// import PersonPinIcon from '@material-ui/icons/PersonPin';
+// import PersonPinIcon from '@material-ui/icons/PersonPinCircle'
 import ArtTrackIcon from '@material-ui/icons/ArtTrack';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import PeopleIcon from '@material-ui/icons/People';
-import Followers from './Followers/Followers'
-import Posts from './Posts/Posts'
-import Favorites from './Favorites/Favorites'
+import Followers from './Followers'
+import Posts from './Posts'
+import Favorites from './Favorites'
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    [theme.breakpoints.up('md')]: {
+      paddingTop: '60px',
+    },
   },
 }));
 
@@ -46,7 +49,7 @@ export default function ProfileNavTabs(props) {
                 variant="fullWidth"
                 value={value}
                 onChange={handleChange}
-                aria-label="nav tabs example"
+                aria-label="Profile Tabs"
               >
                 
                 <Tab icon={<ArtTrackIcon />} label="POSTS" to={`${match.url}`} component={Link}/>

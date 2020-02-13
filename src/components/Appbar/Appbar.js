@@ -1,15 +1,12 @@
 import React from 'react';
-import DesktopAppBar from './DesktopAppBar/DesktopAppBar';
-import MobileAppBar from './MobileAppBar/MobileAppBar';
+import DesktopAppBar from './DesktopAppBar';
+import MobileAppBar from './MobileAppBar';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-//import { useTheme } from '@material-ui/core/styles';
 import {createMuiTheme, } from '@material-ui/core/styles';
 import { ThemeProvider} from '@material-ui/styles'
-import { Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
 
 function AppBar(props) {
-  //const theme = useTheme();
   const theme = createMuiTheme({
     palette: {
       type: 'dark'
@@ -54,8 +51,8 @@ function AppBar(props) {
 
 const mapStateToProps = state => {
   return {
-    error: state.auth.error,
-    loading: state.auth.loading,
+    // error: state.auth.error,
+    // loading: state.auth.loading,
     authenticated: state.auth.token
   }
 }

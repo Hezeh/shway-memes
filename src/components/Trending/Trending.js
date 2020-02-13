@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -12,9 +12,9 @@ import {
     Link,
     useRouteMatch,
 } from 'react-router-dom';
-import People from './People/People'
-import Groups from './GroupsList/GroupsList'
-import Hashtags from './Hashtags/Hashtags'
+import People from './Memelords'
+import Groups from './GroupsList'
+import Hashtags from './Hashtags'
 
 function a11yProps(index) {
   return {
@@ -26,6 +26,10 @@ function a11yProps(index) {
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    // paddingTop: '60px',
+    [theme.breakpoints.up('md')]: {
+      paddingTop: '60px',
+    },
   },
   fab: {
     position: 'absolute',
@@ -36,7 +40,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function TrendingNavTabs() {
   const classes = useStyles();
-  const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -44,12 +47,6 @@ export default function TrendingNavTabs() {
   };
 
   let match = useRouteMatch();
-
-  const transitionDuration = {
-    enter: theme.transitions.duration.enteringScreen,
-    exit: theme.transitions.duration.leavingScreen,
-  };
-
 
   return (
     <div className={classes.root}>
@@ -62,7 +59,7 @@ export default function TrendingNavTabs() {
                 variant="fullWidth"
                 value={value}
                 onChange={handleChange}
-                aria-label="nav tabs example"
+                aria-label="Trending Tabs"
               >
                 <Tab icon={<TrendingUpIcon />} label="Hashtags" to={`${match.url}`} {...a11yProps(0)} component={Link} />
                 <Tab icon={<PeopleIcon />} label="Groups" to={`${match.url}/groups`} {...a11yProps(1)} component={Link}/>

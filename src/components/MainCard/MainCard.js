@@ -1,9 +1,8 @@
 import React from 'react';
-import DesktopAppBar from './DesktopCard/DesktopCard';
-import MobileAppBar from './MobileCard/MobileCard';
+import DesktopAppBar from './DesktopCard';
+import MobileAppBar from './MobileCard';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-//import {createMuiTheme, } from '@material-ui/core/styles';
 import { ThemeProvider} from '@material-ui/styles'
 import { Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';

@@ -15,10 +15,10 @@ export const authSuccess = token => {
     }
 }
 
-export const authFail = error => {
+export const authFail = err => {
     return {
         type: actionTypes.AUTH_FAIL,
-        error: error
+        error: err
     }
 }
 
@@ -94,7 +94,7 @@ export const authCheckState = () => {
                 dispatch(logout());
             } else {
                 dispatch(authSuccess(token));
-                dispatch(checkAuthTimeout( (expirationDate.getTime() - new Date().getTime()) / 1000) );
+                dispatch(checkAuthTimeout( (expirationDate.getTime() - new Date().getTime()) ) );
             }
         }
     }

@@ -24,7 +24,7 @@ export default function UploadFab() {
     let history = useHistory();
 
     function handleChange() {
-        history.push("/home");
+        history.push("/upload");
     }
     
     return (

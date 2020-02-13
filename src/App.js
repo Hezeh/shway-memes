@@ -44,7 +44,6 @@ const App = (props) => {
 }
 
 const mapStateToProps = state => {
-  // console.log(state)
   return {
     isAuthenticated: state.auth.token !== null,
   }

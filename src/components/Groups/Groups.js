@@ -10,17 +10,23 @@ import {
     Link,
     useRouteMatch,
 } from 'react-router-dom';
-import CreateGroup from './Create/Create'
-import Groups from './GroupsSubs/GroupsSubs'
+import CreateGroup from './Create'
+import Groups from './GroupsList'
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
+import MyGroups from './MyGroups'
+import {Redirect} from 'react-router-dom'
+import {connect} from 'react-redux'
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    [theme.breakpoints.up('md')]: {
+      paddingTop: '60px',
+    },
   },
 }));
 
-export default function SubsNavTabs(props) {
+function GroupsNavTabs(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -30,7 +36,9 @@ export default function SubsNavTabs(props) {
 
   let match = useRouteMatch();
 
-
+  if (!props.token) {
+    return <Redirect to="/login" />;
+  }
   return (
     <div className={classes.root}>
       <Route 
@@ -43,9 +51,10 @@ export default function SubsNavTabs(props) {
                 variant="fullWidth"
                 value={value}
                 onChange={handleChange}
-                aria-label="nav tabs example"
+                aria-label="Groups Tabs"
               >
-                <Tab icon={<PeopleIcon />} label="Groups" to={`${match.url}`} component={Link}/>
+                <Tab icon={<PeopleIcon />} label="All Groups" to={`${match.url}`} component={Link}/>
+                <Tab icon={<PeopleIcon />} label="My Groups" to={`${match.url}/mygroups`} component={Link}/>
                 <Tab icon={<GroupAddIcon />} label="Add Group" to={`${match.url}/addgroup`} component={Link}/>
               </Tabs>
             </AppBar>
@@ -53,6 +62,9 @@ export default function SubsNavTabs(props) {
               
               <Route path={`${match.url}/addgroup`}>
                 <CreateGroup />
+              </Route>
+              <Route path={`${match.url}/mygroups`}>
+                <MyGroups />
               </Route>
               <Route path={`${match.url}`}>
                 <Groups />
@@ -65,3 +77,11 @@ export default function SubsNavTabs(props) {
     </div>
   );
 }
+
+const mapStateToProps = state => {
+  return {
+    token: state.auth.token
+  };
+};
+
+export default connect(mapStateToProps)(GroupsNavTabs)

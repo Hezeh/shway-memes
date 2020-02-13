@@ -1,20 +1,26 @@
 import React from 'react'
 import Fab from '@material-ui/core/Fab';
-import PublishIcon from '@material-ui/icons/Publish';
 import { useHistory } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
+import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles(theme => ({
     input: {
       display: 'none'
     }, 
+    fabButton: {
+      position: 'relative',
+      left: 0,
+      right: 0,
+      margin: '0 auto',
+    },
 }));
 
 export default function UploadFab() {
     const classes = useStyles();
     let history = useHistory();
     function handleChange() {
-        history.push("/home");
+        history.push("/upload");
       }
     return (
         <div>
@@ -27,8 +33,8 @@ export default function UploadFab() {
               onChange={handleChange}
             />
           <label htmlFor="contained-button-file">
-            <Fab color="secondary" aria-label="add" title="Select Memes" component="span">
-              <PublishIcon />
+            <Fab color="secondary" aria-label="add" className={classes.fabButton} title="Select Memes" component="span">
+              <AddIcon />
             </Fab>
           </label>
         </div>

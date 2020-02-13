@@ -15,6 +15,13 @@ export const JOIN_GROUP = 'JOIN_GROUP'
 export const LEAVE_GROUP = 'LEAVE_GROUP'
 export const ADD_TAG = 'ADD_TAG'
 export const REMOVE_TAG = 'REMOVE_TAG'
+
+// UI reducer types
+export const SET_ERRORS = 'SET_ERRORS';
+export const LOADING_UI = 'LOADING_UI';
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+export const LOADING_DATA = 'LOADING_DATA';
+export const STOP_LOADING_UI = 'STOP_LOADING_UI';
 // export const ASYNC_START = 'ASYNC_START'
 // export const ASYNC_END = 'ASYNC_END'
 // export const PROFILE_PAGE_LOADED = 'PROFILE_PAGE_LOADED'

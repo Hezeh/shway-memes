@@ -36,7 +36,7 @@ function Caption() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(values)
-    history.push('/')
+    // history.push('/')
   }
 
   return (
