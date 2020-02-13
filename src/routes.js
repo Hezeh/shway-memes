@@ -10,7 +10,7 @@ const Register = React.lazy(() => import ('./components/Account/Register'));
 const Aboutus = React.lazy(() => import ('./components/Aboutus/Aboutus'));
 const Profile = React.lazy(() => import ('./components/Profile/Profile'))
 const Error_404 = React.lazy(() => import ('./components/Errors/Error_404/Error_404'))
-const Search = React.lazy(() => import ('./components/Search/Search'))
+// const Search = React.lazy(() => import ('./components/Search/Search'))
 const MainCard = React.lazy(() => import ('./components/MainCard/MainCard'))
 const Subscriptions = React.lazy(() => import ('./components/Groups/Groups'))
 const Upload = React.lazy(() => import ('./components/Upload/Upload'))
@@ -44,7 +44,7 @@ export default function BaseRouter() {
                 <Route path="/trending" component={Trending} />
                 <Route path="/aboutus" component={Aboutus}/>
                 <Route path="/profile" component={Profile}/>
-                <Route path="/search" component={Search}/>
+                {/* <Route path="/search" component={Search}/> */}
                 {/* <PrivateRoute path="/@:username" component={Profile}/> */}
                 {/* <PrivateRoute path="/@:username/favorites" component={Profile}/> */}
                 {/* <Route path="/groups" component={Groups}/> */}
