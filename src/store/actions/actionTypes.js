@@ -22,7 +22,3 @@ export const LOADING_UI = 'LOADING_UI';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const LOADING_DATA = 'LOADING_DATA';
 export const STOP_LOADING_UI = 'STOP_LOADING_UI';
-// export const ASYNC_START = 'ASYNC_START'
-// export const ASYNC_END = 'ASYNC_END'
-// export const PROFILE_PAGE_LOADED = 'PROFILE_PAGE_LOADED'
-// export const PROFILE_PAGE_UNLOADED = 'PROFILE_PAGE_UNLOADED'

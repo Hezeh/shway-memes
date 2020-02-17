@@ -74,8 +74,8 @@ function Login(props) {
   let errorMessage = null;
   if (props.error)  {
         errorMessage = (
-          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="error">
+          <Snackbar open={open} >
+            <Alert severity="error">
               {props.error.message}
             </Alert>
           </Snackbar>

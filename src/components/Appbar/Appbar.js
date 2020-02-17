@@ -51,8 +51,6 @@ function AppBar(props) {
 
 const mapStateToProps = state => {
   return {
-    // error: state.auth.error,
-    // loading: state.auth.loading,
     authenticated: state.auth.token
   }
 }

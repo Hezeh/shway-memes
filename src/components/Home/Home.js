@@ -1,6 +1,6 @@
 import React from 'react';
-import DesktopAppBar from './DesktopCard';
-import MobileAppBar from './MobileCard';
+import DesktopAppBar from './DesktopHome';
+import MobileAppBar from './MobileHome';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { ThemeProvider} from '@material-ui/styles'

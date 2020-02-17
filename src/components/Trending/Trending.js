@@ -3,7 +3,7 @@ import { makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+// import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
 import PeopleIcon from '@material-ui/icons/People';
 import { 
@@ -14,7 +14,7 @@ import {
 } from 'react-router-dom';
 import People from './Memelords'
 import Groups from './GroupsList'
-import Hashtags from './Hashtags'
+// import Hashtags from './Hashtags'
 
 function a11yProps(index) {
   return {
@@ -61,21 +61,21 @@ export default function TrendingNavTabs() {
                 onChange={handleChange}
                 aria-label="Trending Tabs"
               >
-                <Tab icon={<TrendingUpIcon />} label="Hashtags" to={`${match.url}`} {...a11yProps(0)} component={Link} />
-                <Tab icon={<PeopleIcon />} label="Groups" to={`${match.url}/groups`} {...a11yProps(1)} component={Link}/>
+                {/* <Tab icon={<TrendingUpIcon />} label="Hashtags" to={`${match.url}`} {...a11yProps(0)} component={Link} /> */}
                 <Tab icon={<PersonPinIcon />} label="Meme lords" to={`${match.url}/people`} {...a11yProps(2)} component={Link}/>
+                <Tab icon={<PeopleIcon />} label="Groups" to={`${match.url}/groups`} {...a11yProps(1)} component={Link}/>
               </Tabs>
             </AppBar>
             <Switch>
               <Route path={`${match.url}/groups`}>
                 <Groups />
               </Route>
-              <Route path={`${match.url}/people`}>
+              <Route path={`${match.url}`}>
                 <People />
               </Route>
-              <Route path={`${match.url}`}>
+              {/* <Route path={`${match.url}`}>
                 <Hashtags />
-              </Route>
+              </Route> */}
             </Switch>
             </React.Fragment>
       )}

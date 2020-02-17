@@ -15,8 +15,9 @@ import pink from '@material-ui/core/colors/pink';
 import PropTypes from 'prop-types';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
-import UploadFab from '../Upload/Mobile/UploadFab'
+import UploadFab from '../Upload/MobileUpload'
 import GroupIcon from '@material-ui/icons/Group';
+import { connect} from 'react-redux'
 
 const color = pink[400];
 
@@ -61,32 +62,9 @@ HideOnScroll.propTypes = {
 
 export  function BottomAppBar(props) {
   const classes = useStyles();
-  // const [anchorEl, setAnchorEl] = React.useState(null);
-  // const open = Boolean(anchorEl);
   const [state, setState ] = useState({
     left: false
   })
-  // const [image, setImage] = useState('');
-  // const [imagename, setImagename] = useState('Choose File')
-  // const [uploadedImage, setUploadedImage] = useState({});
-  // const [message, setMessage] = useState('');
-  // const [uploadPercentage, setUploadPercentage] = useState(0);
-
-  // const onChange = e => {
-  //   setImage(e.target.files[0]);
-  //   setImagename(e.target.files[0].name);
-  // }
-
-  // const uploadHandler = () => {
-  //   const formData = new FormData()
-  //   formData.append(
-  //     'myFile',
-  //     image,
-  //     imagename
-  //   )
-  //   axios.post('my-domain.com/file-upload', formData)
-  // }
-  
 
   const toggleDrawer = (side, open) => event => {
   if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -143,12 +121,12 @@ export  function BottomAppBar(props) {
           <div className={classes.grow} />
 
           <NavLink to="/groups" activeClassName={classes.activeMenuLink} className={classes.link}>
-            <IconButton color="inherit" title="Subscriptions">
+            <IconButton color="inherit" title="Groups">
               <GroupIcon />
             </IconButton>
           </NavLink>
 
-          <NavLink to="/profile" activeClassName={classes.activeMenuLink} className={classes.link}>
+          <NavLink to={`/@${props.username}`} activeClassName={classes.activeMenuLink} className={classes.link}>
             <IconButton color="inherit" title="Profile">
               <AccountCircle />
             </IconButton>
@@ -160,12 +138,12 @@ export  function BottomAppBar(props) {
   );
 }
 
-const Appbar = () => {
-  return (
-    <Fragment>
-      <BottomAppBar />
-    </Fragment>
-  )
+const mapStateToProps = state => {
+  return {
+    token: state.auth.token,
+    userId: state.auth.userId,
+    username: state.auth.username
+  }
 }
 
-export default Appbar;
+export default connect(mapStateToProps)(BottomAppBar);

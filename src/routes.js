@@ -10,11 +10,8 @@ const Register = React.lazy(() => import ('./components/Account/Register'));
 const Aboutus = React.lazy(() => import ('./components/Aboutus/Aboutus'));
 const Profile = React.lazy(() => import ('./components/Profile/Profile'))
 const Error_404 = React.lazy(() => import ('./components/Errors/Error_404/Error_404'))
-// const Search = React.lazy(() => import ('./components/Search/Search'))
-const MainCard = React.lazy(() => import ('./components/MainCard/MainCard'))
-const Subscriptions = React.lazy(() => import ('./components/Groups/Groups'))
-const Upload = React.lazy(() => import ('./components/Upload/Upload'))
-
+const Home = React.lazy(() => import ('./components/Home/Home'))
+const Groups = React.lazy(() => import ('./components/Groups/Groups'))
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -40,21 +37,18 @@ export default function BaseRouter() {
             }>
             <AppBar />
               <Switch>
-                <Route exact path="/" component={MainCard} />
+                <Route exact path="/" component={Home} />
                 <Route path="/trending" component={Trending} />
                 <Route path="/aboutus" component={Aboutus}/>
-                <Route path="/profile" component={Profile}/>
+                {/* <Route path="/profile" component={Profile}/> */}
                 {/* <Route path="/search" component={Search}/> */}
-                {/* <PrivateRoute path="/@:username" component={Profile}/> */}
+                <Route path="/@:username" component={Profile}/>
                 {/* <PrivateRoute path="/@:username/favorites" component={Profile}/> */}
-                {/* <Route path="/groups" component={Groups}/> */}
-                <Route path="/groups" component={Subscriptions}/>
-                <Route path="/upload" component={Upload}/>
+                <Route path="/groups" component={Groups}/>
                 <Route exact path="/register" component={Register}/>
                 <Route exact path="/login" component={Login}/>
                 {/* <Route exact path="/resetpassword" component={ResetPassword}/> */}
                 <Redirect from="/logout" to="/login" />
-                {/* <Redirect from="/register" to="/" /> */}
                 <Route path="*" component={Error_404}/>
               </Switch>
             </Suspense>    

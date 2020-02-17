@@ -79,7 +79,7 @@ const Register = (props) => {
         errorMessage = (
           <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="error">
-              Username or Email already exists
+              {props.error.message}
             </Alert>
           </Snackbar>
         );
@@ -89,6 +89,8 @@ const Register = (props) => {
   const [values, setValues] = useState({
     showPassword: false,
   })
+
+  // Is there a conflict with the Formik values?
 
   const handleClickShowPassword = () => {
     setValues({showPassword: !values.showPassword });

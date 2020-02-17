@@ -16,6 +16,8 @@ import PeopleIcon from '@material-ui/icons/People';
 import Followers from './Followers'
 import Posts from './Posts'
 import Favorites from './Favorites'
+import {connect} from 'react-redux'
+import {Redirect, useParams} from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,9 +28,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ProfileNavTabs(props) {
+function ProfileNavTabs(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const { username } = useParams()
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -36,12 +39,14 @@ export default function ProfileNavTabs(props) {
 
   let match = useRouteMatch();
 
+  if (!props.token) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <div className={classes.root}>
       <Route 
-          path="/profile"
-          // path={`/@${props.profile.username}`}
+          path={`/@${username}`}
           render={({ location }) => (
             <React.Fragment>
             <AppBar position="static" color="inherit">
@@ -54,8 +59,8 @@ export default function ProfileNavTabs(props) {
                 
                 <Tab icon={<ArtTrackIcon />} label="POSTS" to={`${match.url}`} component={Link}/>
                 <Tab icon={<FavoriteIcon />} label="FAVORITES" to={`${match.url}/favorites`} component={Link}/>
-                {/* <Tab icon={<PersonPinIcon />} label="FOLLOWING" to={`${match.url}/following`} component={Link}/> */}
-                <Tab icon={<PeopleIcon />} label="FOLLOWERS" to={`${match.url}/followers`} component={Link}/>
+                {/* <Tab icon={<PersonPinIcon />} label="FOLLOWING" to={`${match.url}/following`} component={Link}/>  */}
+                {/* <Tab icon={<PeopleIcon />} label="FOLLOWERS" to={`${match.url}/followers`} component={Link}/> */}
               </Tabs>
             </AppBar>
             <Switch>
@@ -65,11 +70,11 @@ export default function ProfileNavTabs(props) {
               {/* <Route path={`${match.url}/following`}>
                 <Following />
               </Route> */}
-              <Route path={`${match.url}/followers`}>
+              {/* <Route path={`${match.url}/followers`}>
                 <Followers />
-              </Route>
+              </Route> */}
               <Route path={`${match.url}`}>
-                <Posts />
+                <Posts user={username} />
               </Route>
             </Switch>
             </React.Fragment>
@@ -78,3 +83,13 @@ export default function ProfileNavTabs(props) {
     </div>
   );
 }
+
+const mapStateToProps = state => {
+  return {
+    token: state.auth.token,
+    userId: state.auth.userId,
+    username: state.auth.username
+  }
+}
+
+export default connect(mapStateToProps)(ProfileNavTabs);

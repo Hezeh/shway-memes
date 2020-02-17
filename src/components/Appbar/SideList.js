@@ -28,6 +28,15 @@ export default function SideListLinks() {
             <ListItemText primary="About Us" />
           </ListItem>
         </Link>
+        {/* Link for sharing the app */}
+        {/* <Link to="/share" className={classes.menuLink}>
+          <ListItem button >
+            <ListItemIcon>
+              <InfoIcon />
+            </ListItemIcon>
+            <ListItemText primary="About Us" />
+          </ListItem>
+        </Link> */}
       </List>
   )
 }

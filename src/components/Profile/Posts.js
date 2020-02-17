@@ -7,7 +7,7 @@ import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
 import { red } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
-import {userPostsURL} from '../../constants'
+import {uploadsURL} from '../../constants'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {Loader, FollowUserButton, FavoriteAction, RepostAction} from '../common'
@@ -15,7 +15,7 @@ import {Loader, FollowUserButton, FavoriteAction, RepostAction} from '../common'
 const useStyles = makeStyles(theme => ({
   card: {
     flexGrow: 1,
-    minWidth: '630px',
+    minWidth: '400px',
     // maxHeight: '800px',  // was 1000px
     maxHeight: '1000px',
     margin: "10px",
@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   media: {
-    height: '400px',  
+    height: '380px',  
     width: '100%'
   },
   avatar: {
@@ -40,10 +40,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function UserPosts(props) {
-  const classes = useStyles();
+  const classes = useStyles()
+  // let { username } = useParams()
   const [ isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState([]);
-  const [url] = useState(userPostsURL);
+  const [url] = useState(`${uploadsURL}?publisher=${props.user}`);
 
   async function fetchData() {
     setIsLoading(true)
@@ -72,53 +73,27 @@ function UserPosts(props) {
   return (
     <div>
       <Grid container className={classes.root} spacing={2}>
-        <Grid item xs={12}>
-          <Grid container justify="center" spacing={2}>
+        <Grid item xs={6}>
+          <Grid container spacing={2}>
             { isLoading ? (<Fragment><Loader /> <Loader /></Fragment>) : (
               data.map((step) => {
                 return (
                   <div key={step.id} className={classes.div}>
-                  <Card className={classes.card}>
-                    <CardHeader
-                      avatar={
-                          <Avatar
-                            alt="User Avatar"
-                            className={classes.avatar}
-                          >
-                            HM
-                            {/* {step.shortname} */}
-                          </Avatar>
-                        }
-                      action={<FollowUserButton step={step} />}
-                      title={step.publisher_name}
-                    />
-                      
+                  <Card className={classes.card}>  
                     <CardMedia
                       className={classes.media}
-                      image={step.photo.full_size}
+                      image={step.photo.thumbnail}
                       title="Meme"
-                        />
-      
-                      }  
-                    <CardActions >
-                        {
-                        <Fragment>
-                          <FavoriteAction step={step}/>
-                          <RepostAction step={step}/>
-                        </Fragment>
-                      }
-                        
-                      </CardActions>
+                        />              
                   </Card>
                 </div>
                 )
-          })
+            })
             )}
             
             </Grid>
         </Grid>
       </Grid>
-      )}
     </div>
   );
 }

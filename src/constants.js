@@ -6,7 +6,7 @@ if (DEBUG === false) {
 
 export const APIEndpoint = `${host}/api/v1`;
 
-export const fileUploadURL = `${APIEndpoint}/upload/`;
+// export const fileUploadURL = `${APIEndpoint}/upload/`;
 
 export const loginURL = `${APIEndpoint}/rest-auth/login/`;
 export const signupURL = `${APIEndpoint}/rest-auth/registration/`;

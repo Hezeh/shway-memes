@@ -5,7 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { Link, withRouter } from 'react-router-dom';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import UploadFab from '../Upload/Desktop/UploadFab'
+import UploadFab from '../Upload/DesktopUpload'
 import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
 import * as actions from '../../store/actions/auth';
