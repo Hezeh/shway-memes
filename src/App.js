@@ -10,17 +10,17 @@ import ReactGA from 'react-ga';
 
 const App = (props) => {
 
-  // useEffect(() => {
-  //   ReactGA.initialize('UA-157796668-2', {
-  //     debug: false,
-  //     titleCase: false,
-  //     gaOptions: {
-  //       siteSpeedSampleRate: 100 
-  //     }});
-  //   // To Report Page View 
-  //   ReactGA.pageview(window.location.pathname + window.location.search);
+  useEffect(() => {
+    ReactGA.initialize('UA-157796668-2', {
+      debug: false,
+      titleCase: false,
+      gaOptions: {
+        siteSpeedSampleRate: 100 
+      }});
+    // To Report Page View 
+    ReactGA.pageview(window.location.pathname + window.location.search);
 
-  // }, [])
+  }, [])
   
   const theme = createMuiTheme({
     palette: {

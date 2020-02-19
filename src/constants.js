@@ -1,7 +1,7 @@
-let DEBUG = true;
+let DEBUG = false;
 let host = "http://127.0.0.1:8000";
 if (DEBUG === false) {
-    host = "api.shwaymemes.com";
+    host = "https://api.shwaymemes.com";
 }
 
 export const APIEndpoint = `${host}/api/v1`;
