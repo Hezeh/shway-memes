@@ -25,15 +25,15 @@ import { Formik } from 'formik';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ImageIcon from '@material-ui/icons/Image';
-import GroupIcon from '@material-ui/icons/Group';
-import PortraitIcon from '@material-ui/icons/Portrait';
-import WhatshotIcon from '@material-ui/icons/Whatshot';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+// import List from '@material-ui/core/List';
+// import ListItem from '@material-ui/core/ListItem';
+// import ListItemText from '@material-ui/core/ListItemText';
+// import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+// import ImageIcon from '@material-ui/icons/Image';
+// import GroupIcon from '@material-ui/icons/Group';
+// import PortraitIcon from '@material-ui/icons/Portrait';
+// import WhatshotIcon from '@material-ui/icons/Whatshot';
+// import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -160,9 +160,9 @@ const Register = (props) => {
           Shwaymemes is a community driven platform for sharing cool memes.
          </Typography>
          <Typography  variant="h6">
-          Create an account to:
+          Create an account. It is fast and easy!
          </Typography>
-         <List className={classes.list}>
+         {/* <List className={classes.list}>
             <ListItem>
               <ListItemAvatar>
                 <Avatar>
@@ -187,7 +187,7 @@ const Register = (props) => {
               </ListItemAvatar>
               <ListItemText primary="Discover trending memelords" />
             </ListItem>
-          </List>
+          </List> */}
           
           <form className={classes.form} onSubmit={formik.handleSubmit}>
             <Grid container spacing={1}> 

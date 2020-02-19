@@ -4,7 +4,6 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardActions from '@material-ui/core/CardActions';
-// import Avatar from '@material-ui/core/Avatar';
 import { red } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
 import {Loader, FollowUserButton, FavoriteAction, RepostAction} from '../common'
@@ -90,15 +89,6 @@ function MainCard(props) {
                   <div key={step.id} className={classes.div}>
                   <Card className={classes.card}>
                     <CardHeader
-                      // avatar={
-                      //     <Avatar
-                      //       alt="User Avatar"
-                      //       className={classes.avatar}
-                      //     >
-                      //       HM
-                           
-                      //     </Avatar>
-                      //   }
                       action={<FollowUserButton step={step} />}
                       title={<Link to={`@${step.publisher_name}`} className={classes.menuLink}>
                               <Button size="small" color="secondary">
@@ -110,7 +100,7 @@ function MainCard(props) {
                       
                     <CardMedia
                       className={classes.media}
-                      image={step.photo.medium_square_crop}
+                      image={step.photo.thumbnail}
                       title="Meme"
                     />
       

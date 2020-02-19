@@ -133,38 +133,9 @@ function Login(props) {
          <Avatar className={classes.avatar}>
            <LockOutlinedIcon />
          </Avatar>
-         <Typography component="h1" variant="h5">
-           Shwaymemes is a community driven platform for sharing cool memes. 
-         </Typography>
          <Typography variant="h6">
            Login
          </Typography>
-         {/* <List className={classes.list}>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar>
-                  <ImageIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary="Share hot and trending memes"/>
-            </ListItem>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar>
-                  <GroupIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary="Engage in meme groups"/>
-            </ListItem>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar>
-                  <PortraitIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary="Discover trending memelords" />
-            </ListItem>
-          </List> */}
          <form className={classes.form} onSubmit={formik.handleSubmit}>
            <TextField
              variant="outlined"

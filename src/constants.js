@@ -11,7 +11,7 @@ export const APIEndpoint = `${host}/api/v1`;
 export const loginURL = `${APIEndpoint}/rest-auth/login/`;
 export const signupURL = `${APIEndpoint}/rest-auth/registration/`;
 
-export const groupsURL = `${APIEndpoint}/groupslist/`
+export const groupsURL = `${APIEndpoint}/groups/list/`
 export const trendingGroupsURL = `${APIEndpoint}/trending-groups`
 
 export const tagsURL = `${APIEndpoint}/tags/`
