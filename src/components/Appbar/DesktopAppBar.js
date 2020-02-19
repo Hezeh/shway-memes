@@ -77,7 +77,7 @@ function DesktopAppBar(props) {
               typography="Groups"
              />
              <AppBarLink 
-              linkTo="/profile"
+              linkTo={`@${props.username}`}
               typography="Profile"
              />
              <AppBarLink 
@@ -97,10 +97,18 @@ function DesktopAppBar(props) {
   );
 }
 
+const mapStateToProps = state => {
+  return {
+    token: state.auth.token,
+    username: state.auth.username
+  };
+};
+
+
 const mapDispatchToProps = dispatch => {
   return {
       logout: () => dispatch(actions.logout()) 
   }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(DesktopAppBar))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DesktopAppBar))

@@ -118,7 +118,7 @@ function AddGroup(props) {
         })
   }
   if (!props.token) {
-      return <Redirect to="/login" />;
+      return <Redirect to="/register" />;
   }
   return (
         <Container component="main" maxWidth="xs">

@@ -19,6 +19,15 @@ import { Formik } from 'formik';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
+// import List from '@material-ui/core/List';
+// import ListItem from '@material-ui/core/ListItem';
+// import ListItemText from '@material-ui/core/ListItemText';
+// import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+// import ImageIcon from '@material-ui/icons/Image';
+// import GroupIcon from '@material-ui/icons/Group';
+// import PortraitIcon from '@material-ui/icons/Portrait';
+// import WhatshotIcon from '@material-ui/icons/Whatshot';
+
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -50,6 +59,11 @@ const useStyles = makeStyles(theme => ({
   },
   extendedIcon: {
     marginRight: theme.spacing(1),
+  },
+  list: {
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
   },
 }));
 
@@ -120,9 +134,37 @@ function Login(props) {
            <LockOutlinedIcon />
          </Avatar>
          <Typography component="h1" variant="h5">
-           Sign in to share and view cool memes, follow trending meme hashtags, discover new memelords 
-           and engage in meme groups.
+           Shwaymemes is a community driven platform for sharing cool memes. 
          </Typography>
+         <Typography variant="h6">
+           Login
+         </Typography>
+         {/* <List className={classes.list}>
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar>
+                  <ImageIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary="Share hot and trending memes"/>
+            </ListItem>
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar>
+                  <GroupIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary="Engage in meme groups"/>
+            </ListItem>
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar>
+                  <PortraitIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary="Discover trending memelords" />
+            </ListItem>
+          </List> */}
          <form className={classes.form} onSubmit={formik.handleSubmit}>
            <TextField
              variant="outlined"

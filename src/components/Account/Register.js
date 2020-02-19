@@ -25,6 +25,16 @@ import { Formik } from 'formik';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ImageIcon from '@material-ui/icons/Image';
+import GroupIcon from '@material-ui/icons/Group';
+import PortraitIcon from '@material-ui/icons/Portrait';
+import WhatshotIcon from '@material-ui/icons/Whatshot';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+
 const useStyles = makeStyles(theme => ({
   '@global': {
     body: {
@@ -147,15 +157,43 @@ const Register = (props) => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-          Sign up to share and view cool memes, follow trending meme hashtags, discover new memelords 
-          and engage in meme groups.
-          </Typography>
+          Shwaymemes is a community driven platform for sharing cool memes.
+         </Typography>
+         <Typography  variant="h6">
+          Create an account to:
+         </Typography>
+         <List className={classes.list}>
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar>
+                  <CloudUploadIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary="Share hot and trending memes"/>
+            </ListItem>
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar>
+                  <GroupIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary="Engage in meme groups"/>
+            </ListItem>
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar>
+                  <WhatshotIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary="Discover trending memelords" />
+            </ListItem>
+          </List>
           
           <form className={classes.form} onSubmit={formik.handleSubmit}>
             <Grid container spacing={1}> 
               <Grid item xs={12} sm={12}>
                 <TextField
-                  // autoComplete="fname"
+                  
                   name="username"
                   variant="outlined"
                   required
@@ -177,7 +215,7 @@ const Register = (props) => {
                   id="email"
                   label="Email Address"
                   name="email"
-                  // autoComplete="email"
+                  
                   onChange={formik.handleChange}
                   value={formik.values.email}
                   error={Boolean(formik.errors.email)}

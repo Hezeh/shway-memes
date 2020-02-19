@@ -40,10 +40,8 @@ export default function BaseRouter() {
                 <Route exact path="/" component={Home} />
                 <Route path="/trending" component={Trending} />
                 <Route path="/aboutus" component={Aboutus}/>
-                {/* <Route path="/profile" component={Profile}/> */}
                 {/* <Route path="/search" component={Search}/> */}
                 <Route path="/@:username" component={Profile}/>
-                {/* <PrivateRoute path="/@:username/favorites" component={Profile}/> */}
                 <Route path="/groups" component={Groups}/>
                 <Route exact path="/register" component={Register}/>
                 <Route exact path="/login" component={Login}/>

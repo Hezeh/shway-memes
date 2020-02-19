@@ -37,7 +37,7 @@ function GroupsNavTabs(props) {
   let match = useRouteMatch();
 
   if (!props.token) {
-    return <Redirect to="/login" />;
+    return <Redirect to="/register" />;
   }
   return (
     <div className={classes.root}>

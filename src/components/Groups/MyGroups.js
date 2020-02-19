@@ -59,7 +59,7 @@ function MyGroups(props) {
   }, []);
 
   if (!props.token) {
-    return <Redirect to="/login" />;
+    return <Redirect to="/register" />;
   }
 
   if (isLoading === true) {

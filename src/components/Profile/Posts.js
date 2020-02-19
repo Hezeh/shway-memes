@@ -41,7 +41,6 @@ const useStyles = makeStyles(theme => ({
 
 function UserPosts(props) {
   const classes = useStyles()
-  // let { username } = useParams()
   const [ isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState([]);
   const [url] = useState(`${uploadsURL}?publisher=${props.user}`);
