@@ -1,0 +1,5 @@
+[{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target" : { "namespace": "android_app", "package_name": "com.shwaytech.shwaymemes",
+                 "sha256_cert_fingerprints": ["B5:BC:1A:8A:9F:ED:C9:A1:A5:ED:CE:C9:F6:B8:BB:69:23:94:F1:7C:BC:77:64:26:B6:D6:B3:A2:6F:45:E4:23"] }
+  }]
