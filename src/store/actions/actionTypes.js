@@ -4,6 +4,7 @@ export const AUTH_FAIL = "AUTH_FAIL";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 export const SET_PROGRESS = "SET_PROGRESS";
 export const APP_LOAD = 'APP_LOAD'
+
 // export const SETTINGS_SAVED = 'SETTINGS_SAVED'
 export const ADD_MEME = 'ADD_MEME'
 export const DELETE_MEME = 'DELETE_MEME'
