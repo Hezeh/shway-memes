@@ -5,13 +5,14 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+// import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
+// import Avatar from '@material-ui/core/Avatar';
 import {trendingProfilesURL} from '../../constants'
 import {connect} from 'react-redux'
 import Skeleton from '@material-ui/lab/Skeleton';
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 
 const useStyles = makeStyles(theme => ({
@@ -26,6 +27,10 @@ const useStyles = makeStyles(theme => ({
   },
   subheader: {
     backgroundColor: theme.palette.background.paper,
+  },
+  menuLink: {
+    textDecoration: 'none',
+    color: '#e91e63'
   }
 }));
 
@@ -78,9 +83,11 @@ function Memelords(props) {
         <List className={classes.list}>
           {data.map(({ id, username}) => (
             <React.Fragment key={id}>
-              <ListItem button>
-                <ListItemText primary={username} />
-              </ListItem>
+              <Link to={`/@${username}`} className={classes.menuLink}>
+                <ListItem button>
+                  <ListItemText primary={username} />
+                </ListItem>
+              </Link>
             </React.Fragment>
           ))}
         </List>

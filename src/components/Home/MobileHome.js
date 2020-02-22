@@ -4,7 +4,6 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardActions from '@material-ui/core/CardActions';
-// import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton'
 import { red } from '@material-ui/core/colors';
 import ShareIcon from '@material-ui/icons/Share';
@@ -20,7 +19,7 @@ import ReactGA from 'react-ga';
 import {uploadsURL} from '../../constants';
 import axios from 'axios'
 import {connect} from 'react-redux'
-import { Loader,  FollowUserButton, FavoriteAction, RepostAction } from '../common'
+import { CardLoader,  FollowUserButton, FavoriteAction} from '../common'
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -67,7 +66,8 @@ const useStyles = makeStyles(theme => ({
     },  
   },
   menuLink: {
-    textDecoration: 'none'
+    textDecoration: 'none',
+    color: '#e91e63'
   }
 }));
 
@@ -114,8 +114,8 @@ function MobileCard(props) {
     if (navigator.share) {
       navigator.share({
           title: 'Cool Memes',
-          text: 'Check out Shway Memes — it rocks!',
-          url: 'https://shwaymemes.com',
+          text: 'Check out ShwayMemes — it rocks!',
+          url: `https://shwaymemes.com/`,
       })
         .then(() => console.log('Successful share'))
         .catch((error) => console.log('Error sharing', error));
@@ -150,18 +150,12 @@ function MobileCard(props) {
         interval={3000}
         autoplay={autoplay}
       >
-      { isLoading ? (<Loader />) : 
+      { isLoading ? (<CardLoader />) : 
       (data.map((step, index) => (
         <div key={step.id}>
             {Math.abs(activeStep - index) <= 2 ? (
             <Card className={classes.card}>
               <CardHeader
-                // avatar={
-                //   <Avatar
-                //     alt="User Avatar"
-                //     className={classes.avatar}
-                //   >HM</Avatar>
-                // }
                 action={<FollowUserButton step={step}/>}
                 title={
                   <Link to={`@${step.publisher_name}`} className={classes.menuLink}>

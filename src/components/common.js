@@ -13,8 +13,7 @@ import IconButton from '@material-ui/core/IconButton'
 const useStyles = makeStyles(theme => ({
   card: {
     flexGrow: 1,
-    minWidth: '630px',
-    // maxHeight: '800px',  // was 1000px
+    minWidth: '450px',
     maxHeight: '1000px',
     margin: "10px",
     transition: "0.1s",
@@ -28,12 +27,63 @@ const useStyles = makeStyles(theme => ({
     height: '400px',  
     width: '100%'
   },
+  mobile: {
+    height: '380px',  
+    width: '100%'
+  },
+  mobileCard: {
+    flexGrow: 1,
+    minWidth: '350px',
+    maxHeight: '1000px',
+    margin: "10px",
+    transition: "0.1s",
+    borderRadius: "30px",
+    boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
+    "&:hover": {
+      boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
+    }
+  },
   avatar: {
     backgroundColor: red[500],
   },
   div: {
     alignContent: 'start',
     display: 'block',
+  },
+  cardloader: {
+    maxWidth: '99%',
+    //minHeight: '100%',
+    maxHeight: 800,  // 1000
+    transition: "0.01s",
+    margin: 'auto',
+    justify: "center",
+    borderRadius: "30px",
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 20,
+    // position: 'fixed',
+    // height: '100%',
+    boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
+    "&:hover": {
+      boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
+    }
+  },
+  cardimg: {
+    //minHeight: 500,
+    //lineHeight: 350,
+    height: 350,
+    display: 'block',
+    overflow: 'hidden',
+    maxWidth: '95%',
+    alignItems: 'center',
+    padding: '5px',
+    margin: 'auto',
+    borderRadius: '10px',
+    position: "static",
+    [theme.breakpoints.down('xs')]: {
+      //display: 'block',
+      //height: 350,
+    },  
   },
 }));
 
@@ -78,6 +128,36 @@ export const Loader = () => {
     </div>
     )
 }
+
+export const CardLoader = () => {
+  const classes = useStyles();
+  return (
+    <div className={classes.div}>
+    <Card className={classes.cardloader}>
+      <CardHeader
+        // action={<Skeleton variant="rect" width={40} height={40} />}
+        title={<Skeleton height={35} width="100%" style={{ marginBottom: 6 }} /> }
+      />
+      {<Skeleton variant="rect" className={classes.cardimg} />}  
+      <CardActions >
+        <Skeleton height={40} width="80%" />
+      </CardActions>
+    </Card>
+  </div>
+  )
+}
+
+export const MobileLoader = () => {
+  const classes = useStyles();
+  return (
+    <div className={classes.div}>
+    <Card className={classes.mobileCard}>
+      {<Skeleton variant="rect" className={classes.mobile} />}  
+    </Card>
+  </div>
+  )
+}
+
 
 export const FavoriteAction = (props) => {
     const [iconColor, setIconColor] = useState(props.step.favorited) 

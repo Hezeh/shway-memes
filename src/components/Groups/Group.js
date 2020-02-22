@@ -1,16 +1,14 @@
 import React, { Fragment , useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-// import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
-// import CardActions from '@material-ui/core/CardActions';
-// import Avatar from '@material-ui/core/Avatar';
 import { red } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
-import {uploadsURL} from '../../constants'
+import {groupPostsURL} from '../../constants'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {MobileLoader} from '../common'
+import { useRouteMatch } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -38,11 +36,15 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function UserPosts(props) {
+function GroupPosts(props) {
   const classes = useStyles()
+  let match = useRouteMatch();
+  // console.log(match)
+
   const [ isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState([]);
-  const [url] = useState(`${uploadsURL}?publisher=${props.user}`);
+  // console.log(props)
+  const [url] = useState(`${groupPostsURL}?group=${match.params.id}`);
 
   async function fetchData() {
     setIsLoading(true)
@@ -80,15 +82,14 @@ function UserPosts(props) {
                   <Card className={classes.card}>  
                     <CardMedia
                       className={classes.media}
-                      image={step.photo.thumbnail}
+                      image={step.post}
                       title="Meme"
                         />              
                   </Card>
                 </div>
                 )
             })
-            )}
-            
+            )}        
             </Grid>
         </Grid>
       </Grid>
@@ -103,4 +104,4 @@ const mapStateToProps = state => {
 };
 
 
-export default connect(mapStateToProps)(UserPosts)
+export default connect(mapStateToProps)(GroupPosts)

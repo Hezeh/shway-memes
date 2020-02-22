@@ -10,7 +10,7 @@ import {userGroups} from '../../constants'
 import {connect} from 'react-redux'
 import Skeleton from '@material-ui/lab/Skeleton';
 import axios from 'axios'
-import {Redirect} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom'
 
 
 const useStyles = makeStyles(theme => ({
@@ -25,6 +25,10 @@ const useStyles = makeStyles(theme => ({
   },
   subheader: {
     backgroundColor: theme.palette.background.paper,
+  },
+  menuLink: {
+    textDecoration: 'none',
+    color: '#e91e63'
   }
 }));
 
@@ -81,9 +85,11 @@ function MyGroups(props) {
         <List className={classes.list}>
           {data.map(({ id, group_name}) => (
             <React.Fragment key={id}>
-              <ListItem button>
-                <ListItemText primary={group_name} />
-              </ListItem>
+              <Link to={`/groups/${id}`} className={classes.menuLink}>
+                <ListItem button>
+                  <ListItemText primary={group_name} />
+                </ListItem>
+              </Link>
             </React.Fragment>
           ))}
         </List>

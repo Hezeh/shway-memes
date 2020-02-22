@@ -10,6 +10,8 @@ import axios from 'axios'
 import {trendingGroupsURL} from '../../constants'
 import {connect} from 'react-redux'
 import Skeleton from '@material-ui/lab/Skeleton';
+import { Link } from 'react-router-dom'
+// import {groupPostsURL} from '../../constants'
 
 const useStyles = makeStyles(theme => ({
   text: {
@@ -23,6 +25,10 @@ const useStyles = makeStyles(theme => ({
   },
   subheader: {
     backgroundColor: theme.palette.background.paper,
+  },
+  menuLink: {
+    textDecoration: 'none',
+    color: '#e91e63'
   }
 }));
 
@@ -76,9 +82,11 @@ function TrendingGroups(props) {
         <List className={classes.list}>
           {data.map(({ id, group_name}) => (
             <React.Fragment key={id}>
-              <ListItem button>
-                <ListItemText primary={group_name} />
-              </ListItem>
+              <Link to={`/groups/${id}`} className={classes.menuLink}>
+                <ListItem button >
+                  <ListItemText primary={group_name} />
+                </ListItem>
+              </Link>
             </React.Fragment>
           ))}
         </List>

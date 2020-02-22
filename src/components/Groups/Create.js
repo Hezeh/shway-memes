@@ -111,7 +111,6 @@ function AddGroup(props) {
       })
         .then(res => {
           if (res.status === 201) {
-            console.log('Snack coming up!')
             return successMessage
             // history.push(`/groups/mygroups`);
           }
@@ -127,7 +126,7 @@ function AddGroup(props) {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        {successMessage}
+
         <form className={classes.form} onSubmit={handleSubmit}>
           <TextField
             variant="outlined"

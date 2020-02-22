@@ -11,11 +11,13 @@ import {
     useRouteMatch,
 } from 'react-router-dom';
 import CreateGroup from './Create'
-import Groups from './GroupsList'
+import GroupsList from './GroupsList'
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import MyGroups from './MyGroups'
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
+import Group from './Group'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -35,6 +37,7 @@ function GroupsNavTabs(props) {
   };
 
   let match = useRouteMatch();
+  // console.log(match)
 
   if (!props.token) {
     return <Redirect to="/register" />;
@@ -42,8 +45,7 @@ function GroupsNavTabs(props) {
   return (
     <div className={classes.root}>
       <Route 
-          path="/groups"
-          // path={`@${props.profile.username}`}
+          path={`/groups`}
           render={({ location }) => (
             <React.Fragment>
             <AppBar position="static" color="inherit">
@@ -54,7 +56,7 @@ function GroupsNavTabs(props) {
                 aria-label="Groups Tabs"
               >
                 <Tab icon={<PeopleIcon />} label="All Groups" to={`${match.url}`} component={Link}/>
-                <Tab icon={<PeopleIcon />} label="My Groups" to={`${match.url}/mygroups`} component={Link}/>
+                <Tab icon={<SupervisorAccountIcon/>} label="My Groups" to={`${match.url}/mygroups`} component={Link}/>
                 <Tab icon={<GroupAddIcon />} label="Add Group" to={`${match.url}/addgroup`} component={Link}/>
               </Tabs>
             </AppBar>
@@ -66,10 +68,12 @@ function GroupsNavTabs(props) {
               <Route path={`${match.url}/mygroups`}>
                 <MyGroups />
               </Route>
-              <Route path={`${match.url}`}>
-                <Groups />
+              <Route path={`${match.url}/:id`}>
+                <Group />
               </Route>
-              
+              <Route path={`${match.url}`}>
+                <GroupsList />
+              </Route>             
             </Switch>
             </React.Fragment>
       )}
