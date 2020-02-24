@@ -11,7 +11,6 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import Skeleton from '@material-ui/lab/Skeleton';
 import {Redirect, Link} from 'react-router-dom'
-// import { Link } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   text: {

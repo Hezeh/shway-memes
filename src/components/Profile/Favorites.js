@@ -10,8 +10,8 @@ import Grid from '@material-ui/core/Grid';
 import {favoritesURL} from '../../constants'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import {Loader, FollowUserButton, FavoriteAction, RepostAction} from '../common'
-import { useRouteMatch, useParams } from 'react-router-dom'
+import {Loader} from '../common'
+// import { useRouteMatch, useParams } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -41,13 +41,9 @@ const useStyles = makeStyles(theme => ({
 
 function Favorites(props) {
   const classes = useStyles()
-  // const { username } = useParams()
   const [ isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState([]);
   const [url] = useState(`${favoritesURL}?favorited=${props.user}`);
-  
-
-  console.log(url)
 
   async function fetchData() {
     setIsLoading(true)

@@ -1,12 +1,10 @@
-let DEBUG = true;
+let DEBUG = false;
 let host = "http://127.0.0.1:8000";
 if (DEBUG === false) {
     host = "https://api.shwaymemes.com";
 }
 
 export const APIEndpoint = `${host}/api/v1`;
-
-// export const fileUploadURL = `${APIEndpoint}/upload/`;
 
 export const loginURL = `${APIEndpoint}/rest-auth/login/`;
 export const signupURL = `${APIEndpoint}/rest-auth/registration/`;

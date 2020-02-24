@@ -17,7 +17,6 @@ const App = (props) => {
       gaOptions: {
         siteSpeedSampleRate: 100 
       }});
-    // To Report Page View 
     ReactGA.pageview(window.location.pathname + window.location.search);
 
   }, [])
