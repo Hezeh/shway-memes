@@ -11,13 +11,12 @@ import {uploadsURL} from '../../constants';
 import axios from 'axios'
 import {connect} from 'react-redux'
 import Button from '@material-ui/core/Button';
-import {Link} from 'react-router-dom'
+import {Link, useRouteMatch} from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   card: {
     flexGrow: 1,
     minWidth: '630px',
-    // maxHeight: '800px',  // was 1000px
     maxHeight: '1000px',
     margin: "10px",
     transition: "0.1s",
@@ -48,11 +47,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-function MainCard(props) {
+function UploadDetail(props) {
   const classes = useStyles();
+
+  let match = useRouteMatch();
+
   const [ isLoading, setIsLoading] = useState(false)
-  const [data, setData] = useState([]);
-  const [url] = useState(uploadsURL);
+  const [data, setData] = useState({});
+  const [url] = useState(`${uploadsURL}/${match.params.id}`);
 
   async function fetchData() {
     setIsLoading(true)
@@ -66,7 +68,7 @@ function MainCard(props) {
         .get(url)
         .then(response => {
           setIsLoading(false)
-          setData(response.data.results)
+          setData(response.data)
         })
         .catch(err => {
           console.log(err)
@@ -77,50 +79,53 @@ function MainCard(props) {
   useEffect(() => {
       fetchData();
   }, []);
+
+  console.log(data)
   
   return (
     <div>
       <Grid container className={classes.root} spacing={2}>
         <Grid item xs={12}>
           <Grid container justify="center" spacing={2}>
-          { isLoading ? (<Fragment><Loader /> <Loader /></Fragment>) : (
-              data.map((step) => {
-                return (
-                  <div key={step.id} className={classes.div}>
+          { isLoading ? (<Fragment><Loader /></Fragment>) : 
+            (data.map((step) => (
+                  <div key={data.id} className={classes.div}>
                   <Card className={classes.card}>
                     <CardHeader
-                      action={<FollowUserButton token={props.token} step={step} />}
-                      title={<Link to={`@${step.username}`} className={classes.menuLink}>
+                      action={<FollowUserButton step={step} />}
+                      title={<Link to={`@${data.publisher_name}`} className={classes.menuLink}>
                               <Button size="small" color="secondary">
-                                {step.username}
+                                {step.publisher_name}
                               </Button>
                              </Link>
-                             }
+                            }
                     />
                       
                     <CardMedia
                       className={classes.media}
-                      image={step.photo}
+                      image={step.photo.thumbnail}
                       title="Meme"
                     />
       
                     <CardActions >
                         <Fragment>
-                          <FavoriteAction token={props.token} step={step}/>
+                          <FavoriteAction step={step}/>
                           {/* <RepostAction step={step}/> */}
                         </Fragment>    
                       </CardActions>
                   </Card>
                 </div>
-                )
-          })
-            )}
+            )))}
             </Grid>
         </Grid>
       </Grid>
-      )}
     </div>
   );
+  // return (
+  //   <div>
+  //     <h1>Upload Detail</h1>
+  //   </div>
+  // )
 }
 
 const mapStateToProps = state => {
@@ -130,4 +135,4 @@ const mapStateToProps = state => {
 };
 
 
-export default connect(mapStateToProps)(MainCard)
+export default connect(mapStateToProps)(UploadDetail)

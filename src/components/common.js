@@ -9,6 +9,8 @@ import Skeleton from '@material-ui/lab/Skeleton'
 import Button from '@material-ui/core/Button';
 import RepeatIcon from '@material-ui/icons/Repeat';
 import IconButton from '@material-ui/core/IconButton'
+import axios from 'axios'
+import { uploadsURL, followURL } from '../constants'
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -87,15 +89,33 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export const FollowUserButton = ({step}) => {
+export const FollowUserButton = (props) => {
   const classes = useStyles();
-  const [buttonState, setButtonState] = useState(step.following);
+  const [buttonState, setButtonState] = useState(props.step.following);
+
+  console.log(props.step.following)
 
   const handleClick = () => {
-    console.log('Follow Button Clicked')
+    if ( props.step.following === true) {
+        axios.defaults.headers = {
+          "Content-Type": "application/json",
+          Authorization: `Token ${props.token}`
+        }
+        axios.delete(`${followURL}${props.step.username}/follow`)
+    } else {
+      axios.defaults.headers = {
+          "Content-Type": "application/json",
+          Authorization: `Token ${props.token}`
+        }
+        axios.post(`${followURL}${props.step.username}/follow`)
+    }
     setButtonState(prev => !prev);
+  }
 
-    // TODO:  Make a request to the backend to modify the following attribute
+  if (props.user === props.step.username) {
+    return (
+      <div></div>
+    )
   }
 
   return (
@@ -163,11 +183,22 @@ export const FavoriteAction = (props) => {
     const [iconColor, setIconColor] = useState(props.step.favorited) 
   
     const handleClick = () => {
-      console.log('Favorite Icon Clicked')
+      if ( props.step.favorited === true) {
+          axios.defaults.headers = {
+            "Content-Type": "application/json",
+            Authorization: `Token ${props.token}`
+          }
+          axios.delete(`${uploadsURL}/${props.step.id}/favorite/`)
+      } else {
+        axios.defaults.headers = {
+            "Content-Type": "application/json",
+            Authorization: `Token ${props.token}`
+          }
+          axios.post(`${uploadsURL}/${props.step.id}/favorite/`)
+      }
       setIconColor(prev => !prev);
-
-      // TODO: Make Post/Delete requests to the backend
     }
+  
 
     return (
       <IconButton 

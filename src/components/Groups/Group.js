@@ -39,11 +39,9 @@ const useStyles = makeStyles(theme => ({
 function GroupPosts(props) {
   const classes = useStyles()
   let match = useRouteMatch();
-  // console.log(match)
 
   const [ isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState([]);
-  // console.log(props)
   const [url] = useState(`${groupPostsURL}?group=${match.params.id}`);
 
   async function fetchData() {
@@ -73,7 +71,7 @@ function GroupPosts(props) {
   return (
     <div>
       <Grid container className={classes.root} spacing={2}>
-        <Grid item xs={6}>
+        <Grid item xs={12}>
           <Grid container spacing={2}>
             { isLoading ? (<Fragment><MobileLoader /> <MobileLoader /></Fragment>) : (
               data.map((step) => {

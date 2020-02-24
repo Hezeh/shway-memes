@@ -19,8 +19,9 @@ export const tagsURL = `${APIEndpoint}/tags/`
 export const trendingTagsURL = `${APIEndpoint}/trending-hashtags`
 
 export const feedURL = `${APIEndpoint}/feed/`
-export const uploadsURL = `${APIEndpoint}/uploads/`
+export const uploadsURL = `${APIEndpoint}/uploads`
 export const userGroups = `${APIEndpoint}/mygroups`
 export const userPostsURL = `${APIEndpoint}/userposts`
 export const trendingProfilesURL = `${APIEndpoint}/trending-profiles`
-
+export const favoritesURL = `${APIEndpoint}/favorites/`
+export const followURL = `${APIEndpoint}/profiles/`

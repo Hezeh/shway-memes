@@ -12,8 +12,8 @@ import {
 // import PersonPinIcon from '@material-ui/icons/PersonPinCircle'
 import ArtTrackIcon from '@material-ui/icons/ArtTrack';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import PeopleIcon from '@material-ui/icons/People';
-import Followers from './Followers'
+// import PeopleIcon from '@material-ui/icons/People';
+// import Followers from './Followers'
 import Posts from './Posts'
 import Favorites from './Favorites'
 import {connect} from 'react-redux'
@@ -64,15 +64,17 @@ function ProfileNavTabs(props) {
               </Tabs>
             </AppBar>
             <Switch>
-              <Route path={`${match.url}/favorites`}>
-                <Favorites />
-              </Route>
+
               {/* <Route path={`${match.url}/following`}>
                 <Following />
               </Route> */}
               {/* <Route path={`${match.url}/followers`}>
                 <Followers />
               </Route> */}
+              <Route path={`${match.url}/favorites`}>
+                <Favorites user={username} />
+              </Route>
+
               <Route path={`${match.url}`}>
                 <Posts user={username} />
               </Route>
@@ -88,7 +90,6 @@ const mapStateToProps = state => {
   return {
     token: state.auth.token,
     userId: state.auth.userId,
-    username: state.auth.username
   }
 }
 

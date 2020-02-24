@@ -105,6 +105,14 @@ function MobileCard(props) {
       fetchData();
   }, []);
 
+  // console.log()
+
+  const checkUserStatus = () => {
+    if (props.currentUser === data.username) {
+      return true
+    }
+  }
+
   const toggleChecked = () => {
     setChecked(prev => !prev);
     setAutoplay(prev => !prev);
@@ -113,17 +121,18 @@ function MobileCard(props) {
   const shareMeme = () => {
     if (navigator.share) {
       navigator.share({
-          title: 'Cool Memes',
-          text: 'Check out ShwayMemes — it rocks!',
-          url: `https://shwaymemes.com/`,
+          title: 'Cool Meme',
+          text: 'Check out this meme on Shwaymemes — it rocks!',
+          url: `https://shwaymemes.com/upload/${data.id}`,
       })
-        .then(() => console.log('Successful share'))
+        .then(() => {
+          ReactGA.event({
+            category: 'User',
+            action: 'Shared link to meme'
+          })}
+        )
         .catch((error) => console.log('Error sharing', error));
     }
-    ReactGA.event({
-      category: 'User',
-      action: 'Shared link to photo/meme'
-    });
   }
   
   const handleStepChange = step => {
@@ -156,21 +165,21 @@ function MobileCard(props) {
             {Math.abs(activeStep - index) <= 2 ? (
             <Card className={classes.card}>
               <CardHeader
-                action={<FollowUserButton step={step}/>}
+                action={<FollowUserButton token={props.token} user={props.currentUser} step={step}/>}
                 title={
-                  <Link to={`@${step.publisher_name}`} className={classes.menuLink}>
+                  <Link to={`@${step.username}`} className={classes.menuLink}>
                     <Button size="small" color="secondary">
-                      {step.publisher_name}
+                      {step.username}
                     </Button>
                   </Link>
                 }
               />
               <CardMedia 
                 className={classes.img} 
-                image={step.photo.thumbnail} 
+                image={step.photo} 
                 title="Meme" />
               <CardActions>
-                <FavoriteAction step={step}/>
+                <FavoriteAction token={props.token} step={step}/>
                 {/* <RepostAction step={step}/> */}
                 <IconButton aria-label="share" title="Share" onClick={shareMeme}>
                   <ShareIcon />
@@ -188,7 +197,8 @@ function MobileCard(props) {
 
 const mapStateToProps = state => {
   return {
-    token: state.auth.token
+    token: state.auth.token,
+    currentUser: state.auth.username
   };
 };
 

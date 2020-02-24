@@ -1,21 +1,22 @@
 import React, { Fragment , useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
+// import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
-import CardActions from '@material-ui/core/CardActions';
-import Avatar from '@material-ui/core/Avatar';
+// import CardActions from '@material-ui/core/CardActions';
+// import Avatar from '@material-ui/core/Avatar';
 import { red } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
-import {uploadsURL} from '../../constants'
+import {favoritesURL} from '../../constants'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {Loader, FollowUserButton, FavoriteAction, RepostAction} from '../common'
+import { useRouteMatch, useParams } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   card: {
     flexGrow: 1,
-    minWidth: '400px',
+    minWidth: '350px',
     maxHeight: '1000px',
     margin: "10px",
     transition: "0.1s",
@@ -40,9 +41,13 @@ const useStyles = makeStyles(theme => ({
 
 function Favorites(props) {
   const classes = useStyles()
+  // const { username } = useParams()
   const [ isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState([]);
-  const [url] = useState(`${uploadsURL}?publisher=${props.user}`);
+  const [url] = useState(`${favoritesURL}?favorited=${props.user}`);
+  
+
+  console.log(url)
 
   async function fetchData() {
     setIsLoading(true)
@@ -71,7 +76,7 @@ function Favorites(props) {
   return (
     <div>
       <Grid container className={classes.root} spacing={2}>
-        <Grid item xs={6}>
+        <Grid item xs={12}>
           <Grid container spacing={2}>
             { isLoading ? (<Fragment><Loader /> <Loader /></Fragment>) : (
               data.map((step) => {
@@ -80,7 +85,7 @@ function Favorites(props) {
                   <Card className={classes.card}>  
                     <CardMedia
                       className={classes.media}
-                      image={step.photo.thumbnail}
+                      image={step.photo}
                       title="Meme"
                         />              
                   </Card>
@@ -98,7 +103,7 @@ function Favorites(props) {
 
 const mapStateToProps = state => {
   return {
-    token: state.auth.token
+    token: state.auth.token,
   };
 };
 

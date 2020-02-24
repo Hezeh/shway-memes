@@ -12,7 +12,7 @@ const Profile = React.lazy(() => import ('./components/Profile/Profile'))
 const Error_404 = React.lazy(() => import ('./components/Errors/Error_404/Error_404'))
 const Home = React.lazy(() => import ('./components/Home/Home'))
 const Groups = React.lazy(() => import ('./components/Groups/Groups'))
-// const Group = React.lazy(() => import ('./components/Groups/Group'))
+const UploadDetail = React.lazy(() => import ('./components/Upload/UploadDetail'))
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -44,9 +44,9 @@ export default function BaseRouter() {
                 {/* <Route path="/search" component={Search}/> */}
                 <Route path="/@:username" component={Profile}/>
                 <Route path="/groups" component={Groups}/>
-                {/* <Route path="/group/:id" component={Group} /> */}
                 <Route exact path="/register" component={Register}/>
                 <Route exact path="/login" component={Login}/>
+                <Route exact path="/upload/:id" component={UploadDetail}/>
                 {/* <Route exact path="/resetpassword" component={ResetPassword}/> */}
                 <Redirect from="/logout" to="/login" />
                 <Route path="*" component={Error_404}/>

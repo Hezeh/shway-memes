@@ -1,16 +1,14 @@
 import React, { Fragment , useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-// import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
-// import CardActions from '@material-ui/core/CardActions';
-// import Avatar from '@material-ui/core/Avatar';
 import { red } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
 import {uploadsURL} from '../../constants'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {MobileLoader} from '../common'
+import { useParams} from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -40,9 +38,11 @@ const useStyles = makeStyles(theme => ({
 
 function UserPosts(props) {
   const classes = useStyles()
+  // const { username } = useParams()
   const [ isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState([]);
-  const [url] = useState(`${uploadsURL}?publisher=${props.user}`);
+  const [url] = useState(`${uploadsURL}?author=${props.user}`);
+  // console.log(url)
 
   async function fetchData() {
     setIsLoading(true)
@@ -71,7 +71,7 @@ function UserPosts(props) {
   return (
     <div>
       <Grid container className={classes.root} spacing={2}>
-        <Grid item xs={6}>
+        <Grid item xs={12}>
           <Grid container spacing={2}>
             { isLoading ? (<Fragment><MobileLoader /> <MobileLoader /></Fragment>) : (
               data.map((step) => {
@@ -80,7 +80,7 @@ function UserPosts(props) {
                   <Card className={classes.card}>  
                     <CardMedia
                       className={classes.media}
-                      image={step.photo.thumbnail}
+                      image={step.photo}
                       title="Meme"
                         />              
                   </Card>
@@ -88,7 +88,6 @@ function UserPosts(props) {
                 )
             })
             )}
-            
             </Grid>
         </Grid>
       </Grid>
