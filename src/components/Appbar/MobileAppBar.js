@@ -7,7 +7,6 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
-import HomeIcon from '@material-ui/icons/Home';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import { NavLink } from 'react-router-dom';
 import SideListLinks from './SideList';
@@ -18,6 +17,8 @@ import Slide from '@material-ui/core/Slide';
 import UploadFab from '../Upload/MobileUpload'
 import GroupIcon from '@material-ui/icons/Group';
 import { connect} from 'react-redux'
+// import ViewCarouselIcon from '@material-ui/icons/ViewCarousel';
+import HomeIcon from '@material-ui/icons/Home';
 
 const color = pink[400];
 
@@ -141,7 +142,6 @@ export  function BottomAppBar(props) {
 const mapStateToProps = state => {
   return {
     token: state.auth.token,
-    userId: state.auth.userId,
     username: state.auth.username
   }
 }

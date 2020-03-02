@@ -83,11 +83,11 @@ function MyGroups(props) {
           My Groups
         </Typography>
         <List className={classes.list}>
-          {data.map(({ id, group_name}) => (
+          {data.map(({ id, name}) => (
             <React.Fragment key={id}>
-              <Link to={`/groups/${id}`} className={classes.menuLink}>
+              <Link to={`/group/${id}`} className={classes.menuLink}>
                 <ListItem button>
-                  <ListItemText primary={group_name} />
+                  <ListItemText primary={name} />
                 </ListItem>
               </Link>
             </React.Fragment>

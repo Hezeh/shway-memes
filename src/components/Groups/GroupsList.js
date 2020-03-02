@@ -11,6 +11,8 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import Skeleton from '@material-ui/lab/Skeleton';
 import {Redirect, Link} from 'react-router-dom'
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import { GroupJoinButton } from '../common'
 
 const useStyles = makeStyles(theme => ({
   text: {
@@ -82,11 +84,14 @@ function Groups(props) {
           Groups
         </Typography>
         <List className={classes.list}>
-          {data.map(({ id, group_name}) => (
+          {data.map(({ id, name, member}) => (
             <React.Fragment key={id}>
-              <Link to={`/groups/${id}`} className={classes.menuLink}>
+              <Link to={`/group/${id}`} className={classes.menuLink}>
                 <ListItem button>
-                  <ListItemText primary={group_name} />
+                  <ListItemText primary={name} />
+                  {/* <ListItemSecondaryAction>
+                    <GroupJoinButton id={id} member={member} />
+                  </ListItemSecondaryAction> */}
                 </ListItem>
               </Link>
             </React.Fragment>

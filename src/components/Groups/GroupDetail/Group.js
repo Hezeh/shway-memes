@@ -3,20 +3,21 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import PeopleIcon from '@material-ui/icons/People';
 import { 
     Switch,
     Route,
     Link,
     useRouteMatch,
 } from 'react-router-dom';
-import CreateGroup from './Create'
-import GroupsList from './GroupsList'
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import MyGroups from './MyGroups'
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
+import GroupUpload from './Join&Upload'
+import Members from './MembersList'
+import GroupsDetail from './GroupDetail'
+import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
+import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
+import CallToActionIcon from '@material-ui/icons/CallToAction';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -43,7 +44,7 @@ function GroupsNavTabs(props) {
   return (
     <div className={classes.root}>
       <Route 
-          path={`/groups`}
+          path={`/group/${match.params.id}`}
           render={({ location }) => (
             <React.Fragment>
             <AppBar position="static" color="inherit">
@@ -55,21 +56,21 @@ function GroupsNavTabs(props) {
                 indicatorColor="secondary"
                 textColor="secondary"
               >
-                <Tab icon={<PeopleIcon />} label="All Groups" to={`${match.url}`} component={Link}/>
-                <Tab icon={<SupervisorAccountIcon/>} label="My Groups" to={`${match.url}/mygroups`} component={Link}/>
-                <Tab icon={<GroupAddIcon />} label="Add Group" to={`${match.url}/addgroup`} component={Link}/>
+                <Tab icon={<PhotoLibraryIcon />} label="Group Posts" to={`${match.url}`} component={Link}/>
+                <Tab icon={<CallToActionIcon />} label="Join &#38; Upload" to={`${match.url}/upload`} component={Link}/>
+                <Tab icon={<PeopleOutlineIcon />} label="Members" to={`${match.url}/members`} component={Link}/>
               </Tabs>
             </AppBar>
             <Switch>
               
-              <Route path={`${match.url}/addgroup`}>
-                <CreateGroup />
+              <Route path={`${match.url}/upload`}>
+                <GroupUpload groupid={match.params.id}/>
               </Route>
-              <Route path={`${match.url}/mygroups`}>
-                <MyGroups />
+              <Route path={`${match.url}/members`}>
+                <Members />
               </Route>
               <Route path={`${match.url}`}>
-                <GroupsList />
+                <GroupsDetail id={match.params.id}/>
               </Route>             
             </Switch>
             </React.Fragment>

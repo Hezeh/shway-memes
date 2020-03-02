@@ -36,10 +36,22 @@ function TrendingGroups(props) {
   const classes = useStyles();
   const [ isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState([]);
-  const [url] = useState(trendingGroupsURL);
+  const [url, setNextUrl] = useState(trendingGroupsURL);
 
-  async function fetchData() {
-    setIsLoading(true)
+  const [loadingMore, setLoadingMore] = useState(false)
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll)
+  })
+
+  function handleScroll() {
+    if ( window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || isLoading) return;
+    fetchMoreData()
+  }
+
+  async function fetchMoreData() {
+    setLoadingMore(true)
     axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
     axios.defaults.xsrfCookieName = "csrftoken";
     axios.defaults.headers = {
@@ -49,16 +61,37 @@ function TrendingGroups(props) {
     axios
         .get(url)
         .then(response => {
-          setIsLoading(false)
-          setData(response.data.results)
+          setNextUrl(response.data.next)
+          setData([...data, ...response.data.results])
+          setLoadingMore(false)
         })
         .catch(err => {
           console.log(err)
-          setIsLoading(false)
+          setLoadingMore(false)
         })
   }
 
   useEffect(() => {
+    async function fetchData() {
+      setIsLoading(true)
+      axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+      axios.defaults.xsrfCookieName = "csrftoken";
+      axios.defaults.headers = {
+        "Content-Type": "application/json",
+        Authorization: `Token ${props.token}`,
+      };
+      axios
+          .get(url)
+          .then(response => {
+            setIsLoading(false)
+            setNextUrl(response.data.next)
+            setData(response.data.results)
+          })
+          .catch(err => {
+            console.log(err)
+            setIsLoading(false)
+          })
+    }
       fetchData();
   }, []);
 
@@ -89,6 +122,7 @@ function TrendingGroups(props) {
               </Link>
             </React.Fragment>
           ))}
+          {loadingMore && <Fragment><div>Loading More</div></Fragment>}
         </List>
       </Paper>
     </React.Fragment>

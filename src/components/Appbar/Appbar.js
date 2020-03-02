@@ -37,9 +37,6 @@ function AppBar(props) {
     </div>
       )
     } 
-    // else {
-    //   return <Redirect to="/register" />
-    // }
   }
 
  return (

@@ -8,6 +8,7 @@ import {
     Route,
     Link,
     useRouteMatch,
+    NavLink
 } from 'react-router-dom';
 // import PersonPinIcon from '@material-ui/icons/PersonPinCircle'
 import ArtTrackIcon from '@material-ui/icons/ArtTrack';
@@ -16,8 +17,10 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 // import Followers from './Followers'
 import Posts from './Posts'
 import Favorites from './Favorites'
+import Reposts from './Reposts'
 import {connect} from 'react-redux'
 import {Redirect, useParams} from 'react-router-dom'
+import RepeatIcon from '@material-ui/icons/Repeat';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -47,7 +50,7 @@ function ProfileNavTabs(props) {
     <div className={classes.root}>
       <Route 
           path={`/@${username}`}
-          render={({ location }) => (
+          render={() => (
             <React.Fragment>
             <AppBar position="static" color="inherit">
               <Tabs
@@ -55,10 +58,13 @@ function ProfileNavTabs(props) {
                 value={value}
                 onChange={handleChange}
                 aria-label="Profile Tabs"
+                indicatorColor="secondary"
+                textColor="secondary"
               >
                 
-                <Tab icon={<ArtTrackIcon />} label="POSTS" to={`${match.url}`} component={Link}/>
-                <Tab icon={<FavoriteIcon />} label="FAVORITES" to={`${match.url}/favorites`} component={Link}/>
+                <Tab icon={<ArtTrackIcon />} label="POSTS" to={`${match.url}`} component={NavLink}/>
+                <Tab icon={<FavoriteIcon />} label="FAVORITES" to={`${match.url}/favorites`} component={NavLink}/>
+                <Tab icon={<RepeatIcon />} label="Reposts" to={`${match.url}/reposts`} component={NavLink}/>
                 {/* <Tab icon={<PersonPinIcon />} label="FOLLOWING" to={`${match.url}/following`} component={Link}/>  */}
                 {/* <Tab icon={<PeopleIcon />} label="FOLLOWERS" to={`${match.url}/followers`} component={Link}/> */}
               </Tabs>
@@ -73,6 +79,10 @@ function ProfileNavTabs(props) {
               </Route> */}
               <Route path={`${match.url}/favorites`}>
                 <Favorites user={username} />
+              </Route>
+
+              <Route path={`${match.url}/reposts`}>
+                <Reposts user={username} />
               </Route>
 
               <Route path={`${match.url}`}>

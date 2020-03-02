@@ -93,9 +93,9 @@ function UploadDetail(props) {
                   <Card className={classes.card}>
                     <CardHeader
                       action={<FollowUserButton step={step} />}
-                      title={<Link to={`@${data.publisher_name}`} className={classes.menuLink}>
+                      title={<Link to={`@${data.author}`} className={classes.menuLink}>
                               <Button size="small" color="secondary">
-                                {step.publisher_name}
+                                {step.author}
                               </Button>
                              </Link>
                             }
@@ -103,7 +103,7 @@ function UploadDetail(props) {
                       
                     <CardMedia
                       className={classes.media}
-                      image={step.photo.thumbnail}
+                      image={step.photo}
                       title="Meme"
                     />
       
@@ -121,11 +121,6 @@ function UploadDetail(props) {
       </Grid>
     </div>
   );
-  // return (
-  //   <div>
-  //     <h1>Upload Detail</h1>
-  //   </div>
-  // )
 }
 
 const mapStateToProps = state => {

@@ -4,7 +4,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InfoIcon from '@material-ui/icons/Info';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { makeStyles} from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/auth';
@@ -30,12 +30,12 @@ function SideListLinks(props) {
           text: 'Check out ShwayMemes — it rocks!',
           url: 'https://shwaymemes.com',
       })
-        .then(() => console.log('Successful share'))
+        // .then(() => (ReactGA)
         .catch((error) => console.log('Error sharing', error));
     }
     ReactGA.event({
       category: 'User',
-      action: 'Shared link to photo/meme'
+      action: 'Shared Playstore Link'
     });
   }
 
@@ -59,26 +59,32 @@ function SideListLinks(props) {
           </ListItem>
         </Link>
 
-        <Link to="/link-to-playstore" className={classes.menuLink}>
+        {/* <Link to="/link-to-playstore" className={classes.menuLink}>
           <ListItem button >
             <ListItemIcon>
               <GetAppIcon />
             </ListItemIcon>
             <ListItemText primary="Get App" />
           </ListItem>
-        </Link>
+        </Link> */}
 
 
           <ListItem button >
             <ListItemIcon>
               <ShareIcon onClick={shareApp} />
             </ListItemIcon>
-            <ListItemText primary="Share App" />
+            <ListItemText primary="Share" />
           </ListItem>
       </List>
   )
 }
 
+
+const mapStateToProps = state => {
+  return {
+    token: state.auth.token,
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -86,4 +92,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapDispatchToProps)(SideListLinks)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SideListLinks))

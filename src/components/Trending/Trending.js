@@ -60,6 +60,8 @@ export default function TrendingNavTabs() {
                 value={value}
                 onChange={handleChange}
                 aria-label="Trending Tabs"
+                indicatorColor="secondary"
+                textColor="secondary"
               >
                 {/* <Tab icon={<TrendingUpIcon />} label="Hashtags" to={`${match.url}`} {...a11yProps(0)} component={Link} /> */}
                 <Tab icon={<PersonPinIcon />} label="Meme lords" to={`${match.url}/people`} {...a11yProps(2)} component={Link}/>

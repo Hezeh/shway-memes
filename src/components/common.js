@@ -10,12 +10,13 @@ import Button from '@material-ui/core/Button';
 import RepeatIcon from '@material-ui/icons/Repeat';
 import IconButton from '@material-ui/core/IconButton'
 import axios from 'axios'
-import { uploadsURL, followURL } from '../constants'
+// import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import { uploadsURL, followURL, groupJoinURL } from '../constants'
 
 const useStyles = makeStyles(theme => ({
   card: {
     flexGrow: 1,
-    minWidth: '450px',
+    minWidth: '700px',
     maxHeight: '1000px',
     margin: "10px",
     transition: "0.1s",
@@ -54,8 +55,8 @@ const useStyles = makeStyles(theme => ({
   },
   cardloader: {
     maxWidth: '99%',
-    //minHeight: '100%',
-    maxHeight: 800,  // 1000
+    // minWidth: '650px',
+    maxHeight: 800, 
     transition: "0.01s",
     margin: 'auto',
     justify: "center",
@@ -63,17 +64,14 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 20,
-    // position: 'fixed',
-    // height: '100%',
     boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
     "&:hover": {
       boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
     }
   },
   cardimg: {
-    //minHeight: 500,
-    //lineHeight: 350,
-    height: 350,
+    objectFit: 'scale-down',
+    height: 450,
     display: 'block',
     overflow: 'hidden',
     maxWidth: '95%',
@@ -82,10 +80,6 @@ const useStyles = makeStyles(theme => ({
     margin: 'auto',
     borderRadius: '10px',
     position: "static",
-    [theme.breakpoints.down('xs')]: {
-      //display: 'block',
-      //height: 350,
-    },  
   },
 }));
 
@@ -93,26 +87,24 @@ export const FollowUserButton = (props) => {
   const classes = useStyles();
   const [buttonState, setButtonState] = useState(props.step.following);
 
-  console.log(props.step.following)
-
   const handleClick = () => {
     if ( props.step.following === true) {
         axios.defaults.headers = {
           "Content-Type": "application/json",
           Authorization: `Token ${props.token}`
         }
-        axios.delete(`${followURL}${props.step.username}/follow`)
+        axios.delete(`${followURL}${props.step.author}/follow`)
     } else {
       axios.defaults.headers = {
           "Content-Type": "application/json",
           Authorization: `Token ${props.token}`
         }
-        axios.post(`${followURL}${props.step.username}/follow`)
+        axios.post(`${followURL}${props.step.author}/follow`)
     }
     setButtonState(prev => !prev);
   }
 
-  if (props.user === props.step.username) {
+  if (props.step.following === null) {
     return (
       <div></div>
     )
@@ -129,6 +121,39 @@ export const FollowUserButton = (props) => {
     </Button>
   )
 }
+
+// export const GroupJoinButton = (props) => {
+//   const classes = useStyles();
+//   const [buttonState, setButtonState] = useState(props.member);
+
+//   const handleClick = () => {
+//     if ( props.member === true) {
+//         axios.defaults.headers = {
+//           "Content-Type": "application/json",
+//           Authorization: `Token ${props.token}`
+//         }
+//         axios.delete(`${groupJoinURL}${props.id}/join`)
+//     } else {
+//       axios.defaults.headers = {
+//           "Content-Type": "application/json",
+//           Authorization: `Token ${props.token}`
+//         }
+//         axios.post(`${groupJoinURL}${props.id}/join`)
+//     }
+//     setButtonState(prev => !prev);
+//   }
+
+//   return (
+//       <Button
+//       variant={buttonState === true ? 'outlined' : 'contained'}
+//       color="secondary"
+//       className={classes.button}
+//       onClick={handleClick}
+//      >
+//       { buttonState === true ? 'Leave' : 'Join'}
+//     </Button>
+//   )
+// }
 
 export const Loader = () => {
     const classes = useStyles();
@@ -149,13 +174,14 @@ export const Loader = () => {
     )
 }
 
+// I really have no idea what is the diff between Loader and CardLoader 
+
 export const CardLoader = () => {
   const classes = useStyles();
   return (
     <div className={classes.div}>
     <Card className={classes.cardloader}>
       <CardHeader
-        // action={<Skeleton variant="rect" width={40} height={40} />}
         title={<Skeleton height={35} width="100%" style={{ marginBottom: 6 }} /> }
       />
       {<Skeleton variant="rect" className={classes.cardimg} />}  
@@ -188,13 +214,13 @@ export const FavoriteAction = (props) => {
             "Content-Type": "application/json",
             Authorization: `Token ${props.token}`
           }
-          axios.delete(`${uploadsURL}/${props.step.id}/favorite/`)
+          axios.delete(`${uploadsURL}${props.step.id}/favorite/`)
       } else {
         axios.defaults.headers = {
             "Content-Type": "application/json",
             Authorization: `Token ${props.token}`
           }
-          axios.post(`${uploadsURL}/${props.step.id}/favorite/`)
+          axios.post(`${uploadsURL}${props.step.id}/favorite/`)
       }
       setIconColor(prev => !prev);
     }
@@ -212,12 +238,22 @@ export const FavoriteAction = (props) => {
   }
   
   export const RepostAction = (props) => {
-    const [iconColor, setIconColor] = useState(props.step.favorited) 
-  
-    // TODO: step should have a repost attribute
+    const [iconColor, setIconColor] = useState(props.step.reposted) 
   
     const handleClick = () => {
-      console.log('Repost Icon Clicked')
+      if ( props.step.reposted === true) {
+          axios.defaults.headers = {
+            "Content-Type": "application/json",
+            Authorization: `Token ${props.token}`
+          }
+          axios.delete(`${uploadsURL}${props.step.id}/repost/`)
+      } else {
+        axios.defaults.headers = {
+            "Content-Type": "application/json",
+            Authorization: `Token ${props.token}`
+          }
+          axios.post(`${uploadsURL}${props.step.id}/repost/`)
+      }
       setIconColor(prev => !prev);
     }
   

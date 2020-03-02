@@ -48,8 +48,9 @@ export const authLogin = (username, password) => {
         .then(res => {
             const user = {
                 token: res.data.key,
-                username,
-                userId: res.data.user,
+                // username,
+                username: res.data.user,
+                author: res.data.author,
                 expirationDate: new Date(new Date().getTime() + 360000 * 100000)
             }
             localStorage.setItem("user", JSON.stringify(user))
@@ -74,8 +75,9 @@ export const authSignup = (username, email, password1, password2) => {
         .then(res => {
             const user = {
                 token: res.data.key,
-                username,
-                userId: res.data.user,
+                // username,
+                username: res.data.user,
+                author: res.data.author,
                 expirationDate: new Date(new Date().getTime() + 360000 * 100000)
             }
             localStorage.setItem("user", JSON.stringify(user));

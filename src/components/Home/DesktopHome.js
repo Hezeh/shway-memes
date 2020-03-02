@@ -12,13 +12,14 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import Button from '@material-ui/core/Button';
 import {Link} from 'react-router-dom'
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(theme => ({
   card: {
     flexGrow: 1,
     minWidth: '630px',
-    // maxHeight: '800px',  // was 1000px
-    maxHeight: '1000px',
+    maxHeight: '650px',
     margin: "10px",
     transition: "0.1s",
     borderRadius: "30px",
@@ -28,8 +29,11 @@ const useStyles = makeStyles(theme => ({
     }
   },
   media: {
-    height: '400px',  
-    width: '100%'
+    objectFit: 'scale-down',
+    height: '500px',
+    display: 'block',
+    margin: 'auto',
+    borderRadius: '10px',
   },
   avatar: {
     backgroundColor: red[500],
@@ -52,10 +56,42 @@ function MainCard(props) {
   const classes = useStyles();
   const [ isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState([]);
-  const [url] = useState(uploadsURL);
+  const [url, setNextUrl] = useState(uploadsURL);
+  const [loadingMore, setLoadingMore] = useState(false)
 
-  async function fetchData() {
-    setIsLoading(true)
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll)
+  })
+
+  function handleScroll() {
+    if ( window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || isLoading) return;
+    fetchMoreData()
+  }
+
+  // async function fetchData() {
+  //   setIsLoading(true)
+  //   axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+  //   axios.defaults.xsrfCookieName = "csrftoken";
+  //   axios.defaults.headers = {
+  //     "Content-Type": "application/json",
+  //     Authorization: `Token ${props.token}`,
+  //   };
+  //   axios
+  //       .get(url)
+  //       .then(response => {
+  //         setIsLoading(false)
+  //         setNextUrl(response.data.next)
+  //         setData(response.data.results)
+  //       })
+  //       .catch(err => {
+  //         console.log(err)
+  //         setIsLoading(false)
+  //       })
+  // }
+
+  async function fetchMoreData() {
+    setLoadingMore(true)
     axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
     axios.defaults.xsrfCookieName = "csrftoken";
     axios.defaults.headers = {
@@ -65,17 +101,38 @@ function MainCard(props) {
     axios
         .get(url)
         .then(response => {
-          setIsLoading(false)
-          setData(response.data.results)
+          setNextUrl(response.data.next)
+          setData([...data, ...response.data.results])
+          setLoadingMore(false)
         })
         .catch(err => {
           console.log(err)
-          setIsLoading(false)
+          setLoadingMore(false)
         })
   }
 
   useEffect(() => {
-      fetchData();
+    async function fetchData() {
+      setIsLoading(true)
+      axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+      axios.defaults.xsrfCookieName = "csrftoken";
+      axios.defaults.headers = {
+        "Content-Type": "application/json",
+        Authorization: `Token ${props.token}`,
+      };
+      axios
+          .get(url)
+          .then(response => {
+            setIsLoading(false)
+            setNextUrl(response.data.next)
+            setData(response.data.results)
+          })
+          .catch(err => {
+            console.log(err)
+            setIsLoading(false)
+          })
+    }
+    fetchData();
   }, []);
   
   return (
@@ -83,16 +140,16 @@ function MainCard(props) {
       <Grid container className={classes.root} spacing={2}>
         <Grid item xs={12}>
           <Grid container justify="center" spacing={2}>
-          { isLoading ? (<Fragment><Loader /> <Loader /></Fragment>) : (
+          { isLoading ? (<Fragment><Loader /></Fragment>) : (
               data.map((step) => {
                 return (
                   <div key={step.id} className={classes.div}>
                   <Card className={classes.card}>
                     <CardHeader
                       action={<FollowUserButton token={props.token} step={step} />}
-                      title={<Link to={`@${step.username}`} className={classes.menuLink}>
+                      title={<Link to={`@${step.author_name}`} className={classes.menuLink}>
                               <Button size="small" color="secondary">
-                                {step.username}
+                                {step.author_name}
                               </Button>
                              </Link>
                              }
@@ -102,12 +159,20 @@ function MainCard(props) {
                       className={classes.media}
                       image={step.photo}
                       title="Meme"
+                      component="img"
+                      // height="auto"
                     />
+
+                    <CardContent>
+                      <Typography variant="body2" color="textSecondary" component="p">
+                        {step.caption}
+                      </Typography>
+                    </CardContent>
       
                     <CardActions >
                         <Fragment>
                           <FavoriteAction token={props.token} step={step}/>
-                          {/* <RepostAction step={step}/> */}
+                          <RepostAction token={props.token} step={step}/>
                         </Fragment>    
                       </CardActions>
                   </Card>
@@ -115,6 +180,7 @@ function MainCard(props) {
                 )
           })
             )}
+            {loadingMore && <Fragment><Loader /></Fragment>}
             </Grid>
         </Grid>
       </Grid>

@@ -14,7 +14,6 @@ import { connect } from 'react-redux';
 const useStyles = makeStyles(theme => ({
   grow: {
     flexGrow: 1,
-    // padding: '2px'
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -85,10 +84,6 @@ function DesktopAppBar(props) {
               typography="Logout"
               onClick={props.logout}
              />
-             {/* <AppBarLink 
-              linkTo="/aboutus"
-              typography="About Us"
-             /> */}
             <UploadFab />
           </Toolbar>
         </AppBar>

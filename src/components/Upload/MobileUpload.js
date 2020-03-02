@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Fab from '@material-ui/core/Fab';
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/Add';
 import axios from 'axios';
@@ -10,8 +10,9 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
+// import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField';
 
 export const useStyles = makeStyles(theme => ({
     fabButton: {
@@ -29,14 +30,15 @@ export const useStyles = makeStyles(theme => ({
 
 function UploadFab(props) {
     const classes = useStyles();
-    let history = useHistory();
+    // let history = useHistory();
 
     const [file, setFile] = useState('');
     const [filename, setFilename] = useState('Choose File');
-    const [uploadedFile, setUploadedFile] = useState({});
-    const [message, setMessage] = useState('');
-    const [uploadPercentage, setUploadPercentage] = useState(0);
+    // const [uploadedFile, setUploadedFile] = useState({});
+    // const [message, setMessage] = useState('');
+    // const [uploadPercentage, setUploadPercentage] = useState(0);
     const [preview, setPreview] = useState()
+    const [caption, setCaption] = useState('')
 
     // create a preview as a side effect, whenever selected file is changed
     useEffect(() => {
@@ -68,12 +70,22 @@ function UploadFab(props) {
       setOpen(false);
     };
 
+    const handleCaptionChange = (e) => {
+      setCaption(e.target.caption)
+    }
+
 
     const handleSubmit = async () => {
-      console.log('Called Submit Component')
+      // console.log('Called Submit Component')
       const formData = new FormData();
       formData.append('photo', file);
-      formData.append('publisher', props.userId);
+      formData.append('author', props.author);
+      // formData.append('caption', caption)
+
+      // console.log(props.username)
+      // console.log(props.token)
+      // console.log(file)
+      // console.log(formData)
       axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
       axios.defaults.xsrfCookieName = "csrftoken";
       axios.defaults.headers = {
@@ -112,13 +124,21 @@ function UploadFab(props) {
           <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
             <DialogTitle id="form-dialog-title">Upload</DialogTitle>
             <DialogContent>
-              <DialogContentText>
-              {filename}
-              </DialogContentText>
-              <div>{file &&  <img width={300} src={preview} /> }</div>
+              
+              <div>{file &&  <img height={400} src={preview} /> }</div>
+              <TextField
+                autoFocus
+                margin="dense"
+                id="caption"
+                fullWidth
+                label="Caption"
+                variant="outlined"
+                color="secondary"
+                onChange={handleCaptionChange}
+              />
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleClose}  variant="contained" color="primary">
+              <Button onClick={handleClose}  variant="contained" color="secondary">
                 Cancel
               </Button>
               <Button onClick={handleSubmit} variant="contained" color="secondary">
@@ -135,7 +155,7 @@ const mapStateToProps = state => {
   return {
     token: state.auth.token,
     username: state.auth.username,
-    userId: state.auth.userId,
+    author: state.auth.author,
   };
 };
 

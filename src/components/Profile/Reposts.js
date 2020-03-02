@@ -1,14 +1,16 @@
 import React, { Fragment , useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
+// import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
+// import CardActions from '@material-ui/core/CardActions';
+// import Avatar from '@material-ui/core/Avatar';
 import { red } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
-import {groupPostsURL} from '../../constants'
+import {repostsURL} from '../../constants'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {MobileLoader} from '../common'
-import { useRouteMatch } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -36,16 +38,25 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function GroupPosts(props) {
+function Reposts(props) {
   const classes = useStyles()
-  let match = useRouteMatch();
-
   const [ isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState([]);
-  const [url] = useState(`${groupPostsURL}?group=${match.params.id}`);
+  const [url, setNextUrl] = useState(`${repostsURL}?reposted=${props.user}`);
+  const [loadingMore, setLoadingMore] = useState(false)
 
-  async function fetchData() {
-    setIsLoading(true)
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll)
+  })
+
+  function handleScroll() {
+    if ( window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || isLoading) return;
+    fetchMoreData()
+  }
+
+  async function fetchMoreData() {
+    setLoadingMore(true)
     axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
     axios.defaults.xsrfCookieName = "csrftoken";
     axios.defaults.headers = {
@@ -55,16 +66,37 @@ function GroupPosts(props) {
     axios
         .get(url)
         .then(response => {
-          setIsLoading(false)
-          setData(response.data.results)
+          setNextUrl(response.data.next)
+          setData([...data, ...response.data.results])
+          setLoadingMore(false)
         })
         .catch(err => {
           console.log(err)
-          setIsLoading(false)
+          setLoadingMore(false)
         })
   }
 
   useEffect(() => {
+    async function fetchData() {
+      setIsLoading(true)
+      axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+      axios.defaults.xsrfCookieName = "csrftoken";
+      axios.defaults.headers = {
+        "Content-Type": "application/json",
+        Authorization: `Token ${props.token}`,
+      };
+      axios
+          .get(url)
+          .then(response => {
+            setIsLoading(false)
+            setNextUrl(response.data.next)
+            setData(response.data.results)
+          })
+          .catch(err => {
+            console.log(err)
+            setIsLoading(false)
+          })
+    }
       fetchData();
   }, []);
   
@@ -73,21 +105,22 @@ function GroupPosts(props) {
       <Grid container className={classes.root} spacing={2}>
         <Grid item xs={12}>
           <Grid container spacing={2}>
-            { isLoading ? (<Fragment><MobileLoader /> <MobileLoader /></Fragment>) : (
+            { isLoading ? (<Fragment><MobileLoader /> <MobileLoader /> <MobileLoader /></Fragment>) : (
               data.map((step) => {
                 return (
                   <div key={step.id} className={classes.div}>
                   <Card className={classes.card}>  
                     <CardMedia
                       className={classes.media}
-                      image={step.post}
+                      image={step.photo}
                       title="Meme"
                         />              
                   </Card>
                 </div>
                 )
             })
-            )}        
+            )}
+            {loadingMore && <Fragment><MobileLoader /> <MobileLoader /> <MobileLoader /></Fragment>}
             </Grid>
         </Grid>
       </Grid>
@@ -97,9 +130,9 @@ function GroupPosts(props) {
 
 const mapStateToProps = state => {
   return {
-    token: state.auth.token
+    token: state.auth.token,
   };
 };
 
 
-export default connect(mapStateToProps)(GroupPosts)
+export default connect(mapStateToProps)(Reposts)

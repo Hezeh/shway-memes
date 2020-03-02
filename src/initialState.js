@@ -3,5 +3,5 @@ export  const initialState = {
     error: null,
     loading: false,
     username: null,
-    userId: null
+    author: null
 }

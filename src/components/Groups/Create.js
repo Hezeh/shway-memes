@@ -106,7 +106,7 @@ function AddGroup(props) {
     };
     
     await axios.post(groupsURL, {
-        group_name: values.groupname,
+        name: values.groupname,
         is_public: values.grouptype
       })
         .then(res => {

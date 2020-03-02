@@ -19,15 +19,6 @@ import { Formik } from 'formik';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
-// import List from '@material-ui/core/List';
-// import ListItem from '@material-ui/core/ListItem';
-// import ListItemText from '@material-ui/core/ListItemText';
-// import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-// import ImageIcon from '@material-ui/icons/Image';
-// import GroupIcon from '@material-ui/icons/Group';
-// import PortraitIcon from '@material-ui/icons/Portrait';
-// import WhatshotIcon from '@material-ui/icons/Whatshot';
-
 
 const useStyles = makeStyles(theme => ({
   '@global': {
