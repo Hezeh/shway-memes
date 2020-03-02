@@ -126,7 +126,7 @@ function UploadFab(props) {
             <DialogContent>
               
               <div>{file &&  <img height={400} src={preview} /> }</div>
-              <TextField
+              {/* <TextField
                 autoFocus
                 margin="dense"
                 id="caption"
@@ -135,7 +135,7 @@ function UploadFab(props) {
                 variant="outlined"
                 color="secondary"
                 onChange={handleCaptionChange}
-              />
+              /> */}
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClose}  variant="contained" color="secondary">

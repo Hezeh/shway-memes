@@ -121,7 +121,7 @@ function UploadFab(props) {
                 {file && 
                <img height={400} src={preview} /> }
               </div>
-              <img height={400} src={preview} />
+              {/* <img height={400} src={preview} />
               <TextField
                 autoFocus
                 margin="dense"
@@ -131,7 +131,7 @@ function UploadFab(props) {
                 variant="outlined"
                 color="secondary"
                 onChange={handleCaptionChange}
-              />
+              /> */}
             </DialogContent>
             <DialogActions>
             
