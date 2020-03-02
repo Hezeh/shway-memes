@@ -1,4 +1,4 @@
-let DEBUG = process.env.DEBUG;
+let DEBUG = false;
 let host = "http://127.0.0.1:8000";
 if (DEBUG === false) {
     host = "https://api.shwaymemes.com";
