@@ -64,8 +64,12 @@ function MobileCard(props) {
   })
 
   function handleScroll() {
-    if ( window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || isLoading) return;
-    fetchMoreData()
+    if (
+      document.documentElement.scrollHeight - document.documentElement.scrollTop ===
+      document.documentElement.clientHeight
+    ) {
+      fetchMoreData()
+    }
   }
 
   async function fetchMoreData() {
@@ -113,31 +117,6 @@ function MobileCard(props) {
       fetchData();
   }, []);
 
-  // console.log(data)
-
-  // const shareMeme = (id) => {
-  //   console.log('Hey')
-  //   console.log(id)
-  //   if (navigator.share) {
-  //     navigator.share({
-  //         title: 'Cool Meme',
-  //         text: 'Check out this meme on Shwaymemes — it rocks!',
-  //         url: `https://shwaymemes.com/upload/${id}`,
-  //     })
-  //       .then(() => {
-  //         ReactGA.event({
-  //           category: 'User',
-  //           action: 'Shared link to meme'
-  //         })}
-  //       )
-  //       .catch((error) => console.log('Error sharing', error));
-  //   }
-  // }
-
-  // function shareMeme(id) {
-  //   console.log(id)
-  // }
-
   return (
     <Fragment>
     <Typography color="secondary" variant="h6" align="center" noWrap>
@@ -174,7 +153,6 @@ function MobileCard(props) {
                 <RepostAction  token={props.token} step={step}/>
                 <IconButton aria-label="share" title="Share" onClick={
                   () => {
-                    // console.log(step.id)
                     if (navigator.share) {
                       navigator.share({
                           title: 'Cool Meme',
