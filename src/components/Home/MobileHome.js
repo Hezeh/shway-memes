@@ -113,22 +113,30 @@ function MobileCard(props) {
       fetchData();
   }, []);
 
-  const shareMeme = () => {
-    if (navigator.share) {
-      navigator.share({
-          title: 'Cool Meme',
-          text: 'Check out this meme on Shwaymemes — it rocks!',
-          url: `https://shwaymemes.com/upload/${data.id}`,
-      })
-        .then(() => {
-          ReactGA.event({
-            category: 'User',
-            action: 'Shared link to meme'
-          })}
-        )
-        .catch((error) => console.log('Error sharing', error));
-    }
-  }
+  // console.log(data)
+
+  // const shareMeme = (id) => {
+  //   console.log('Hey')
+  //   console.log(id)
+  //   if (navigator.share) {
+  //     navigator.share({
+  //         title: 'Cool Meme',
+  //         text: 'Check out this meme on Shwaymemes — it rocks!',
+  //         url: `https://shwaymemes.com/upload/${id}`,
+  //     })
+  //       .then(() => {
+  //         ReactGA.event({
+  //           category: 'User',
+  //           action: 'Shared link to meme'
+  //         })}
+  //       )
+  //       .catch((error) => console.log('Error sharing', error));
+  //   }
+  // }
+
+  // function shareMeme(id) {
+  //   console.log(id)
+  // }
 
   return (
     <Fragment>
@@ -164,7 +172,25 @@ function MobileCard(props) {
               <CardActions>
                 <FavoriteAction token={props.token} step={step}/>
                 <RepostAction  token={props.token} step={step}/>
-                <IconButton aria-label="share" title="Share" onClick={shareMeme}>
+                <IconButton aria-label="share" title="Share" onClick={
+                  () => {
+                    // console.log(step.id)
+                    if (navigator.share) {
+                      navigator.share({
+                          title: 'Cool Meme',
+                          text: 'Check out this meme on Shwaymemes — it rocks!',
+                          url: `https://shwaymemes.com/upload/${step.id}`,
+                      })
+                        .then(() => {
+                          ReactGA.event({
+                            category: 'User',
+                            action: 'Shared link to meme'
+                          })}
+                        )
+                        .catch((error) => console.log('Error sharing', error));
+                    }
+                  }
+                }>
                   <ShareIcon />
                 </IconButton>
                 
