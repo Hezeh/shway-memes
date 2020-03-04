@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect, Fragment, useRef, useCallback } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -16,12 +16,11 @@ import {connect} from 'react-redux'
 import { CardLoader,  FollowUserButton, FavoriteAction, RepostAction} from '../common'
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { useInfiniteScroll } from 'react-infinite-scroll-hook'
 
 const useStyles = makeStyles(theme => ({
   card: {
     maxWidth: '99%',
-    maxHeight: 800,
+    maxHeight: 650,
     transition: "0.01s",
     margin: 'auto',
     justify: "center",
@@ -29,6 +28,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 20,
+    // marginBottom: 10,
     boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
     "&:hover": {
       boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
@@ -58,21 +58,29 @@ function MobileCard(props) {
   const [url, setNextUrl] = useState(uploadsURL);
   const [loadingMore, setLoadingMore] = useState(false)
   const [data, setData] = useState([]);
-  const [hasNextPage, setHasNextPage] = useState();
+
+  // const observer = useRef()
+  // const lastImageElementRef = useCallback(node => {
+  //   if (isLoading) return
+  //   if (observer.current) observer.current.disconnect()
+  //   observer.current = new IntersectionObserver(entries => {
+  //     if (entries[0].isIntersecting ) {
+  //       setPageNumber(prevPageNumber => prevPageNumber + 1)
+  //     }
+  //   })
+  //   if (node) observer.current.observe(node)
+  // }, [isLoading, url])
+
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll, {passive: true});
+    window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll)
   })
 
-  // window.onscroll = () => {
-  //   handleScroll()
-  // }
-
   function handleScroll() {
     if (
-      document.documentElement.scrollHeight - document.documentElement.scrollTop ===
-      document.documentElement.clientHeight
+      (document.documentElement.scrollHeight - document.documentElement.scrollTop) ===
+      (document.documentElement.clientHeight)
     ) {
       fetchMoreData()
     }
@@ -90,7 +98,6 @@ function MobileCard(props) {
         .get(url)
         .then(response => {
           setNextUrl(response.data.next)
-          setHasNextPage(response.data.next);
           setData([...data, ...response.data.results])
           setLoadingMore(false)
         })
@@ -99,13 +106,6 @@ function MobileCard(props) {
           setLoadingMore(false)
         })
   }
-
-  // const infiniteRef = useInfiniteScroll({
-  //   loadingMore,
-  //   hasNextPage,
-  //   onLoadMore: fetchMoreData,
-  //   scrollContainer: 'window'
-  // });
 
   useEffect(() => {
     async function fetchData() {
@@ -136,7 +136,6 @@ function MobileCard(props) {
     <Typography color="secondary" variant="h6" align="center" noWrap>
                 ShwayMemes
     </Typography>
-     {/* <div ref={infiniteRef}> */}
       { isLoading ? (<CardLoader />) : 
       (data.map((step) => (
         <div key={step.id}>
@@ -186,13 +185,11 @@ function MobileCard(props) {
                 }>
                   <ShareIcon />
                 </IconButton>
-                
               </CardActions>
             </Card>
     
     </div>
       )))}
-      {/* </div> */}
     {loadingMore && <Fragment><CardLoader /></Fragment>}
     </Fragment>
   );
