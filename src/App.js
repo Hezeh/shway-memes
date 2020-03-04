@@ -3,7 +3,7 @@ import { ThemeProvider} from '@material-ui/styles'
 import {createMuiTheme} from '@material-ui/core/styles';
 import './App.css';
 import * as actions from './store/actions/auth';
-import { BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter as Router, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
 import BaseRouter from './routes';
 import ReactGA from 'react-ga';

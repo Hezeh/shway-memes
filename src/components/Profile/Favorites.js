@@ -11,24 +11,36 @@ import {favoritesURL} from '../../constants'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {MobileLoader} from '../common'
+import CardActions from '@material-ui/core/CardActions';
+import IconButton from '@material-ui/core/IconButton'
+import ShareIcon from '@material-ui/icons/Share';
+import { CardLoader,  FollowUserButton, FavoriteAction, RepostAction} from '../common'
 // import { useRouteMatch, useParams } from 'react-router-dom'
+import ReactGA from 'react-ga';
 
 const useStyles = makeStyles(theme => ({
   card: {
-    flexGrow: 1,
-    minWidth: '350px',
-    maxHeight: '1000px',
-    margin: "10px",
-    transition: "0.1s",
+    maxWidth: '99%',
+    maxHeight: 650,
+    // transition: "0.01s",
+    margin: 'auto',
+    justify: "center",
     borderRadius: "30px",
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 20,
+    // marginBottom: 10,
     boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
     "&:hover": {
       boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
     }
   },
   media: {
-    height: '380px',  
-    width: '100%'
+    objectFit: 'scale-down',
+    height: 350,
+    display: 'block',
+    margin: 'auto',
+    borderRadius: '10px',
   },
   avatar: {
     backgroundColor: red[500],
@@ -116,12 +128,76 @@ function Favorites(props) {
                       className={classes.media}
                       image={step.photo}
                       title="Meme"
-                        />              
+                      component="img"
+                        />   
+                    
+                    <CardActions>
+                      <FavoriteAction token={props.token} step={step}/>
+                      <RepostAction  token={props.token} step={step}/>
+                      <IconButton aria-label="share" title="Share" onClick={
+                        () => {
+                          if (navigator.share) {
+                            navigator.share({
+                                title: 'Cool Meme',
+                                text: 'Check out this meme on Shwaymemes — it rocks!',
+                                url: `https://shwaymemes.com/upload/${step.id}`,
+                            })
+                              .then(() => {
+                                ReactGA.event({
+                                  category: 'User',
+                                  action: 'Shared link to meme'
+                                })}
+                              )
+                              .catch((error) => console.log('Error sharing', error));
+                          }
+                        }
+                      }>
+                        <ShareIcon />
+                      </IconButton>
+                    </CardActions>           
                   </Card>
                 </div>
                 )
             })
             )}
+            {/* { isLoading ? (<CardLoader />) : 
+            (data.map((step) => (
+              <div key={step.id} className={classes.div}>
+                  <Card className={classes.card}>
+                    <CardHeader
+                      action={<FollowUserButton token={props.token} user={props.currentUser} step={step}/>}
+                      title={
+                        <Link to={`@${step.author_name}`} className={classes.menuLink}>
+                          <Button size="small" color="secondary">
+                            {step.author_name}
+                          </Button>
+                        </Link>
+                      }
+                    />
+                    <CardMedia 
+                      className={classes.media} 
+                      image={step.photo} 
+                      title="Meme" 
+                      component="img"
+                      />
+
+                    <CardContent>
+                      <Typography variant="body2" color="textSecondary" component="p">
+                        {step.caption}
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
+                      <FavoriteAction token={props.token} step={step}/>
+                      <RepostAction  token={props.token} step={step}/>
+                      <IconButton aria-label="share" title="Share" onClick={shareMeme}>
+                        <ShareIcon />
+                      </IconButton>
+                      
+                    </CardActions>
+                  </Card>
+              </div>
+            )))} */}
+
             {loadingMore && <Fragment><MobileLoader /> <MobileLoader /> <MobileLoader /></Fragment>}
             </Grid>
         </Grid>

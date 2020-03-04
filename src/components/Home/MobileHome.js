@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   card: {
     maxWidth: '99%',
     maxHeight: 650,
-    transition: "0.01s",
+    // transition: "0.01s",
     margin: 'auto',
     justify: "center",
     borderRadius: "30px",
@@ -63,11 +63,13 @@ function MobileCard(props) {
   // const lastImageElementRef = useCallback(node => {
   //   if (isLoading) return
   //   if (observer.current) observer.current.disconnect()
-  //   observer.current = new IntersectionObserver(entries => {
-  //     if (entries[0].isIntersecting ) {
-  //       setPageNumber(prevPageNumber => prevPageNumber + 1)
-  //     }
-  //   })
+  //   observer.current = new IntersectionObserver(
+  //     // entries => {
+  //     // if (entries[0].isIntersecting ) {
+  //     //   setPageNumber(prevPageNumber => prevPageNumber + 1)
+  //     // }
+  //   // }
+  //   )
   //   if (node) observer.current.observe(node)
   // }, [isLoading, url])
 
@@ -158,9 +160,9 @@ function MobileCard(props) {
                 />
 
               <CardContent>
-                <Typography variant="body2" color="textSecondary" component="p">
+              {/* <Typography variant="body2" color="textSecondary" component="p">
                   {step.caption}
-                </Typography>
+                </Typography> */}
               </CardContent>
               <CardActions>
                 <FavoriteAction token={props.token} step={step}/>

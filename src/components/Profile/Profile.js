@@ -28,7 +28,11 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('md')]: {
       paddingTop: '60px',
     },
+    overflowX: 'hidden',
+    overflowY: 'scroll',
+    // overflow: 'scroll',
   },
+  
 }));
 
 function ProfileNavTabs(props) {

@@ -6,12 +6,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: black !important;
-  /* -ms-overflow-style: none; */
+  -ms-overflow-style: none;
   /* overflow: hidden; */
 
 
-  /* overflow: scroll;
-  overflow-x: hidden; */
+  overflow: scroll;
+  overflow-x: hidden;
 }
 
 code {
@@ -20,9 +20,9 @@ code {
 }
 
 
-/* body::-webkit-scrollbar{
+body::-webkit-scrollbar{
   display: none;
-} */
+}
 
 
 

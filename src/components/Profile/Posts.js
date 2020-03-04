@@ -8,34 +8,41 @@ import {uploadsURL} from '../../constants'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {MobileLoader} from '../common'
-// import CardHeader from '@material-ui/core/CardHeader';
-// import CardActions from '@material-ui/core/CardActions';
-// import IconButton from '@material-ui/core/IconButton'
-// import ShareIcon from '@material-ui/icons/Share';
-// import Button from '@material-ui/core/Button';
-// import {Link} from 'react-router-dom'
+import CardHeader from '@material-ui/core/CardHeader';
+import CardActions from '@material-ui/core/CardActions';
+import IconButton from '@material-ui/core/IconButton'
+import ShareIcon from '@material-ui/icons/Share';
+import Button from '@material-ui/core/Button';
+import {Link} from 'react-router-dom'
 import ReactGA from 'react-ga';
-// import { CardLoader,  FollowUserButton, FavoriteAction, RepostAction} from '../common'
-// import CardContent from '@material-ui/core/CardContent';
+import { CardLoader,  FollowUserButton, FavoriteAction, RepostAction} from '../common'
+import CardContent from '@material-ui/core/CardContent';
 // import Typography from '@material-ui/core/Typography';
 
 
 const useStyles = makeStyles(theme => ({
   card: {
-    flexGrow: 1,
-    minWidth: '350px',
-    maxHeight: '1000px',
-    margin: "10px",
-    transition: "0.1s",
+    maxWidth: '90%',
+    maxHeight: 650,
+    // transition: "0.01s",
+    margin: 'auto',
+    justify: "center",
     borderRadius: "30px",
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 20,
+    // marginBottom: 10,
     boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
     "&:hover": {
       boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
     }
   },
   media: {
-    height: '380px',  
-    width: '100%'
+    objectFit: 'scale-down',
+    height: 350,
+    display: 'block',
+    margin: 'auto',
+    borderRadius: '10px',
   },
   avatar: {
     backgroundColor: red[500],
@@ -108,23 +115,6 @@ function UserPosts(props) {
     }
     fetchData();
   }, []);
-
-  const shareMeme = () => {
-    if (navigator.share) {
-      navigator.share({
-          title: 'Cool Meme',
-          text: 'Check out this meme on Shwaymemes — it rocks!',
-          url: `https://shwaymemes.com/upload/${data.id}`,
-      })
-        .then(() => {
-          ReactGA.event({
-            category: 'User',
-            action: 'Shared link to meme'
-          })}
-        )
-        .catch((error) => console.log('Error sharing', error));
-    }
-  }
   
   return (
     <div>
@@ -140,7 +130,33 @@ function UserPosts(props) {
                       className={classes.media}
                       image={step.photo}
                       title="Meme"
-                        />              
+                      component="img"
+                        />   
+                    
+                    <CardActions>
+                      <FavoriteAction token={props.token} step={step}/>
+                      <RepostAction  token={props.token} step={step}/>
+                      <IconButton aria-label="share" title="Share" onClick={
+                        () => {
+                          if (navigator.share) {
+                            navigator.share({
+                                title: 'Cool Meme',
+                                text: 'Check out this meme on Shwaymemes — it rocks!',
+                                url: `https://shwaymemes.com/upload/${step.id}`,
+                            })
+                              .then(() => {
+                                ReactGA.event({
+                                  category: 'User',
+                                  action: 'Shared link to meme'
+                                })}
+                              )
+                              .catch((error) => console.log('Error sharing', error));
+                          }
+                        }
+                      }>
+                        <ShareIcon />
+                      </IconButton>
+                    </CardActions>           
                   </Card>
                 </div>
                 )
