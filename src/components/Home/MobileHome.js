@@ -16,6 +16,7 @@ import {connect} from 'react-redux'
 import { CardLoader,  FollowUserButton, FavoriteAction, RepostAction} from '../common'
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import { useInfiniteScroll } from 'react-infinite-scroll-hook'
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -57,11 +58,16 @@ function MobileCard(props) {
   const [url, setNextUrl] = useState(uploadsURL);
   const [loadingMore, setLoadingMore] = useState(false)
   const [data, setData] = useState([]);
+  const [hasNextPage, setHasNextPage] = useState();
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, {passive: true});
     return () => window.removeEventListener('scroll', handleScroll)
   })
+
+  // window.onscroll = () => {
+  //   handleScroll()
+  // }
 
   function handleScroll() {
     if (
@@ -84,6 +90,7 @@ function MobileCard(props) {
         .get(url)
         .then(response => {
           setNextUrl(response.data.next)
+          setHasNextPage(response.data.next);
           setData([...data, ...response.data.results])
           setLoadingMore(false)
         })
@@ -92,6 +99,13 @@ function MobileCard(props) {
           setLoadingMore(false)
         })
   }
+
+  // const infiniteRef = useInfiniteScroll({
+  //   loadingMore,
+  //   hasNextPage,
+  //   onLoadMore: fetchMoreData,
+  //   scrollContainer: 'window'
+  // });
 
   useEffect(() => {
     async function fetchData() {
@@ -118,10 +132,11 @@ function MobileCard(props) {
   }, []);
 
   return (
-    <Fragment>
+    <Fragment >
     <Typography color="secondary" variant="h6" align="center" noWrap>
                 ShwayMemes
     </Typography>
+     {/* <div ref={infiniteRef}> */}
       { isLoading ? (<CardLoader />) : 
       (data.map((step) => (
         <div key={step.id}>
@@ -177,10 +192,12 @@ function MobileCard(props) {
     
     </div>
       )))}
+      {/* </div> */}
     {loadingMore && <Fragment><CardLoader /></Fragment>}
     </Fragment>
   );
 }
+
 
 const mapStateToProps = state => {
   return {

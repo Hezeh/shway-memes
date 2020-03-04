@@ -60,7 +60,7 @@ function MainCard(props) {
   const [loadingMore, setLoadingMore] = useState(false)
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, {passive: true});
     return () => window.removeEventListener('scroll', handleScroll)
   })
 
