@@ -30,7 +30,6 @@ const useStyles = makeStyles(theme => ({
     },
     overflowX: 'hidden',
     overflowY: 'scroll',
-    // overflow: 'scroll',
   },
   
 }));

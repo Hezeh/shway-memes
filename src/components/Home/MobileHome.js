@@ -14,21 +14,25 @@ import {uploadsURL} from '../../constants';
 import axios from 'axios'
 import {connect} from 'react-redux'
 import { CardLoader,  FollowUserButton, FavoriteAction, RepostAction} from '../common'
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
+// import CardContent from '@material-ui/core/CardContent';
+// import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(theme => ({
+  // root: {
+  //   flexGrow: 1,
+  //   margin: 1,
+  //   overflowX: 'scroll',
+  //   // overflowY: 'scroll',
+  // },
   card: {
     maxWidth: '99%',
     maxHeight: 650,
-    // transition: "0.01s",
     margin: 'auto',
     justify: "center",
     borderRadius: "30px",
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 20,
-    // marginBottom: 10,
+    marginTop: 10,
     boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
     "&:hover": {
       boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
@@ -58,20 +62,6 @@ function MobileCard(props) {
   const [url, setNextUrl] = useState(uploadsURL);
   const [loadingMore, setLoadingMore] = useState(false)
   const [data, setData] = useState([]);
-
-  // const observer = useRef()
-  // const lastImageElementRef = useCallback(node => {
-  //   if (isLoading) return
-  //   if (observer.current) observer.current.disconnect()
-  //   observer.current = new IntersectionObserver(
-  //     // entries => {
-  //     // if (entries[0].isIntersecting ) {
-  //     //   setPageNumber(prevPageNumber => prevPageNumber + 1)
-  //     // }
-  //   // }
-  //   )
-  //   if (node) observer.current.observe(node)
-  // }, [isLoading, url])
 
 
   useEffect(() => {
@@ -135,14 +125,15 @@ function MobileCard(props) {
 
   return (
     <Fragment >
-    <Typography color="secondary" variant="h6" align="center" noWrap>
+    {/* <Typography color="secondary" variant="h6" align="center" noWrap>
                 ShwayMemes
-    </Typography>
+    </Typography> */}
+    {/* <div className={classes.root}> */}
       { isLoading ? (<CardLoader />) : 
       (data.map((step) => (
         <div key={step.id}>
             <Card className={classes.card}>
-              <CardHeader
+              {/* <CardHeader
                 action={<FollowUserButton token={props.token} user={props.currentUser} step={step}/>}
                 title={
                   <Link to={`@${step.author_name}`} className={classes.menuLink}>
@@ -151,19 +142,13 @@ function MobileCard(props) {
                     </Button>
                   </Link>
                 }
-              />
+              /> */}
               <CardMedia 
                 className={classes.img} 
                 image={step.photo} 
                 title="Meme" 
                 component="img"
                 />
-
-              <CardContent>
-              {/* <Typography variant="body2" color="textSecondary" component="p">
-                  {step.caption}
-                </Typography> */}
-              </CardContent>
               <CardActions>
                 <FavoriteAction token={props.token} step={step}/>
                 <RepostAction  token={props.token} step={step}/>
@@ -193,6 +178,7 @@ function MobileCard(props) {
     </div>
       )))}
     {loadingMore && <Fragment><CardLoader /></Fragment>}
+    {/* </div> */}
     </Fragment>
   );
 }
