@@ -14,6 +14,7 @@ import {uploadsURL} from '../../constants';
 import axios from 'axios'
 import {connect} from 'react-redux'
 import { CardLoader,  FollowUserButton, FavoriteAction, RepostAction} from '../common'
+import {MobileLoader} from '../common'
 // import CardContent from '@material-ui/core/CardContent';
 // import Typography from '@material-ui/core/Typography';
 
@@ -69,14 +70,20 @@ function MobileCard(props) {
     return () => window.removeEventListener('scroll', handleScroll)
   })
 
+  // function handleScroll() {
+  //   if (
+  //     (document.documentElement.scrollHeight - document.documentElement.scrollTop) ===
+  //     (document.documentElement.clientHeight)
+  //   ) {
+  //     fetchMoreData()
+  //   }
+  // }
+
   function handleScroll() {
-    if (
-      (document.documentElement.scrollHeight - document.documentElement.scrollTop) ===
-      (document.documentElement.clientHeight)
-    ) {
-      fetchMoreData()
-    }
+    if ( window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || isLoading) return;
+    fetchMoreData()
   }
+
 
   async function fetchMoreData() {
     setLoadingMore(true)
@@ -133,7 +140,7 @@ function MobileCard(props) {
       (data.map((step) => (
         <div key={step.id}>
             <Card className={classes.card}>
-              {/* <CardHeader
+              <CardHeader
                 action={<FollowUserButton token={props.token} user={props.currentUser} step={step}/>}
                 title={
                   <Link to={`@${step.author_name}`} className={classes.menuLink}>
@@ -142,7 +149,7 @@ function MobileCard(props) {
                     </Button>
                   </Link>
                 }
-              /> */}
+              />
               <CardMedia 
                 className={classes.img} 
                 image={step.photo} 
@@ -177,7 +184,8 @@ function MobileCard(props) {
     
     </div>
       )))}
-    {loadingMore && <Fragment><CardLoader /></Fragment>}
+    {/* {loadingMore && <Fragment><CardLoader /> <CardLoader /></Fragment>} */}
+    {loadingMore && <Fragment><MobileLoader /> <MobileLoader /> <MobileLoader /> </Fragment>}
     {/* </div> */}
     </Fragment>
   );

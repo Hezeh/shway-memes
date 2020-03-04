@@ -24,14 +24,12 @@ const useStyles = makeStyles(theme => ({
   card: {
     maxWidth: '90%',
     maxHeight: 650,
-    // transition: "0.01s",
     margin: 'auto',
     justify: "center",
     borderRadius: "30px",
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 20,
-    // marginBottom: 10,
     boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
     "&:hover": {
       boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
@@ -162,44 +160,6 @@ function UserPosts(props) {
                 )
             })
             )}
-            {/* { isLoading ? (<CardLoader />) : 
-            (data.map((step) => (
-              <div key={step.id} className={classes.div}>
-                  <Card className={classes.card}>
-                    <CardHeader
-                      action={<FollowUserButton token={props.token} user={props.currentUser} step={step}/>}
-                      title={
-                        <Link to={`@${step.author_name}`} className={classes.menuLink}>
-                          <Button size="small" color="secondary">
-                            {step.author_name}
-                          </Button>
-                        </Link>
-                      }
-                    />
-                    <CardMedia 
-                      className={classes.media} 
-                      image={step.photo} 
-                      title="Meme" 
-                      component="img"
-                      />
-
-                    <CardContent>
-                      <Typography variant="body2" color="textSecondary" component="p">
-                        {step.caption}
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <FavoriteAction token={props.token} step={step}/>
-                      <RepostAction  token={props.token} step={step}/>
-                      <IconButton aria-label="share" title="Share" onClick={shareMeme}>
-                        <ShareIcon />
-                      </IconButton>
-                      
-                    </CardActions>
-                  </Card>
-              </div>
-            )))} */}
-
             {loadingMore && <Fragment><MobileLoader /> <MobileLoader /> <MobileLoader /></Fragment>}
             </Grid>
         </Grid>
