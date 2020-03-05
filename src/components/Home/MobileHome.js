@@ -27,13 +27,13 @@ const useStyles = makeStyles(theme => ({
   },
   card: {
     maxWidth: '90%',
-    maxHeight: 1000,
+    maxHeight: 650,
     margin: 'auto',
     justify: "center",
     borderRadius: "30px",
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 10,
+    marginTop: 20,
     boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
     "&:hover": {
       boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
@@ -44,17 +44,17 @@ const useStyles = makeStyles(theme => ({
   },
   media: {
     objectFit: 'scale-down',
-    // height: 350,
+    height: 600,
     display: 'block',
     margin: 'auto',
     borderRadius: '10px',
-    [theme.breakpoints.up('md')]: {
-      objectFit: 'scale-down',
-      // height: '500px',
-      display: 'block',
-      margin: 'auto',
-      borderRadius: '10px',
-    },
+    // [theme.breakpoints.up('md')]: {
+    //   objectFit: 'scale-down',
+    //   // height: '500px',
+    //   display: 'block',
+    //   margin: 'auto',
+    //   borderRadius: '10px',
+    // },
   },
   menuLink: {
     textDecoration: 'none',
@@ -129,8 +129,8 @@ function MobileCard(props) {
 
   return (
     <div>
-      <Grid container={true} className={classes.root}>
-        <Grid item={true} xs={12}>
+      <Grid container className={classes.root} spacing={2} >
+        <Grid item xs={12}>
           <Grid container spacing={2}>
             { isLoading ? (<Fragment><CardLoader /></Fragment>) : (
               data.map((step) => {

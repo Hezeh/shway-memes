@@ -89,13 +89,13 @@ export const FollowUserButton = (props) => {
           "Content-Type": "application/json",
           Authorization: `Token ${props.token}`
         }
-        axios.delete(`${followURL}${props.step.author}/follow`)
+        axios.delete(`${followURL}${props.step.author_name}/follow`)
     } else {
       axios.defaults.headers = {
           "Content-Type": "application/json",
           Authorization: `Token ${props.token}`
         }
-        axios.post(`${followURL}${props.step.author}/follow`)
+        axios.post(`${followURL}${props.step.author_name}/follow`)
     }
     setButtonState(prev => !prev);
   }

@@ -20,7 +20,7 @@ const Aboutus = () => {
                 heading="What do we do"      
             />
             <About 
-                paragraph="Hezekiah: Founder and CEO"
+                paragraph="Hezekiah: Founder"
                 heading="Key People"      
             />
         </Fragment>

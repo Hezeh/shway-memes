@@ -6,15 +6,15 @@ import Tab from '@material-ui/core/Tab';
 import { 
     Switch,
     Route,
-    // Link,
+    Link,
     useRouteMatch,
     NavLink
 } from 'react-router-dom';
 // import PersonPinIcon from '@material-ui/icons/PersonPinCircle'
 import ArtTrackIcon from '@material-ui/icons/ArtTrack';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-// import PeopleIcon from '@material-ui/icons/People';
-// import Followers from './Followers'
+import PeopleIcon from '@material-ui/icons/People';
+import Followers from './Followers'
 import Posts from './Posts'
 import Favorites from './Favorites'
 import Reposts from './Reposts'
