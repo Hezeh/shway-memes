@@ -107,7 +107,8 @@ function AddGroup(props) {
     
     await axios.post(groupsURL, {
         name: values.groupname,
-        is_public: values.grouptype
+        is_public: values.grouptype,
+        // admin: props.admin
       })
         .then(res => {
           if (res.status === 201) {
@@ -177,7 +178,8 @@ function AddGroup(props) {
 
 const mapStateToProps = state => {
   return {
-    token: state.auth.token
+    token: state.auth.token,
+    admin: state.auth.author
   };
 };
 

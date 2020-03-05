@@ -33,39 +33,6 @@ export const useStyles = makeStyles(theme => ({
     }
 }));
 
-// export const GroupJoinButton = (props) => {
-//   const classes = useStyles();
-//   const [buttonState, setButtonState] = useState(props.member);
-
-//   const handleClick = () => {
-//     if ( props.member === true) {
-//         axios.defaults.headers = {
-//           "Content-Type": "application/json",
-//           Authorization: `Token ${props.token}`
-//         }
-//         axios.delete(`${groupJoinURL}${props.id}/join`)
-//     } else {
-//       axios.defaults.headers = {
-//           "Content-Type": "application/json",
-//           Authorization: `Token ${props.token}`
-//         }
-//         axios.post(`${groupJoinURL}${props.id}/join`)
-//     }
-//     setButtonState(prev => !prev);
-//   }
-
-//   return (
-//       <Button
-//       variant={buttonState === true ? 'outlined' : 'contained'}
-//       color="secondary"
-//       className={classes.button}
-//       onClick={handleClick}
-//      >
-//       { buttonState === true ? 'Leave' : 'Join'}
-//     </Button>
-//   )
-// }
-
 function GroupUpload(props) {
     const classes = useStyles();
     const [file, setFile] = useState('');
@@ -80,8 +47,6 @@ function GroupUpload(props) {
     const [data, setData] = useState([]);
     const [url] = useState(`${groupsURL}${props.groupid}`);
     const [buttonState, setButtonState] = useState(false);
-
-    // console.log(buttonState)
 
     const handleClick = () => {
       if ( data.member === true) {
@@ -183,10 +148,7 @@ function GroupUpload(props) {
 
     return (
         <Fragment>
-          <div>
-    {/* <h1>{data.name}</h1> */}
-          </div>
-          {isLoading ? 'Loading' :  <Button
+          {(isLoading) ? <div></div>  :  <Button
             variant={buttonState === true ? 'outlined' : 'contained'}
             color="secondary"
             className={classes.button}
@@ -222,7 +184,7 @@ function GroupUpload(props) {
             <DialogTitle id="form-dialog-title">Group Upload </DialogTitle>
             <DialogContent>
               <div>{file && <img  height={400} src={preview} /> }</div>
-              <TextField
+              {/* <TextField
                 autoFocus
                 margin="dense"
                 id="caption"
@@ -231,7 +193,7 @@ function GroupUpload(props) {
                 variant="outlined"
                 color="secondary"
                 onChange={handleCaptionChange}
-              />
+              /> */}
             </DialogContent>
             <DialogActions>
               <Button onClick={grouphandleClose}  variant="contained" color="secondary">

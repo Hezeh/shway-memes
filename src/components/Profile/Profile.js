@@ -6,7 +6,7 @@ import Tab from '@material-ui/core/Tab';
 import { 
     Switch,
     Route,
-    Link,
+    // Link,
     useRouteMatch,
     NavLink
 } from 'react-router-dom';
@@ -31,7 +31,6 @@ const useStyles = makeStyles(theme => ({
     overflowX: 'hidden',
     overflowY: 'scroll',
   },
-  
 }));
 
 function ProfileNavTabs(props) {

@@ -13,6 +13,7 @@ export const groupsURL = `${APIEndpoint}/groups/list/`
 export const trendingGroupsURL = `${APIEndpoint}/trending-groups`
 export const groupPostsURL = `${APIEndpoint}/groups/posts/`
 export const groupJoinURL  = `${APIEndpoint}/groups/`
+export const groupMembers = `${APIEndpoint}/groups/members`
 
 export const tagsURL = `${APIEndpoint}/tags/`
 export const trendingTagsURL = `${APIEndpoint}/trending-hashtags`

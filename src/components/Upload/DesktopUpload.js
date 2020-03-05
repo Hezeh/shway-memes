@@ -36,6 +36,7 @@ function UploadFab(props) {
     // const [uploadPercentage, setUploadPercentage] = useState(0);
     const [preview, setPreview] = useState()
     const [caption, setCaption] = useState('')
+    const [submiting, setSubmiting] = useState(false)
 
     // create a preview as a side effect, whenever selected file is changed
     useEffect(() => {
@@ -73,7 +74,8 @@ function UploadFab(props) {
 
 
     const handleSubmit = async () => {
-      console.log('Called Submit Component')
+      // console.log('Called Submit Component')
+      setSubmiting(true)
       const formData = new FormData();
       formData.append('photo', file);
       formData.append('author', props.author);
@@ -89,6 +91,7 @@ function UploadFab(props) {
           .then(res => {
             if (res.status === 201) {
               handleClose()
+              setSubmiting(false)
             }
           })
     }
@@ -138,7 +141,7 @@ function UploadFab(props) {
               <Button onClick={handleClose}  variant="contained" color="secondary">
                 Cancel
               </Button>
-              <Button onClick={handleSubmit} variant="contained" color="secondary">
+              <Button onClick={handleSubmit} disabled={submiting === true} variant="contained" color="secondary">
                 Submit
               </Button>
             </DialogActions>

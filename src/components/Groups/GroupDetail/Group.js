@@ -58,7 +58,7 @@ function GroupsNavTabs(props) {
               >
                 <Tab icon={<PhotoLibraryIcon />} label="Group Posts" to={`${match.url}`} component={Link}/>
                 <Tab icon={<CallToActionIcon />} label="Join &#38; Upload" to={`${match.url}/upload`} component={Link}/>
-                <Tab icon={<PeopleOutlineIcon />} label="Members" to={`${match.url}/members`} component={Link}/>
+                {/* <Tab icon={<PeopleOutlineIcon />} label="Members" to={`${match.url}/members`} component={Link}/> */}
               </Tabs>
             </AppBar>
             <Switch>
@@ -66,9 +66,9 @@ function GroupsNavTabs(props) {
               <Route path={`${match.url}/upload`}>
                 <GroupUpload groupid={match.params.id}/>
               </Route>
-              <Route path={`${match.url}/members`}>
-                <Members />
-              </Route>
+              {/* <Route path={`${match.url}/members`}>
+                <Members id={match.params.id} />
+              </Route> */}
               <Route path={`${match.url}`}>
                 <GroupsDetail id={match.params.id}/>
               </Route>             

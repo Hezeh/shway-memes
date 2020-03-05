@@ -15,19 +15,19 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import { CardLoader,  FollowUserButton, FavoriteAction, RepostAction} from '../common'
 import {MobileLoader} from '../common'
-// import CardContent from '@material-ui/core/CardContent';
-// import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
-  // root: {
-  //   flexGrow: 1,
-  //   margin: 1,
-  //   overflowX: 'scroll',
-  //   // overflowY: 'scroll',
-  // },
+  root: {
+    flexGrow: 1,
+    // margin: 1,
+    maxwidth: '99%',
+    overflowX: 'hidden',
+    overflowY: 'scroll',
+  },
   card: {
-    maxWidth: '99%',
-    maxHeight: 650,
+    maxWidth: '90%',
+    maxHeight: 1000,
     margin: 'auto',
     justify: "center",
     borderRadius: "30px",
@@ -42,12 +42,19 @@ const useStyles = makeStyles(theme => ({
   avatar: {
     backgroundColor: red[500],
   },
-  img: {
+  media: {
     objectFit: 'scale-down',
-    height: 350,
+    // height: 350,
     display: 'block',
     margin: 'auto',
     borderRadius: '10px',
+    [theme.breakpoints.up('md')]: {
+      objectFit: 'scale-down',
+      // height: '500px',
+      display: 'block',
+      margin: 'auto',
+      borderRadius: '10px',
+    },
   },
   menuLink: {
     textDecoration: 'none',
@@ -70,20 +77,10 @@ function MobileCard(props) {
     return () => window.removeEventListener('scroll', handleScroll)
   })
 
-  // function handleScroll() {
-  //   if (
-  //     (document.documentElement.scrollHeight - document.documentElement.scrollTop) ===
-  //     (document.documentElement.clientHeight)
-  //   ) {
-  //     fetchMoreData()
-  //   }
-  // }
-
   function handleScroll() {
     if ( window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || isLoading) return;
     fetchMoreData()
   }
-
 
   async function fetchMoreData() {
     setLoadingMore(true)
@@ -131,63 +128,65 @@ function MobileCard(props) {
   }, []);
 
   return (
-    <Fragment >
-    {/* <Typography color="secondary" variant="h6" align="center" noWrap>
-                ShwayMemes
-    </Typography> */}
-    {/* <div className={classes.root}> */}
-      { isLoading ? (<CardLoader />) : 
-      (data.map((step) => (
-        <div key={step.id}>
-            <Card className={classes.card}>
-              <CardHeader
-                action={<FollowUserButton token={props.token} user={props.currentUser} step={step}/>}
-                title={
-                  <Link to={`@${step.author_name}`} className={classes.menuLink}>
-                    <Button size="small" color="secondary">
-                      {step.author_name}
-                    </Button>
-                  </Link>
-                }
-              />
-              <CardMedia 
-                className={classes.img} 
-                image={step.photo} 
-                title="Meme" 
-                component="img"
-                />
-              <CardActions>
-                <FavoriteAction token={props.token} step={step}/>
-                <RepostAction  token={props.token} step={step}/>
-                <IconButton aria-label="share" title="Share" onClick={
-                  () => {
-                    if (navigator.share) {
-                      navigator.share({
-                          title: 'Cool Meme',
-                          text: 'Check out this meme on Shwaymemes — it rocks!',
-                          url: `https://shwaymemes.com/upload/${step.id}`,
-                      })
-                        .then(() => {
-                          ReactGA.event({
-                            category: 'User',
-                            action: 'Shared link to meme'
-                          })}
-                        )
-                        .catch((error) => console.log('Error sharing', error));
+    <div>
+      <Grid container={true} className={classes.root}>
+        <Grid item={true} xs={12}>
+          <Grid container spacing={2}>
+            { isLoading ? (<Fragment><CardLoader /></Fragment>) : (
+              data.map((step) => {
+                return (
+                  <div key={step.id} className={classes.div}>
+                  <Card className={classes.card}>  
+                  <CardHeader
+                    action={<FollowUserButton token={props.token} user={props.currentUser} step={step}/>}
+                    title={
+                      <Link to={`@${step.author_name}`} className={classes.menuLink}>
+                        <Button size="small" color="secondary">
+                          {step.author_name}
+                        </Button>
+                      </Link>
                     }
-                  }
-                }>
-                  <ShareIcon />
-                </IconButton>
-              </CardActions>
-            </Card>
-    
+                  />
+                    <CardMedia
+                      className={classes.media}
+                      image={step.photo}
+                      title="Meme"
+                      component="img"
+                        />   
+                    <CardActions>
+                      <FavoriteAction token={props.token} step={step}/>
+                      <RepostAction  token={props.token} step={step}/>
+                      <IconButton aria-label="share" title="Share" onClick={
+                        () => {
+                          if (navigator.share) {
+                            navigator.share({
+                                title: 'Cool Meme',
+                                text: 'Check out this meme on Shwaymemes — it rocks!',
+                                url: `https://shwaymemes.com/upload/${step.id}`,
+                            })
+                              .then(() => {
+                                ReactGA.event({
+                                  category: 'User',
+                                  action: 'Shared link to meme'
+                                })}
+                              )
+                              .catch((error) => console.log('Error sharing', error));
+                          }
+                        }
+                      }>
+                        <ShareIcon />
+                      </IconButton>
+                    </CardActions>           
+                  </Card>
+                </div>
+                )
+            })
+            )}
+            {loadingMore && <Fragment><CardLoader /></Fragment>}
+            </Grid>
+        </Grid>
+      </Grid>
     </div>
-      )))}
-    {/* {loadingMore && <Fragment><CardLoader /> <CardLoader /></Fragment>} */}
-    {loadingMore && <Fragment><MobileLoader /> <MobileLoader /> <MobileLoader /> </Fragment>}
-    {/* </div> */}
-    </Fragment>
   );
 }
 

@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
   },
   media: {
     objectFit: 'scale-down',
-    height: 350,
+    height: 600,
     display: 'block',
     margin: 'auto',
     borderRadius: '10px',

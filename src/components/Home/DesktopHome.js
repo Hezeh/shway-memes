@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     minWidth: '630px',
     maxHeight: '650px',
     margin: "10px",
-    transition: "0.1s",
+    // transition: "0.1s",
     borderRadius: "30px",
     boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
     "&:hover": {
@@ -68,27 +68,6 @@ function MainCard(props) {
     if ( window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || isLoading) return;
     fetchMoreData()
   }
-
-  // async function fetchData() {
-  //   setIsLoading(true)
-  //   axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-  //   axios.defaults.xsrfCookieName = "csrftoken";
-  //   axios.defaults.headers = {
-  //     "Content-Type": "application/json",
-  //     Authorization: `Token ${props.token}`,
-  //   };
-  //   axios
-  //       .get(url)
-  //       .then(response => {
-  //         setIsLoading(false)
-  //         setNextUrl(response.data.next)
-  //         setData(response.data.results)
-  //       })
-  //       .catch(err => {
-  //         console.log(err)
-  //         setIsLoading(false)
-  //       })
-  // }
 
   async function fetchMoreData() {
     setLoadingMore(true)

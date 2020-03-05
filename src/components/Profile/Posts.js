@@ -8,28 +8,24 @@ import {uploadsURL} from '../../constants'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {MobileLoader} from '../common'
-import CardHeader from '@material-ui/core/CardHeader';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton'
 import ShareIcon from '@material-ui/icons/Share';
-import Button from '@material-ui/core/Button';
-import {Link} from 'react-router-dom'
 import ReactGA from 'react-ga';
 import { CardLoader,  FollowUserButton, FavoriteAction, RepostAction} from '../common'
-import CardContent from '@material-ui/core/CardContent';
-// import Typography from '@material-ui/core/Typography';
-
 
 const useStyles = makeStyles(theme => ({
   card: {
     maxWidth: '90%',
     maxHeight: 650,
+    // transition: "0.01s",
     margin: 'auto',
     justify: "center",
     borderRadius: "30px",
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 20,
+    // marginBottom: 10,
     boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
     "&:hover": {
       boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
@@ -37,7 +33,7 @@ const useStyles = makeStyles(theme => ({
   },
   media: {
     objectFit: 'scale-down',
-    height: 350,
+    height: 600,
     display: 'block',
     margin: 'auto',
     borderRadius: '10px',

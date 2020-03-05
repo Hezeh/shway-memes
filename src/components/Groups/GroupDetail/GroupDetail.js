@@ -40,8 +40,6 @@ const useStyles = makeStyles(theme => ({
 
 function GroupPosts(props) {
   const classes = useStyles()
-  // let match = useRouteMatch();
-
   const [ isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState([]);
   const [url] = useState(`${groupPostsURL}?group=${props.id}`);

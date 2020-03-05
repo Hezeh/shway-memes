@@ -10,7 +10,6 @@ import Button from '@material-ui/core/Button';
 import RepeatIcon from '@material-ui/icons/Repeat';
 import IconButton from '@material-ui/core/IconButton'
 import axios from 'axios'
-// import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import { uploadsURL, followURL, groupJoinURL } from '../constants'
 
 const useStyles = makeStyles(theme => ({
@@ -19,7 +18,6 @@ const useStyles = makeStyles(theme => ({
     minWidth: '700px',
     maxHeight: '1000px',
     margin: "10px",
-    transition: "0.1s",
     borderRadius: "30px",
     boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
     "&:hover": {
@@ -54,11 +52,9 @@ const useStyles = makeStyles(theme => ({
     display: 'block',
   },
   cardloader: {
-    maxWidth: '99%',
-    // minWidth: '650px',
+    minWidth: '380px',
     maxHeight: 800, 
-    transition: "0.01s",
-    margin: 'auto',
+    margin: '10px',
     justify: "center",
     borderRadius: "30px",
     alignItems: 'center',
@@ -71,7 +67,7 @@ const useStyles = makeStyles(theme => ({
   },
   cardimg: {
     objectFit: 'scale-down',
-    height: 450,
+    height: 500,
     display: 'block',
     overflow: 'hidden',
     maxWidth: '95%',
@@ -122,39 +118,6 @@ export const FollowUserButton = (props) => {
   )
 }
 
-// export const GroupJoinButton = (props) => {
-//   const classes = useStyles();
-//   const [buttonState, setButtonState] = useState(props.member);
-
-//   const handleClick = () => {
-//     if ( props.member === true) {
-//         axios.defaults.headers = {
-//           "Content-Type": "application/json",
-//           Authorization: `Token ${props.token}`
-//         }
-//         axios.delete(`${groupJoinURL}${props.id}/join`)
-//     } else {
-//       axios.defaults.headers = {
-//           "Content-Type": "application/json",
-//           Authorization: `Token ${props.token}`
-//         }
-//         axios.post(`${groupJoinURL}${props.id}/join`)
-//     }
-//     setButtonState(prev => !prev);
-//   }
-
-//   return (
-//       <Button
-//       variant={buttonState === true ? 'outlined' : 'contained'}
-//       color="secondary"
-//       className={classes.button}
-//       onClick={handleClick}
-//      >
-//       { buttonState === true ? 'Leave' : 'Join'}
-//     </Button>
-//   )
-// }
-
 export const Loader = () => {
     const classes = useStyles();
     return (
@@ -173,8 +136,6 @@ export const Loader = () => {
     </div>
     )
 }
-
-// I really have no idea what is the diff between Loader and CardLoader 
 
 export const CardLoader = () => {
   const classes = useStyles();
