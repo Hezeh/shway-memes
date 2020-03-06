@@ -129,10 +129,10 @@ function MobileCard(props) {
 
   return (
     <div>
-      <Grid container={true} className={classes.root} >
-        <Grid item={true} xs={12}>
-          <Grid container spacing={2}>
-            { isLoading ? (<Fragment><CardLoader /></Fragment>) : (
+      <Grid container className={classes.root} >
+        <Grid item>
+          {/* <Grid container> */}
+            { isLoading ? (<Fragment><MobileLoader /><MobileLoader /><MobileLoader /></Fragment>) : (
               data.map((step) => {
                 return (
                   <div key={step.id} className={classes.div}>
@@ -182,9 +182,9 @@ function MobileCard(props) {
                 )
             })
             )}
-            {loadingMore && <Fragment><CardLoader /></Fragment>}
+            {loadingMore && <Fragment><MobileLoader /><MobileLoader /><MobileLoader /></Fragment>}
             </Grid>
-        </Grid>
+        {/* </Grid> */}
       </Grid>
     </div>
   );

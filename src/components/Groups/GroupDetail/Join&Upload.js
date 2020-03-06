@@ -45,25 +45,25 @@ function GroupUpload(props) {
 
     const [ isLoading, setIsLoading] = useState(false)
     const [data, setData] = useState([]);
-    const [url] = useState(`${groupsURL}${props.groupid}`);
+    const [url] = useState(`${groupsURL}${props.groupid}/`);
     const [buttonState, setButtonState] = useState(false);
 
-    const handleClick = () => {
-      if ( data.member === true) {
-          axios.defaults.headers = {
-            "Content-Type": "application/json",
-            Authorization: `Token ${props.token}`
-          }
-          axios.delete(`${groupJoinURL}${data.id}/join`)
-      } else {
-        axios.defaults.headers = {
-            "Content-Type": "application/json",
-            Authorization: `Token ${props.token}`
-          }
-          axios.post(`${groupJoinURL}${data.id}/join`)
-      }
-      setButtonState(prev => !prev);
-    }
+    // const handleClick = () => {
+    //   if ( data.member === true) {
+    //       axios.defaults.headers = {
+    //         "Content-Type": "application/json",
+    //         Authorization: `Token ${props.token}`
+    //       }
+    //       axios.delete(`${groupJoinURL}${data.id}/join`)
+    //   } else {
+    //     axios.defaults.headers = {
+    //         "Content-Type": "application/json",
+    //         Authorization: `Token ${props.token}`
+    //       }
+    //       axios.post(`${groupJoinURL}${data.id}/join`)
+    //   }
+    //   setButtonState(prev => !prev);
+    // }
   
     async function fetchData() {
         setIsLoading(true)
@@ -146,13 +146,29 @@ function GroupUpload(props) {
           })
     }
 
-    return (
+    return ( 
         <Fragment>
-          {(isLoading) ? <div></div>  :  <Button
+
+          {(isLoading) ? <div></div> :  <Button
             variant={buttonState === true ? 'outlined' : 'contained'}
             color="secondary"
             className={classes.button}
-            onClick={handleClick}
+            onClick={() => {
+              if ( buttonState === true) {
+                  axios.defaults.headers = {
+                    "Content-Type": "application/json",
+                    Authorization: `Token ${props.token}`
+                  }
+                  axios.delete(`${groupJoinURL}${data.id}/join`)
+              } else {
+                axios.defaults.headers = {
+                    "Content-Type": "application/json",
+                    Authorization: `Token ${props.token}`
+                  }
+                  axios.post(`${groupJoinURL}${data.id}/join`)
+              }
+              setButtonState(prev => !prev);
+            }}
             size="large"
           >
             { buttonState === true ? 'Leave' : 'Join'}
@@ -166,6 +182,7 @@ function GroupUpload(props) {
               onChange={grouphandleOpen}
             />
           <label htmlFor="contained-button-group">
+          {(isLoading) ? <div></div> : 
             <Fab 
               color="secondary" 
               aria-label="add" 
@@ -174,11 +191,12 @@ function GroupUpload(props) {
               type="submit"
               component="span"
               variant="extended"
-              disabled={data.member === false}
+              disabled={buttonState === false}
               >
               <AddIcon />
               Upload
             </Fab>
+          }
           </label>
           <Dialog open={open} onClose={grouphandleClose} aria-labelledby="form-dialog-title">
             <DialogTitle id="form-dialog-title">Group Upload </DialogTitle>
