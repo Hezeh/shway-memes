@@ -88,7 +88,7 @@ export  function BottomAppBar(props) {
   return (
     <Fragment>
       <CssBaseline />
-      <HideOnScroll {...props}>
+      {/* <HideOnScroll {...props}> */}
       <AppBar position="fixed" color="default" className={classes.appBar}>
         <Toolbar>
 
@@ -134,7 +134,7 @@ export  function BottomAppBar(props) {
           </NavLink>
         </Toolbar>
       </AppBar>
-      </HideOnScroll>
+      {/* </HideOnScroll> */}
     </Fragment>
   );
 }

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Fragment} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -7,7 +7,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useForm } from '../../useForm'
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -15,7 +15,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import axios from 'axios'
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
+// import {Redirect} from 'react-router-dom'
 import {groupsURL} from '../../constants'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -83,17 +83,17 @@ function AddGroup(props) {
 
   // }
 
-  // let history = useHistory()
+  let history = useHistory()
   
-  const successMessage = () => {
-      return (
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="success">
-            Group Created Successfully
-          </Alert>
-        </Snackbar>
-      )
-  }
+  // const successMessage = () => {
+  //     return (
+  //       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+  //         <Alert onClose={handleClose} severity="success">
+  //           Group Created Successfully
+  //         </Alert>
+  //       </Snackbar>
+  //     )
+  // }
   
 
   const handleSubmit = async (e) => {
@@ -108,12 +108,10 @@ function AddGroup(props) {
     await axios.post(groupsURL, {
         name: values.groupname,
         is_public: values.grouptype,
-        // admin: props.admin
       })
         .then(res => {
           if (res.status === 201) {
-            return successMessage
-            // history.push(`/groups/mygroups`);
+            history.push(`/group/${res.data.id}`);
           }
         })
   }
