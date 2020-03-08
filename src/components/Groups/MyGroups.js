@@ -36,7 +36,7 @@ function MyGroups(props) {
   const classes = useStyles();
   const [ isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState([]);
-  const [url] = useState(userGroups);
+  const [url] = useState(`${userGroups}?member=${props.username}`);
 
   async function fetchData() {
     setIsLoading(true)
@@ -101,7 +101,8 @@ function MyGroups(props) {
 
 const mapStateToProps = state => {
   return {
-    token: state.auth.token
+    token: state.auth.token,
+    username: state.auth.username
   };
 };
 
