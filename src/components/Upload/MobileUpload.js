@@ -99,6 +99,7 @@ function UploadFab(props) {
           .then(res => {
             if (res.status === 201) {
               handleClose()
+              console.log(res)
               setSubmiting(false)
             }
           })

@@ -38,7 +38,7 @@ function GroupsNavTabs(props) {
   let match = useRouteMatch();
 
   if (!props.token) {
-    return <Redirect to="/register" />;
+    return <Redirect to="/login" />;
   }
   return (
     <div className={classes.root}>
@@ -61,7 +61,6 @@ function GroupsNavTabs(props) {
               </Tabs>
             </AppBar>
             <Switch>
-              
               <Route path={`${match.url}/addgroup`}>
                 <CreateGroup />
               </Route>

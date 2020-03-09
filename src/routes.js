@@ -39,7 +39,8 @@ export default function BaseRouter() {
             }>
             <AppBar />
               <Switch>
-                <Route exact path="/" component={Home} />
+                <Route path="/home" component={Home} />
+                {/* <Route exact path="/following" component={Home} /> */}
                 <Route path="/trending" component={Trending} />
                 <Route path="/aboutus" component={Aboutus}/>
                 {/* <Route path="/search" component={Search}/> */}
@@ -51,6 +52,7 @@ export default function BaseRouter() {
                 <Route exact path="/upload/:id" component={UploadDetail}/>
                 {/* <Route exact path="/resetpassword" component={ResetPassword}/> */}
                 <Redirect from="/logout" to="/login" />
+                <Redirect from="/" to="/home" />
                 <Route path="*" component={Error_404}/>
               </Switch>
             </Suspense>    

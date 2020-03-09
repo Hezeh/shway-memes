@@ -105,7 +105,7 @@ export  function BottomAppBar(props) {
           </SwipeableDrawer>
 
 
-          <NavLink exact to="/" activeClassName={classes.activeMenuLink} className={classes.link}>
+          <NavLink  to="/home" activeClassName={classes.activeMenuLink} className={classes.link}>
             <IconButton color="inherit" title="Home">
                 <HomeIcon />
             </IconButton>
